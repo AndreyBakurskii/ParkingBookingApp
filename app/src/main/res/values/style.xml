@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+    <style name="MainTheme" parent="Theme.AppCompat.NoActionBar">
+    </style>
+    <style name="AlertDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:textColor">@color/primary_600</item>
+        <item name="android:background">@color/base_800</item>
+        <item name="android:colorAccent">@color/primary_600</item>
+    </style>
+</resources>
