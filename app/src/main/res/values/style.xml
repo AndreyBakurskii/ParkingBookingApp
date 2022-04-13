@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:forceDarkAllowed">false</item>
+    </style>
+    <style name="MainTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:forceDarkAllowed">false</item>
+    </style>
+    <style name="AlertDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:textColor">@color/primary_600</item>
+        <item name="android:background">@color/base_800</item>
+        <item name="android:colorAccent">@color/primary_600</item>
+    </style>
+    <style name="ButtonPrimary">
+        <item name="android:layout_width">379dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginBottom">30dp</item>
+        <item name="android:background">@drawable/button_background_primary</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/base_900</item>
+    </style>
+    <style name="ButtonSecondary" parent="ButtonPrimary">
+        <item name="android:background">@drawable/button_background_secondary</item>
+        <item name="android:textColor">@color/primary_600</item>
+    </style>
+    <style name="ButtonText" parent="ButtonSecondary">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+</resources>

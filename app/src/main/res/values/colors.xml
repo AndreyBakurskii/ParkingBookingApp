@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="base_50">#F5F5F5</color>
+    <color name="base_100">#E9E9E9</color>
+    <color name="base_200">#D9D9D9</color>
+    <color name="base_300">#C4C4C4</color>
+    <color name="base_400">#9D9D9D</color>
+    <color name="base_500">#7B7B7B</color>
+    <color name="base_600">#555555</color>
+    <color name="base_700">#434343</color>
+    <color name="base_800">#262626</color>
+    <color name="base_900">#000000</color>
+
+    <color name="primary_50">#FFFEE7</color>
+    <color name="primary_100">#FFFAC3</color>
+    <color name="primary_200">#FEF69B</color>
+    <color name="primary_300">#FDF171</color>
+    <color name="primary_400">#FBED4F</color>
+    <color name="primary_500">#F8E829</color>
+    <color name="primary_600">#FFDD2D</color> <!-- main color -->
+    <color name="primary_700">#FEC424</color>
+    <color name="primary_800">#FDAB1A</color>
+    <color name="primary_900">#FA8106</color>
+
+    <color name="positive_50">#E6F7E7</color>
+    <color name="positive_100">#C3EAC3</color>
+    <color name="positive_200">#9BDC9C</color>
+    <color name="positive_300">#6ECF73</color>
+    <color name="positive_400">#46C452</color>
+    <color name="positive_500">#00B92D</color> <!-- main color -->
+    <color name="positive_600">#00AA25</color>
+    <color name="positive_700">#00AA25</color>
+    <color name="positive_800">#008605</color>
+    <color name="positive_900">#006700</color>
+
+    <color name="negative_50">#FFE9EC</color>
+    <color name="negative_100">#FFC8CE</color>
+    <color name="negative_200">#F29292</color>
+    <color name="negative_300">#E86667</color>
+    <color name="negative_400">#F13E41</color>
+    <color name="negative_500">#F52222</color> <!-- main color -->
+    <color name="negative_600">#E61023</color>
+    <color name="negative_700">#D5001D</color>
+    <color name="negative_800">#C80016</color>
+    <color name="negative_900">#BA0005</color>
+
+    <color name="info_50">#E4F3FF</color>
+    <color name="info_100">#BFE0FF</color>
+    <color name="info_200">#97CDFF</color>
+    <color name="info_300">#6FB9FF</color>
+    <color name="info_400">#54A9FF</color>
+    <color name="info_500">#429AFF</color>
+    <color name="info_600">#428BF9</color> <!-- main color -->
+    <color name="info_700">#3F78E5</color>
+    <color name="info_800">#3D67D2</color>
+    <color name="info_900">#3847B2</color>
+</resources>

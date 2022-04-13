@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Parking</string>
+    <string name="start_text">Welcome!\nYou need to choose\na role to process</string>
+    <string name="start_button">start</string>
+    <string name="password">password</string>
+    <string name="hint_password"><i>password</i></string>
+    <string-array name="roles">
+        <item>user</item>
+        <item>admin</item>
+    </string-array>
+</resources>
