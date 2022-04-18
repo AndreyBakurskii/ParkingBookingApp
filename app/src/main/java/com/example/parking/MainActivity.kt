@@ -1,12 +1,10 @@
 package com.example.parking
 
 import android.app.AlertDialog
-import android.content.DialogInterface.OnShowListener
 import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,8 +22,26 @@ class MainActivity : AppCompatActivity() {
         val buttonStart = findViewById<Button>(R.id.buttonStart)
         buttonStart.setOnClickListener {
             if (spinner.selectedItemPosition == 0) {
-                val intent = Intent(this, MapScreenActivity::class.java)
-                startActivity(intent)
+                val view = layoutInflater.inflate(R.layout.edittext_email, null)
+                val alertDialog = AlertDialog.Builder(this, R.style.AlertDialog)
+                alertDialog.setTitle("Enter e-mail")
+                alertDialog.setCancelable(false)
+                val editText = view.findViewById<EditText>(R.id.etEmail)
+                alertDialog.setPositiveButton("OK") { dialog, _ ->
+                    if (android.util.Patterns.EMAIL_ADDRESS.matcher(editText.text.toString()).matches()) {
+                        val intent = Intent(this, UserMainActivity::class.java)
+                        startActivity(intent)
+                    }
+                    else {
+                        val toast = Toast.makeText(applicationContext, "Invalid e-mail address", Toast.LENGTH_SHORT)
+                        toast.show()
+                    }
+                }
+                alertDialog.setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.cancel()
+                }
+                alertDialog.setView(view)
+                alertDialog.show()
             }
             else {
                 val view = layoutInflater.inflate(R.layout.edittext_password, null)
