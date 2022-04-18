@@ -3,5 +3,3 @@ The developers are [Andrey Bakurskii](https://github.com/AndreyBakurskii) and [E
 
 ## Description
 IOS mobile app for booking parking spaces. 
-
-...
