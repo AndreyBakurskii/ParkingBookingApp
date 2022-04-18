@@ -4,6 +4,8 @@
     <string name="start_button">start</string>
     <string name="password">password</string>
     <string name="hint_password"><i>password</i></string>
+    <string name="info_caption">Click for details</string>
+    <string name="email"><i>e-mail</i></string>
     <string-array name="roles">
         <item>user</item>
         <item>admin</item>
