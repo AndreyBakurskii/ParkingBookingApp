@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.parking">
 
     <application
@@ -10,30 +11,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Parking">
         <activity
+            android:name=".CreateReservationActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".AdminMainActivity"
             android:exported="true"
-            android:theme="@style/MainTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme" />
         <activity
             android:name=".UserMainActivity"
             android:exported="true"
-            android:theme="@style/MainTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme" />
         <activity
             android:name=".SplashScreen"
             android:exported="true"
-            android:theme="@style/SplashTheme"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/MainTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme" />
     </application>
 
 </manifest>

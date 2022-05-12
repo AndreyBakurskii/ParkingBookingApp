@@ -1,4 +1,4 @@
-package com.example.parking;
+package com.example.parking.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -8,15 +8,19 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.parking.R;
+import com.example.parking.models.Car;
+
 import java.util.ArrayList;
 
-public class ExpListAdapter extends BaseExpandableListAdapter {
-    private final ArrayList<Reservation> mGroups;
+public class ExpListAdapterAdminCars extends BaseExpandableListAdapter {
+    private final ArrayList<Car> mGroups;
     private final Context mContext;
 
-    public ExpListAdapter (Context context, ArrayList<Reservation> groups){
-        mContext = context;
-        mGroups = groups;
+    public ExpListAdapterAdminCars(Context context, ArrayList<Car> groups){
+        this.mContext = context;
+        this.mGroups = groups;
     }
 
     @Override
@@ -73,7 +77,7 @@ public class ExpListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView textGroup = (TextView) convertView.findViewById(R.id.textGroup);
-        textGroup.setText(mGroups.get(groupPosition).getDate() + ", " + mGroups.get(groupPosition).getTime());
+        textGroup.setText(mGroups.get(groupPosition).getModel() + ", " + mGroups.get(groupPosition).getNum());
 
         return convertView;
 
@@ -85,15 +89,15 @@ public class ExpListAdapter extends BaseExpandableListAdapter {
                              View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.child_view, null);
+            convertView = inflater.inflate(R.layout.admin_cars_child_view, null);
         }
 
-        TextView textChild = (TextView) convertView.findViewById(R.id.textDate);
-        textChild.setText(mGroups.get(groupPosition).getDate());
-        TextView textChild1 = (TextView) convertView.findViewById(R.id.textTime);
-        textChild1.setText(mGroups.get(groupPosition).getTime());
-        TextView textChild2 = (TextView) convertView.findViewById(R.id.textCar);
-        textChild2.setText(mGroups.get(groupPosition).getCar());
+        TextView textChild = (TextView) convertView.findViewById(R.id.textId);
+        textChild.setText(mGroups.get(groupPosition).getId());
+        TextView textChild1 = (TextView) convertView.findViewById(R.id.textModel);
+        textChild1.setText(mGroups.get(groupPosition).getModel());
+        TextView textChild2 = (TextView) convertView.findViewById(R.id.textNum);
+        textChild2.setText(mGroups.get(groupPosition).getNum());
 
         Button button = (Button)convertView.findViewById(R.id.buttonDelete);
         button.setOnClickListener(view -> {

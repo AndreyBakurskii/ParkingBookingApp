@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/base_900"
-    tools:context=".SplashScreen">
+    tools:context=".fragments.ReservationsFragment"
+    android:background="@color/base_900">
 
-    <ImageView
+    <TextView
+        style="@style/TextHeader1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/app_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Reservations"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

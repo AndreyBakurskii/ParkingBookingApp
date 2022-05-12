@@ -14,26 +14,41 @@
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/button_test.xml" value="0.14635416666666667" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/dropdown_item.xml" value="0.14635416666666667" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/edit_text.xml" value="0.2703125" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/expandable_group_background.xml" value="0.536" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/expandable_group_backgrounf.xml" value="0.2205" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/ic_add.xml" value="0.204" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.14635416666666667" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/ic_booking.xml" value="0.204" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/ic_car.xml" value="0.2205" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2205" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/modal.xml" value="0.2703125" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/navigation_bar.xml" value="0.2205" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/spinner_background.xml" value="0.14635416666666667" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/splash_screen.xml" value="0.14635416666666667" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/activity_admin_main.xml" value="0.25" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/activity_create_reservation.xml" value="0.264" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/activity_map_screen.xml" value="0.2838541666666667" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/activity_splash_screen.xml" value="0.13020833333333334" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/activity_user_main.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/admin_cars_child_view.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/admin_users_child_view.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/child_view.xml" value="0.264" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/dropdown_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/edittext_email.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/edittext_password.xml" value="0.17753623188405798" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_accept_reservation.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_cars.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_create_reservation.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_reservations.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_spots.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_users.xml" value="0.264" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/group_view.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/item_list_content.xml" value="0.1390625" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/password.xml" value="0.25" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/test.xml" value="0.25407608695652173" />
-        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/titleitem_dropdown.xml" value="0.13020833333333334" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/titleitem_dropdown.xml" value="0.536" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/menu/menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2205" />
       </map>
