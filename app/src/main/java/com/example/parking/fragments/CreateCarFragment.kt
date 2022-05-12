@@ -17,7 +17,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CreateReservationFragment : Fragment() {
+class CreateCarFragment : Fragment() {
 
     private val acceptReservationFragment = AcceptReservationFragment()
 
@@ -26,35 +26,10 @@ class CreateReservationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView: View = inflater.inflate(R.layout.fragment_create_reservation, null)
+        val rootView: View = inflater.inflate(R.layout.fragment_create_car, null)
         val btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
 
-        val c = Calendar.getInstance()
-        val df: DateFormat = SimpleDateFormat("EEE dd/MM")
-        val dateChips = rootView.findViewById<ChipGroup>(R.id.DateChips)
-        for (i in 0..6) {
-            val chip = inflater.inflate(R.layout.layout_chip_choice, dateChips, false) as Chip
-            chip.text=df.format(c.time)
-            dateChips.addView(chip)
-            c.add(Calendar.DATE, 1)
-        }
-
         btContinue.setOnClickListener {
-            val chipsCount: Int = dateChips.getChildCount()
-            var msg = ""
-            if (chipsCount != 0) {
-                var i = 0
-                var chip = dateChips.getChildAt(0) as Chip
-                while ((!chip.isChecked) && (i < chipsCount)) {
-                    chip = dateChips.getChildAt(i) as Chip
-                    i++
-                }
-                if(i != chipsCount) {
-                    msg += chip.text.toString()
-                }
-            }
-            val toast = Toast.makeText( rootView.context, msg, Toast.LENGTH_LONG )
-            toast.show()
             (activity as CreateModelActivity).replaceFragment(acceptReservationFragment)
         }
         return rootView

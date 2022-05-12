@@ -1,5 +1,6 @@
 package com.example.parking.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +8,12 @@ import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.ExpandableListView
 import androidx.fragment.app.Fragment
+import com.example.parking.AdminMainActivity
+import com.example.parking.CreateModelActivity
 import com.example.parking.R
 import com.example.parking.adapters.ExpListAdapterAdminCars
 import com.example.parking.models.Car
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-
 
 class CarsFragment : Fragment() {
 
@@ -43,6 +45,11 @@ class CarsFragment : Fragment() {
             val temp = Car("123", "Nissan", "ADC")
             groups.add(temp)
             adapter.notifyDataSetChanged()
+
+            val data = "cars"
+            val intent = Intent((activity as AdminMainActivity), CreateModelActivity::class.java)
+            intent.putExtra("fragment", data)
+            (activity as AdminMainActivity).startActivity(intent)
         }
         listView.setOnScrollListener(object : AbsListView.OnScrollListener {
             override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {}

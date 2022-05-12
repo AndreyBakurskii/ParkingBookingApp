@@ -20,72 +20,37 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/userName"
+        android:id="@+id/LinearLayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_margin="16dp"
         android:orientation="vertical"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingBottom="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextHeader">
-        <TextView
-            style="@style/TextHeader3"
-            android:textColor="@color/base_50"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name" />
-
-        <EditText
-            style="@style/Body1"
-            android:layout_width="fill_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/base_800"
-            android:hint="@string/full_name"
-            android:inputType="text"
-            android:padding="8dp"
-            android:textColor="@color/base_50"
-            android:textColorHint="@color/base_500" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/userEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName">
-        <TextView
-            style="@style/TextHeader3"
-            android:textColor="@color/base_50"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="E-mail" />
-
-        <EditText
-            style="@style/Body1"
+        <ExpandableListView
+            android:id="@+id/expListView"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/base_800"
-            android:hint="@string/email"
-            android:inputType="text"
-            android:padding="8dp"
-            android:textColor="@color/base_50"
-            android:textColorHint="@color/base_500" />
+            android:layout_height="match_parent"
+            android:indicatorLeft="250dp"
+            android:indicatorRight="400dp"
+            android:childDivider="@color/base_900"
+            android:divider="@color/base_900"
+            android:dividerHeight="8dp">
+        </ExpandableListView>
     </LinearLayout>
 
-    <Button
-        style="@style/ButtonPrimary"
-        android:layout_width="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:text="create"
-        app:layout_constraintBottom_toBottomOf="parent" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabCustomSize="64dp"
+        android:src="@drawable/ic_add"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="36dp"
+        android:backgroundTint="@color/primary_600"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="Add e,ployee button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

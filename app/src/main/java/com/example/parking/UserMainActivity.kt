@@ -61,7 +61,7 @@ class UserMainActivity : AppCompatActivity() {
 //        }
         btAdd.setOnClickListener {
             val data = "user"
-            val intent = Intent(this, CreateReservationActivity::class.java)
+            val intent = Intent(this, CreateModelActivity::class.java)
             intent.putExtra("fragment", data)
             startActivity(intent)
         }
