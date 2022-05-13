@@ -9,6 +9,10 @@
         android:icon="@drawable/ic_car"
         android:title="Cars" />
     <item
+        android:id="@+id/menu_spot"
+        android:icon="@drawable/ic_parking_spot"
+        android:title="Parking spots" />
+    <item
         android:id="@+id/menu_bookings"
         android:icon="@drawable/ic_booking"
         android:title="Reservations" />

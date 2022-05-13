@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/base_900"
-    tools:context=".UserMainActivity">
+    tools:context=".fragments.CarsFragment">
 
     <TextView
         style="@style/TextHeader1"
@@ -15,7 +15,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:textColor="@color/base_50"
-        android:text="Reservations"
+        android:text="Cars"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,6 +51,6 @@
         android:backgroundTint="@color/primary_600"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="Add reservation button" />
+        android:contentDescription="Add car button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
