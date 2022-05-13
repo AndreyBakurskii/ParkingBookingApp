@@ -11,28 +11,29 @@ import android.widget.ExpandableListView
 import com.example.parking.AdminMainActivity
 import com.example.parking.CreateModelActivity
 import com.example.parking.R
-import com.example.parking.adapters.ExpListAdapterAdminCars
 import com.example.parking.adapters.ExpListAdapterAdminUsers
-import com.example.parking.models.User
+import com.example.parking.models.Employee
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class UsersFragment : Fragment() {
+class EmployeesFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView: View = inflater.inflate(R.layout.fragment_users, null)
+        val rootView: View = inflater.inflate(R.layout.fragment_employees, null)
         val listView = rootView.findViewById<ExpandableListView>(R.id.expListView)
 
-        val groups = ArrayList<User>()
-        val car1 = User("Khoroshavina Ekaterina", "test")
-        groups.add(car1)
-        val car2 = User("Bakurskii Andrei", "test1")
-        groups.add(car2)
-        val car3 = User("Name Surname", "test3")
-        groups.add(car3)
-        groups.add(car2)
+        val groups = ArrayList<Employee>()
+        val emp1 =
+            Employee("Khoroshavina Ekaterina", "test")
+        groups.add(emp1)
+        val emp2 =
+            Employee("Bakurskii Andrei", "test1")
+        groups.add(emp2)
+        val emp3 = Employee("Name Surname", "test3")
+        groups.add(emp3)
+        groups.add(emp2)
 
         val adapter =
             ExpListAdapterAdminUsers(

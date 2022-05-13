@@ -3,16 +3,17 @@ package com.example.parking
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.parking.fragments.AcceptReservationFragment
 import com.example.parking.fragments.CreateCarFragment
 import com.example.parking.fragments.CreateReservationFragment
-import com.example.parking.fragments.CreateUserFragment
+import com.example.parking.fragments.CreateEmployeeFragment
+import com.example.parking.fragments.CreateSpotsFragment
 
 class CreateModelActivity : AppCompatActivity() {
 
     private val createReservationFragment = CreateReservationFragment()
     private val createCarFragment = CreateCarFragment()
-    private val createUserFragment = CreateUserFragment()
+    private val createUserFragment = CreateEmployeeFragment()
+    private val createSpotsFragment = CreateSpotsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +22,7 @@ class CreateModelActivity : AppCompatActivity() {
             "user" -> replaceFragment(createReservationFragment)
             "cars" -> replaceFragment(createCarFragment)
             "employees" -> replaceFragment(createUserFragment)
+            "spots" -> replaceFragment(createSpotsFragment)
         }
     }
 

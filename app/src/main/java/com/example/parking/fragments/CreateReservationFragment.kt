@@ -40,17 +40,16 @@ class CreateReservationFragment : Fragment() {
         }
 
         btContinue.setOnClickListener {
-            val chipsCount: Int = dateChips.getChildCount()
+            val chipsCount: Int = dateChips.childCount
             var msg = ""
             if (chipsCount != 0) {
                 var i = 0
-                var chip = dateChips.getChildAt(0) as Chip
-                while ((!chip.isChecked) && (i < chipsCount)) {
-                    chip = dateChips.getChildAt(i) as Chip
+                while (i < chipsCount) {
+                    val chip = dateChips.getChildAt(i) as Chip
+                    if (chip.isChecked) {
+                        msg += chip.getText().toString()
+                    }
                     i++
-                }
-                if(i != chipsCount) {
-                    msg += chip.text.toString()
                 }
             }
             val toast = Toast.makeText( rootView.context, msg, Toast.LENGTH_LONG )

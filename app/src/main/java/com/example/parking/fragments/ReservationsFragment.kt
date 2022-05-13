@@ -11,10 +11,8 @@ import android.widget.ExpandableListView
 import com.example.parking.AdminMainActivity
 import com.example.parking.CreateModelActivity
 import com.example.parking.R
-import com.example.parking.adapters.ExpListAdapterAdminUsers
 import com.example.parking.adapters.ExpListAdapterUserReservations
 import com.example.parking.models.Reservation
-import com.example.parking.models.User
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ReservationsFragment : Fragment() {

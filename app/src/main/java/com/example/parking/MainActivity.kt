@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                 alertDialog.setNegativeButton("Cancel") { dialog, _ ->
                     dialog.cancel()
                 }
+
                 alertDialog.setView(view)
                 alertDialog.show()
             }

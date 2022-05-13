@@ -10,15 +10,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.parking.R;
-import com.example.parking.models.Employee;
+import com.example.parking.models.ParkingSpot;
 
 import java.util.ArrayList;
 
-public class ExpListAdapterAdminUsers extends BaseExpandableListAdapter {
-    private final ArrayList<Employee> mGroups;
+public class ExpListAdapterAdminSpots extends BaseExpandableListAdapter {
+    private final ArrayList<ParkingSpot> mGroups;
     private final Context mContext;
 
-    public ExpListAdapterAdminUsers(Context context, ArrayList<Employee> groups){
+    public ExpListAdapterAdminSpots(Context context, ArrayList<ParkingSpot> groups){
         this.mContext = context;
         this.mGroups = groups;
     }
@@ -77,8 +77,7 @@ public class ExpListAdapterAdminUsers extends BaseExpandableListAdapter {
         }
 
         TextView textGroup = (TextView) convertView.findViewById(R.id.textGroup);
-        textGroup.setText(mGroups.get(groupPosition).getName() + ", " + mGroups.get(groupPosition).getEmail());
-
+        textGroup.setText(mGroups.get(groupPosition).getNum());
         return convertView;
 
     }
@@ -89,13 +88,13 @@ public class ExpListAdapterAdminUsers extends BaseExpandableListAdapter {
                              View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.admin_employees_child_view, null);
+            convertView = inflater.inflate(R.layout.admin_spots_child_view, null);
         }
 
-        TextView textChild = (TextView) convertView.findViewById(R.id.textName);
-        textChild.setText(mGroups.get(groupPosition).getName());
-        TextView textChild1 = (TextView) convertView.findViewById(R.id.textEmail);
-        textChild1.setText(mGroups.get(groupPosition).getEmail());
+        TextView textChild = (TextView) convertView.findViewById(R.id.textId);
+        textChild.setText(mGroups.get(groupPosition).getId());
+        TextView textChild2 = (TextView) convertView.findViewById(R.id.textNum);
+        textChild2.setText(mGroups.get(groupPosition).getNum());
 
         Button button = (Button)convertView.findViewById(R.id.buttonDelete);
         button.setOnClickListener(view -> {
