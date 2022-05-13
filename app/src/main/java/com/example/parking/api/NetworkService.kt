@@ -18,22 +18,15 @@ class BasicAuthInterceptor(username: String, password: String): Interceptor {
 }
 
 
-class NetworkService(var isAdmin: Boolean) {
-    private val BASE_URL = ""
-    private val ADMIN_USERNAME = "admin"
-    private val USER_USERNAME = "username"
-    private val PASSWORD = "password"
-
-    //add BasicAuthInterceptor to OkHttp client
-    val client =  OkHttpClient.Builder()
-        .addInterceptor(BasicAuthInterceptor(if (isAdmin) ADMIN_USERNAME else USER_USERNAME, PASSWORD))
+class NetworkService(private val authRole: String, private val authPassword: String) {
+    private val BASE_URL = "https://parking-backend-140422.herokuapp.com"
+    private val client = OkHttpClient.Builder()
+        .addInterceptor(BasicAuthInterceptor(authRole, authPassword))
         .build()
 
-    // add OkHttp client to Retrofit instance
-    private val api = Retrofit.Builder()
+    val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-        .create(NetworkService::class.java)
 }

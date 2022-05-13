@@ -1,4 +1,4 @@
-package com.example.parking.api
+package com.example.parking.api.dataclasses
 
 data class ParkingSpotJson(
     val id: String,

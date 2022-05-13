@@ -1,6 +1,6 @@
-package com.example.parking.api
+package com.example.parking.api.dataclasses
 
-data class ReservationsJson(
+data class ReservationJson(
     val id: String,
     val carId: String,
     val employeeId: String,

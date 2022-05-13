@@ -1,6 +1,6 @@
-package com.example.parking.api
+package com.example.parking.api.dataclasses
 
-data class CarsJson(
+data class CarJson(
     val id: String,
     val model: String,
     val registryNumber: String,
