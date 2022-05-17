@@ -11,7 +11,7 @@ import android.widget.ExpandableListView
 import com.example.parking.AdminMainActivity
 import com.example.parking.CreateModelActivity
 import com.example.parking.R
-import com.example.parking.adapters.ExpListAdapterUserReservations
+import com.example.parking.adapters.ExpListAdapterAdminReservations
 import com.example.parking.models.Reservation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -25,19 +25,19 @@ class ReservationsFragment : Fragment() {
         val listView = rootView.findViewById<ExpandableListView>(R.id.expListView)
 
         val groups = ArrayList<Reservation>()
-        val res1 = Reservation("01/02/2022", "11 am - 1 pm", "Nissan", "ABC"
-        )
+        val res1 = Reservation("01/02/2022", "11 am - 1 pm", "Nissan",
+            "ABC", "test")
         groups.add(res1)
-        val res2 = Reservation("02/02/2022", "11 am - 1 pm", "Lada", "CDE"
-        )
+        val res2 = Reservation("02/02/2022", "11 am - 1 pm", "Lada",
+            "CDE", "test")
         groups.add(res2)
-        val res3 = Reservation("03/02/2022", "12 am - 1 pm", "Hondai", "BCD"
-        )
+        val res3 = Reservation("03/02/2022", "12 am - 1 pm", "Hondai",
+            "BCD", "test")
         groups.add(res3)
         groups.add(res2)
 
         val adapter =
-            ExpListAdapterUserReservations(
+            ExpListAdapterAdminReservations(
                 activity,
                 groups
             )
@@ -45,7 +45,7 @@ class ReservationsFragment : Fragment() {
 
         val btAdd = rootView.findViewById<FloatingActionButton>(R.id.fab)
         btAdd.setOnClickListener {
-            val data = "user"
+            val data = "reservations"
             val intent = Intent((activity as AdminMainActivity), CreateModelActivity::class.java)
             intent.putExtra("fragment", data)
             (activity as AdminMainActivity).startActivity(intent)

@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Parking">
         <activity
+            android:name=".EditModelActivity"
+            android:exported="false" />
+        <activity
             android:name=".CreateModelActivity"
             android:exported="true"
             android:screenOrientation="portrait" />

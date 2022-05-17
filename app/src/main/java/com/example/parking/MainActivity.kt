@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         val buttonStart = findViewById<Button>(R.id.buttonStart)
         buttonStart.setOnClickListener {
             if (spinner.selectedItemPosition == 0) {
-                val view = layoutInflater.inflate(R.layout.edittext_email, null)
+                val view = layoutInflater.inflate(R.layout.alertdialog_edittext_email, null)
                 val alertDialog = AlertDialog.Builder(this, R.style.AlertDialog)
                 alertDialog.setTitle("Enter e-mail")
                 alertDialog.setCancelable(false)
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
                 alertDialog.setPositiveButton("OK") { dialog, _ ->
                     if (android.util.Patterns.EMAIL_ADDRESS.matcher(editText.text.toString()).matches()) {
                         val intent = Intent(this, UserMainActivity::class.java)
+                        intent.putExtra("email", editText.text.toString())
                         startActivity(intent)
                     }
                     else {

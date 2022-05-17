@@ -2,6 +2,7 @@ package com.example.parking.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.parking.EditModelActivity;
 import com.example.parking.R;
 import com.example.parking.models.ParkingSpot;
 
@@ -100,6 +102,18 @@ public class ExpListAdapterAdminSpots extends BaseExpandableListAdapter {
         button.setOnClickListener(view -> {
             mGroups.remove(groupPosition);
             notifyDataSetChanged();
+        });
+
+        // здесь переходим в активность с редактированием, вызывая фрагмент для мест
+        Button buttonEdit = (Button)convertView.findViewById(R.id.buttonEdit);
+        buttonEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String data = "spots";
+                Intent intent = new Intent(mContext.getApplicationContext(), EditModelActivity.class);
+                intent.putExtra("fragment", data);
+                mContext.startActivity(intent);
+            }
         });
 
         return convertView;

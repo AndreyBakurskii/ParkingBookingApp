@@ -11,7 +11,7 @@ import android.widget.ExpandableListView
 import com.example.parking.AdminMainActivity
 import com.example.parking.CreateModelActivity
 import com.example.parking.R
-import com.example.parking.adapters.ExpListAdapterAdminUsers
+import com.example.parking.adapters.ExpListAdapterAdminEmployees
 import com.example.parking.models.Employee
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -36,7 +36,7 @@ class EmployeesFragment : Fragment() {
         groups.add(emp2)
 
         val adapter =
-            ExpListAdapterAdminUsers(
+            ExpListAdapterAdminEmployees(
                 activity,
                 groups
             )
