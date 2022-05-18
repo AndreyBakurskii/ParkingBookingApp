@@ -1,6 +1,7 @@
 package com.example.parking.api.interfaces
 
 import com.example.parking.api.dataclasses.CarJson
+import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -11,7 +12,7 @@ const val CARS_DETAIL_URL: String = "/cars/{id}"
 
 interface CarRequests {
     @GET(CARS_URL)
-    fun getCars(): Call<MutableList<CarJson>>
+    fun getCars(): Single<List<CarJson>>
 
     @POST(CARS_URL)
     fun createCar(@Body car: HashMap<String, Any>): Call<CarJson>
