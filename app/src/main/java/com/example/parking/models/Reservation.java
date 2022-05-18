@@ -5,12 +5,14 @@ public class Reservation {
     private String time;
     private String car;
     private String carNum;
+    private String email;
 
-    public Reservation(String date, String time, String car, String carNum) {
+    public Reservation(String date, String time, String car, String carNum, String email) {
         this.date = date;
         this.time = time;
         this.car = car;
         this.carNum = carNum;
+        this.email = email;
     }
 
     public String getDate() {
@@ -27,5 +29,9 @@ public class Reservation {
 
     public String getCarNum() {
         return carNum;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

@@ -12,6 +12,16 @@
         <item name="android:textColor">@color/primary_600</item>
         <item name="android:background">@color/base_800</item>
         <item name="android:colorAccent">@color/primary_600</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+    </style>
+    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/primary_600</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/primary_600</item>
+        <item name="android:textSize">18sp</item>
     </style>
     <style name="ButtonPrimary">
         <item name="android:layout_width">379dp</item>

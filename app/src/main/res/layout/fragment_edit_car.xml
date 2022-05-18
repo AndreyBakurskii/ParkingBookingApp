@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/base_900"
-    tools:context=".fragments.create.CreateCarFragment">
+    tools:context=".fragments.edit.EditCarFragment">
 
     <TextView
         android:id="@+id/textView"
@@ -96,7 +96,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="30dp"
-        android:text="create"
+        android:text="edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"

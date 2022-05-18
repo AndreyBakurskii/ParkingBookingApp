@@ -42,9 +42,9 @@ class CarsFragment : Fragment() {
 
         val btAdd = rootView.findViewById<FloatingActionButton>(R.id.fab)
         btAdd.setOnClickListener {
-            val temp = Car("123", "Nissan", "ADC")
-            groups.add(temp)
-            adapter.notifyDataSetChanged()
+//            val temp = Car("123", "Nissan", "ADC")
+//            groups.add(temp)
+//            adapter.notifyDataSetChanged()
 
             val data = "cars"
             val intent = Intent((activity as AdminMainActivity), CreateModelActivity::class.java)

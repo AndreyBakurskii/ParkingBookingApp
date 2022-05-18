@@ -1,7 +1,6 @@
 package com.example.parking.adapters;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -13,16 +12,15 @@ import android.widget.TextView;
 
 import com.example.parking.EditModelActivity;
 import com.example.parking.R;
-import com.example.parking.models.Reservation;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.parking.models.ParkingSpot;
 
 import java.util.ArrayList;
 
-public class ExpListAdapterUserReservations extends BaseExpandableListAdapter {
-    private final ArrayList<Reservation> mGroups;
-    private final Activity mContext;
+public class ExpListAdapterAdminSpots extends BaseExpandableListAdapter {
+    private final ArrayList<ParkingSpot> mGroups;
+    private final Context mContext;
 
-    public ExpListAdapterUserReservations(Activity context, ArrayList<Reservation> groups){
+    public ExpListAdapterAdminSpots(Context context, ArrayList<ParkingSpot> groups){
         this.mContext = context;
         this.mGroups = groups;
     }
@@ -81,8 +79,7 @@ public class ExpListAdapterUserReservations extends BaseExpandableListAdapter {
         }
 
         TextView textGroup = (TextView) convertView.findViewById(R.id.textGroup);
-        textGroup.setText(mGroups.get(groupPosition).getDate() + ", " + mGroups.get(groupPosition).getTime());
-
+        textGroup.setText(mGroups.get(groupPosition).getNum());
         return convertView;
 
     }
@@ -93,17 +90,13 @@ public class ExpListAdapterUserReservations extends BaseExpandableListAdapter {
                              View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.user_reservations_child_view, null);
+            convertView = inflater.inflate(R.layout.admin_spots_child_view, null);
         }
 
-        TextView textChild = (TextView) convertView.findViewById(R.id.textDate);
-        textChild.setText(mGroups.get(groupPosition).getDate());
-        TextView textChild1 = (TextView) convertView.findViewById(R.id.textTime);
-        textChild1.setText(mGroups.get(groupPosition).getTime());
-        TextView textChild2 = (TextView) convertView.findViewById(R.id.textCar);
-        textChild2.setText(mGroups.get(groupPosition).getCar());
-        TextView textChild3 = (TextView) convertView.findViewById(R.id.textCarNum);
-        textChild3.setText(mGroups.get(groupPosition).getCarNum());
+        TextView textChild = (TextView) convertView.findViewById(R.id.textId);
+        textChild.setText(mGroups.get(groupPosition).getId());
+        TextView textChild2 = (TextView) convertView.findViewById(R.id.textNum);
+        textChild2.setText(mGroups.get(groupPosition).getNum());
 
         Button button = (Button)convertView.findViewById(R.id.buttonDelete);
         button.setOnClickListener(view -> {
@@ -111,15 +104,14 @@ public class ExpListAdapterUserReservations extends BaseExpandableListAdapter {
             notifyDataSetChanged();
         });
 
-        // здесь переходим в активность с редактированием, вызывая фрагмент для брони
+        // здесь переходим в активность с редактированием, вызывая фрагмент для мест
         Button buttonEdit = (Button)convertView.findViewById(R.id.buttonEdit);
         buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String data = "user";
+                String data = "spots";
                 Intent intent = new Intent(mContext.getApplicationContext(), EditModelActivity.class);
                 intent.putExtra("fragment", data);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
         });

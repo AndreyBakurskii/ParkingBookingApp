@@ -3,32 +3,34 @@ package com.example.parking
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.parking.fragments.AcceptReservationFragment
-import com.example.parking.fragments.CreateCarFragment
-import com.example.parking.fragments.CreateReservationFragment
-import com.example.parking.fragments.CreateUserFragment
+import com.example.parking.fragments.create.*
 
 class CreateModelActivity : AppCompatActivity() {
 
-    private val createReservationFragment = CreateReservationFragment()
+    private val createUserReservationFragment = CreateUserReservationFragment()
     private val createCarFragment = CreateCarFragment()
-    private val createUserFragment = CreateUserFragment()
+    private val createUserFragment = CreateEmployeeFragment()
+    private val createSpotsFragment = CreateSpotsFragment()
+    private val createAdminReservationFragment = CreateAdminReservationFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_reservation)
         when(intent.extras!!.getString("fragment")) {
-            "user" -> replaceFragment(createReservationFragment)
+            "reservations" -> replaceFragment(createAdminReservationFragment)
+            "user" -> {
+                val userEmail = intent.extras?.getString("email")
+                replaceFragment(createUserReservationFragment)
+            }
             "cars" -> replaceFragment(createCarFragment)
             "employees" -> replaceFragment(createUserFragment)
+            "spots" -> replaceFragment(createSpotsFragment)
         }
     }
 
     fun replaceFragment(fragment : Fragment){
-        if(fragment != null) {
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, fragment)
-            transaction.commit()
-        }
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
     }
 }
