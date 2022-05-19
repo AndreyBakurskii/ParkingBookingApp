@@ -28,21 +28,37 @@
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/drawable/splash_screen.xml" value="0.14635416666666667" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/activity_admin_main.xml" value="0.25" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/activity_create_reservation.xml" value="0.264" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/activity_edit_model.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/activity_map_screen.xml" value="0.2838541666666667" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/activity_splash_screen.xml" value="0.13020833333333334" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/activity_user_main.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/admin_cars_child_view.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/admin_employees_child_view.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/admin_reservations_child_view.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/admin_spots_child_view.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/admin_users_child_view.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/alertdialog_edittext_email.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/alertdialog_model.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/child_view.xml" value="0.264" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/dropdown_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/edittext_email.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/edittext_password.xml" value="0.17753623188405798" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_accept_reservation.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_cars.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_create_admin_reservation.xml" value="0.17889492753623187" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_create_car.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_create_employee.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_create_reservation.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_create_spots.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_create_user.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_edit_admin_reservation.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_edit_car.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_edit_employee.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_edit_reservation.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_edit_spot.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_edit_user_reservation.xml" value="0.25317028985507245" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_employees.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_reservations.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_spots.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/fragment_users.xml" value="0.264" />
@@ -52,6 +68,7 @@
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/password.xml" value="0.25" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/test.xml" value="0.25407608695652173" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/titleitem_dropdown.xml" value="0.536" />
+        <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/user_reservations_child_view.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/menu/menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2205" />
       </map>

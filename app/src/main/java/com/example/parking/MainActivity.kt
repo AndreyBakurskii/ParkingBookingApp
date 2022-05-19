@@ -41,7 +41,7 @@ class MainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_main) {
     }
 
     private fun showAlertDialogEmail() {
-        val view = layoutInflater.inflate(R.layout.edittext_email, null)
+        val view = layoutInflater.inflate(R.layout.alertdialog_edittext_email, null)
 
         val alertDialog = AlertDialog.Builder(this, R.style.AlertDialog)
         alertDialog.setTitle("Enter e-mail")
@@ -54,6 +54,7 @@ class MainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_main) {
                     .toString()
                 )
             )
+
         }
 
         alertDialog.setNegativeButton("Cancel") { dialog, _ ->
@@ -86,7 +87,7 @@ class MainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_main) {
         alertDialog.setView(view)
         alertDialog.show()
     }
-
+    // intent.putExtra("email", editText.text.toString())
     override fun handleEffect(effect: Effect) = when (effect) {
         is Effect.ShowAlertDialogEmail -> showAlertDialogEmail()
         is Effect.ShowAlertDialogPassword -> showAlertDialogPassword()

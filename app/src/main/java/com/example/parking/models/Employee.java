@@ -1,10 +1,10 @@
 package com.example.parking.models;
 
-public class User {
+public class Employee {
     private String email;
     private String name;
 
-    public User(String name, String email) {
+    public Employee(String name, String email) {
         this.email = email;
         this.name = name;
     }
