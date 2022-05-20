@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/base_900"
-    tools:context=".fragments.edit.EditSpotFragment">
+    tools:context=".presentation.fragments.edit.EditSpotFragment">
 
     <TextView
         android:id="@+id/textView"

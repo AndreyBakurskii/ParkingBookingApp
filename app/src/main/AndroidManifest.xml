@@ -13,24 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Parking">
         <activity
-            android:name=".EditModelActivity"
+            android:name="com.example.parking.presentation.activities.EditModelActivity.EditModelActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateModelActivity"
+            android:name="com.example.parking.presentation.activities.CreateModelActivity.CreateModelActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdminMainActivity"
+            android:name="com.example.parking.presentation.activities.AdminActivity.AdminMainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme" />
         <activity
-            android:name=".UserMainActivity"
+            android:name="com.example.parking.presentation.activities.UserActivity.UserMainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme" />
         <activity
-            android:name=".SplashScreen"
+            android:name="com.example.parking.presentation.activities.SplashScreenActivity.SplashScreen"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.parking.presentation.activities.MainActivity.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme" />
