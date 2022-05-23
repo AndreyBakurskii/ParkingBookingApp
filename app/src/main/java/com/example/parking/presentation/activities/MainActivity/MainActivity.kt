@@ -98,6 +98,5 @@ class MainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_main) {
         is Effect.ShowErrorInvalidEmail -> Toast.makeText(applicationContext, "Invalid e-mail address", Toast.LENGTH_SHORT).show()
         is Effect.ToUserMainActivity -> startActivity(Intent(this, UserMainActivity::class.java))
         is Effect.ToAdminMainActivity -> startActivity(Intent(this, AdminMainActivity::class.java))
-        is Effect.ShowCars -> Toast.makeText(applicationContext, effect.cars[0].toString(), Toast.LENGTH_SHORT).show()
     }
 }
