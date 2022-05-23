@@ -1,6 +1,5 @@
 package com.example.parking.presentation.activities.MainActivity.elm
 
-import vivid.money.elmslie.core.ElmStoreCompat
 import vivid.money.elmslie.core.store.dsl_reducer.ScreenDslReducer
 import com.example.parking.presentation.activities.MainActivity.elm.Event.Internal
 import com.example.parking.presentation.activities.MainActivity.elm.Event.Ui
