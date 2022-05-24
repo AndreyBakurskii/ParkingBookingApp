@@ -79,7 +79,7 @@ public class ExpListAdapterAdminEmployees extends BaseExpandableListAdapter {
         }
 
         TextView textGroup = (TextView) convertView.findViewById(R.id.textGroup);
-        textGroup.setText(mGroups.get(groupPosition).getName() + ", " + mGroups.get(groupPosition).getEmail());
+        textGroup.setText(mGroups.get(groupPosition).getEmail());
 
         return convertView;
 
@@ -94,8 +94,6 @@ public class ExpListAdapterAdminEmployees extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.admin_employees_child_view, null);
         }
 
-        TextView textChild = (TextView) convertView.findViewById(R.id.textName);
-        textChild.setText(mGroups.get(groupPosition).getName());
         TextView textChild1 = (TextView) convertView.findViewById(R.id.textEmail);
         textChild1.setText(mGroups.get(groupPosition).getEmail());
 
@@ -106,17 +104,6 @@ public class ExpListAdapterAdminEmployees extends BaseExpandableListAdapter {
             notifyDataSetChanged();
         });
 
-        // здесь переходим в активность с редактированием, вызывая фрагмент для сотрудников
-        Button buttonEdit = (Button)convertView.findViewById(R.id.buttonEdit);
-        buttonEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String data = "employees";
-                Intent intent = new Intent(mContext.getApplicationContext(), EditModelActivity.class);
-                intent.putExtra("fragment", data);
-                mContext.startActivity(intent);
-            }
-        });
         return convertView;
     }
 

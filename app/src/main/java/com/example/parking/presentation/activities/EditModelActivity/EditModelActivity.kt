@@ -7,8 +7,6 @@ import com.example.parking.R
 import com.example.parking.presentation.fragments.edit.*
 
 class EditModelActivity : AppCompatActivity() {
-
-    private val editEmployeeFragment = EditEmployeeFragment()
     private val editCarFragment = EditCarFragment()
     private val editSpotsFragment = EditSpotFragment()
     private val editUserReservationFragment = EditUserReservationFragment()
@@ -21,7 +19,6 @@ class EditModelActivity : AppCompatActivity() {
             "reservations" -> replaceFragment(editAdminReservationFragment)
             "user" -> replaceFragment(editUserReservationFragment)
             "cars" -> replaceFragment(editCarFragment)
-            "employees" -> replaceFragment(editEmployeeFragment)
             "spots" -> replaceFragment(editSpotsFragment)
         }
     }

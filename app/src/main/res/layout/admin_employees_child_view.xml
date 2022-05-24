@@ -15,32 +15,6 @@
             android:layout_weight="1" >
             <TextView
                 style="@style/Body3"
-                android:id="@+id/captionName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/base_400"
-                android:layout_alignParentTop="true"
-                android:text="Name"
-                />
-            <TextView
-                style="@style/Body2"
-                android:id="@+id/textName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="10dp"
-                android:layout_below="@id/captionName"
-                />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" >
-            <TextView
-                style="@style/Body3"
                 android:id="@+id/captionEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,18 +51,5 @@
             android:textColor="@color/negative_500"
             android:textSize="14sp"
             android:layout_alignParentEnd="true" />
-
-        <Button
-            android:id="@+id/buttonEdit"
-            style="@style/ButtonText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="10dp"
-            android:layout_toStartOf="@+id/buttonDelete"
-            android:focusable="false"
-            android:text="EDIT"
-            android:textSize="14sp"
-            android:textColor="@color/info_600" />
     </RelativeLayout>
 </LinearLayout>
