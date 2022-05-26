@@ -7,10 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.parking.R
 import com.example.parking.data.models.Car
@@ -24,19 +21,23 @@ import vivid.money.elmslie.core.store.Store
 
 class CreateCarFragment : ElmFragment<Event, Effect, State>() {
 
+    private var progressBar : FrameLayout? = null
+    private var btContinue : Button? = null
+
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val rootView: View = inflater.inflate(R.layout.fragment_create_car, null)
-        val btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
+        btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
+        progressBar = rootView.findViewById<FrameLayout>(R.id.progressBarContainer)
 
-        btContinue.setOnClickListener {
+        btContinue?.setOnClickListener {
             // сюда вставить вызов функции создания в бэке
             val car: Car = Car(
-                model = rootView.findViewById<EditText>(R.id.modelNewCar).text.toString(),
-                registryNumber = rootView.findViewById<EditText>(R.id.registryNumNewCar).text.toString()
+                model = rootView.findViewById<EditText>(R.id.etCarModel).text.toString(),
+                registryNumber = rootView.findViewById<EditText>(R.id.etCarNum).text.toString()
             )
             store.accept(Event.Ui.CreateClick(car))
         }
@@ -53,13 +54,15 @@ class CreateCarFragment : ElmFragment<Event, Effect, State>() {
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showConfirmDialog(car: Car) {
         val view = layoutInflater.inflate(R.layout.alertdialog_model, null)
         val alertDialog = AlertDialog.Builder(activity, R.style.AlertDialog)
         alertDialog.setTitle("Confirm")
         alertDialog.setCancelable(false)
-        // сюда информацию
+        // сюда информацию (уже добавила)
         val textOutput = view.findViewById<TextView>(R.id.textView)
+        textOutput.text = "Car model: " + car.model + "\nRegistry number: " + car.registryNumber
         alertDialog.setPositiveButton("OK") { _, _ ->
             store.accept(Event.Ui.OkClickConfirmDialog(car))
         }
@@ -82,6 +85,12 @@ class CreateCarFragment : ElmFragment<Event, Effect, State>() {
 
     override fun render(state: State) {
         // todo loader!!
+
+        // вот так вызывается загрузочная крутяшка (отключаем кнопку ещё на всякий)
+//        progressBar?.visibility = View.VISIBLE
+//        btContinue.isClickable = false
+        // вот так она скрывается
+//        progressBar?.visibility = View.INVISIBLE
     }
 
     override fun handleEffect(effect: Effect) = when (effect) {

@@ -25,13 +25,13 @@ class CarsFragment : Fragment() {
         val listView = rootView.findViewById<ExpandableListView>(R.id.expListView)
 
         val groups = ArrayList<Car>()
-        val car1 = Car("123", "Nissan", "ADC")
-        groups.add(car1)
-        val car2 = Car("345", "Lada", "BCD")
-        groups.add(car2)
-        val car3 = Car("567", "Honda", "CDE")
-        groups.add(car3)
-        groups.add(car2)
+//        val car1 = Car("123", "Nissan", "ADC")
+//        groups.add(car1)
+//        val car2 = Car("345", "Lada", "BCD")
+//        groups.add(car2)
+//        val car3 = Car("567", "Honda", "CDE")
+//        groups.add(car3)
+//        groups.add(car2)
 
         val adapter =
             ExpListAdapterAdminCars(
