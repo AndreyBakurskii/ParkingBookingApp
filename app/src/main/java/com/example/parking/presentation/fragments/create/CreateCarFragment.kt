@@ -6,16 +6,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.parking.R
 
 class CreateCarFragment : Fragment() {
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,9 +29,17 @@ class CreateCarFragment : Fragment() {
             val alertDialog = AlertDialog.Builder(activity, R.style.AlertDialog)
             alertDialog.setTitle("Confirm")
             alertDialog.setCancelable(false)
-            // сюда информацию
+            // сюда информацию (уже добавила)
             val textOutput = view.findViewById<TextView>(R.id.textView)
-            alertDialog.setPositiveButton("OK") { dialog, _ ->
+            textOutput.text = "Car model: " + rootView.findViewById<EditText>(R.id.etCarModel).text +
+                    "\nRegistry number: " + rootView.findViewById<EditText>(R.id.etCarNum).text
+            alertDialog.setPositiveButton("OK") { _, _ ->
+                // вот так вызывается загрузочная крутяшка (отключаем кнопку ещё на всякий)
+                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
+                btContinue.isClickable = false
+                // вот так она скрывается
+                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
+                // выводим toast что всё ок и закрываем активность
                 val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
                 toast.show()
                 activity?.finish()
