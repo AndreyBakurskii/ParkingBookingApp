@@ -20,6 +20,7 @@ class CreateCarFragment : Fragment() {
     ): View {
         val rootView: View = inflater.inflate(R.layout.fragment_create_car, null)
         val btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
+        val progBar = rootView.findViewById<FrameLayout>(R.id.progressBarContainer)
 
         btContinue.setOnClickListener {
             // сюда вставить вызов функции создания в бэке
@@ -35,10 +36,9 @@ class CreateCarFragment : Fragment() {
                     "\nRegistry number: " + rootView.findViewById<EditText>(R.id.etCarNum).text
             alertDialog.setPositiveButton("OK") { _, _ ->
                 // вот так вызывается загрузочная крутяшка (отключаем кнопку ещё на всякий)
-                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
-                btContinue.isClickable = false
+                makeLoadVisible(progBar, btContinue)
                 // вот так она скрывается
-                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
+                makeLoadInvisible(progBar, btContinue)
                 // выводим toast что всё ок и закрываем активность
                 val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
                 toast.show()
@@ -61,6 +61,16 @@ class CreateCarFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+    }
+
+    private fun makeLoadVisible(progBar : FrameLayout, btContinue : Button) {
+        progBar.visibility = View.VISIBLE
+        btContinue.isClickable = false
+    }
+
+    fun makeLoadInvisible(progBar : FrameLayout, btContinue : Button) {
+        progBar.visibility = View.INVISIBLE
+        btContinue.isClickable = true
     }
 
 }
