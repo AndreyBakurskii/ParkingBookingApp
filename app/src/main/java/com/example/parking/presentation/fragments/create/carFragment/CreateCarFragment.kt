@@ -84,13 +84,13 @@ class CreateCarFragment : ElmFragment<Event, Effect, State>() {
     override fun createStore() = storeFactory()
 
     override fun render(state: State) {
-        // todo loader!!
-
-        // вот так вызывается загрузочная крутяшка (отключаем кнопку ещё на всякий)
-//        progressBar?.visibility = View.VISIBLE
-//        btContinue.isClickable = false
-        // вот так она скрывается
-//        progressBar?.visibility = View.INVISIBLE
+        if (state.loading) {
+            progressBar!!.visibility = View.VISIBLE
+            btContinue!!.isClickable = false
+        } else {
+            progressBar!!.visibility = View.INVISIBLE
+            btContinue!!.isClickable = true
+        }
     }
 
     override fun handleEffect(effect: Effect) = when (effect) {
