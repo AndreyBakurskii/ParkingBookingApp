@@ -13,6 +13,8 @@ import com.example.parking.R
 
 class CreateCarFragment : Fragment() {
 
+    private var progressBar : FrameLayout? = null
+
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,7 +22,7 @@ class CreateCarFragment : Fragment() {
     ): View {
         val rootView: View = inflater.inflate(R.layout.fragment_create_car, null)
         val btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
-        val progBar = rootView.findViewById<FrameLayout>(R.id.progressBarContainer)
+        progressBar = rootView.findViewById<FrameLayout>(R.id.progressBarContainer)
 
         btContinue.setOnClickListener {
             // сюда вставить вызов функции создания в бэке
@@ -36,9 +38,10 @@ class CreateCarFragment : Fragment() {
                     "\nRegistry number: " + rootView.findViewById<EditText>(R.id.etCarNum).text
             alertDialog.setPositiveButton("OK") { _, _ ->
                 // вот так вызывается загрузочная крутяшка (отключаем кнопку ещё на всякий)
-                makeLoadVisible(progBar, btContinue)
+                progressBar?.visibility = View.VISIBLE
+                btContinue.isClickable = false
                 // вот так она скрывается
-                makeLoadInvisible(progBar, btContinue)
+                progressBar?.visibility = View.INVISIBLE
                 // выводим toast что всё ок и закрываем активность
                 val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
                 toast.show()
@@ -61,16 +64,6 @@ class CreateCarFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-    }
-
-    private fun makeLoadVisible(progBar : FrameLayout, btContinue : Button) {
-        progBar.visibility = View.VISIBLE
-        btContinue.isClickable = false
-    }
-
-    fun makeLoadInvisible(progBar : FrameLayout, btContinue : Button) {
-        progBar.visibility = View.INVISIBLE
-        btContinue.isClickable = true
     }
 
 }
