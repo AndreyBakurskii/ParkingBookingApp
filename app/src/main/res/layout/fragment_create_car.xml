@@ -48,7 +48,6 @@
                 <EditText
                     android:id="@+id/etCarModel"
                     style="@style/Body1"
-                    android:id="@+id/modelNewCar"
                     android:layout_width="fill_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -80,7 +79,6 @@
                 <EditText
                     android:id="@+id/etCarNum"
                     style="@style/Body1"
-                    android:id="@+id/registryNumNewCar"
                     android:layout_width="fill_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
