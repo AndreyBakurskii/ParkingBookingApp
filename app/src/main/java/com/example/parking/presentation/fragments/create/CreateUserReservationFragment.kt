@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -63,7 +64,13 @@ class CreateUserReservationFragment : Fragment() {
             alertDialog.setCancelable(false)
             // сюда информацию
             val textOutput = view.findViewById<TextView>(R.id.textView)
-            alertDialog.setPositiveButton("OK") { dialog, _ ->
+            alertDialog.setPositiveButton("OK") { _, _ ->
+                // вот так вызывается загрузочная крутяшка (отключаем кнопку ещё на всякий)
+                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
+                btContinue.isClickable = false
+                // вот так она скрывается
+                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
+                // выводим toast что всё ок и закрываем активность
                 val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
                 toast.show()
                 activity?.finish()

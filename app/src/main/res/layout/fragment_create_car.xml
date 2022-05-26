@@ -46,8 +46,8 @@
                     android:text="Car model"
                     android:textColor="@color/base_50" />
                 <EditText
+                    android:id="@+id/etCarModel"
                     style="@style/Body1"
-                    android:id="@+id/modelNewCar"
                     android:layout_width="fill_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -77,8 +77,8 @@
                     android:text="Car number"
                     android:textColor="@color/base_50" />
                 <EditText
+                    android:id="@+id/etCarNum"
                     style="@style/Body1"
-                    android:id="@+id/registryNumNewCar"
                     android:layout_width="fill_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -101,8 +101,21 @@
         android:text="create"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <FrameLayout
+        android:id="@+id/progressBarContainer"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="#90262626"
+        android:clickable="true"
+        android:visibility="gone">
+        <ProgressBar
+            android:id="@+id/pBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

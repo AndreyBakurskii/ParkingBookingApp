@@ -27,6 +27,7 @@ class CarsFragment : Fragment() {
         val listView = rootView.findViewById<ExpandableListView>(R.id.expListView)
 
         val groups = ArrayList<Car>()
+
         val car1 = Car(
             id = UUID.fromString("0f29717c-37e4-4a93-9165-6baacae64e98"),
             model = "Nissan",

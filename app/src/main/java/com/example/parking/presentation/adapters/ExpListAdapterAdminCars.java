@@ -94,8 +94,6 @@ public class ExpListAdapterAdminCars extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.admin_cars_child_view, null);
         }
 
-        TextView textChild = (TextView) convertView.findViewById(R.id.textId);
-        textChild.setText(mGroups.get(groupPosition).getId().toString());
         TextView textChild1 = (TextView) convertView.findViewById(R.id.textModel);
         textChild1.setText(mGroups.get(groupPosition).getModel());
         TextView textChild2 = (TextView) convertView.findViewById(R.id.textNum);
