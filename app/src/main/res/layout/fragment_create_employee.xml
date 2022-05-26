@@ -30,35 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:id="@+id/carModel"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-                <TextView
-                    android:id="@+id/textView2"
-                    style="@style/TextHeader2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Full name"
-                    android:textColor="@color/base_50" />
-                <EditText
-                    style="@style/Body1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@color/base_800"
-                    android:hint="@string/full_name"
-                    android:inputType="text"
-                    android:padding="8dp"
-                    android:textColor="@color/base_50"
-                    android:textColorHint="@color/base_500" />
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/userName"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

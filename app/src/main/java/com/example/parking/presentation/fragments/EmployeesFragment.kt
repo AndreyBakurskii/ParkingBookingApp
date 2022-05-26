@@ -26,12 +26,12 @@ class EmployeesFragment : Fragment() {
 
         val groups = ArrayList<Employee>()
         val emp1 =
-            Employee("Khoroshavina Ekaterina", "test")
+            Employee("test")
         groups.add(emp1)
         val emp2 =
-            Employee("Bakurskii Andrei", "test1")
+            Employee("test1")
         groups.add(emp2)
-        val emp3 = Employee("Name Surname", "test3")
+        val emp3 = Employee("test3")
         groups.add(emp3)
         groups.add(emp2)
 
