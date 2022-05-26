@@ -23,27 +23,15 @@ class CarRepository(private val retrofit: Retrofit) {
             .toObservable()
     }
 
-    fun createCar(model: String, registryNumber: String, wight: Int, length: Int): Observable<Response<CarJson>> {
-        return carAPI.createCar(
-            hashMapOf(
-                "model" to model,
-                "registryNumber" to registryNumber,
-                "wight" to wight,
-                "length" to length
-            )
-        )
+    fun createCar(car: HashMap<String, Any>): Observable<Response<CarJson>> {
+        return carAPI.createCar(car)
             .toObservable()
     }
 
-    fun updateCar(id: String, model: String, registryNumber: String, wight: Int, length: Int): Observable<Response<CarJson>> {
+    fun updateCar(id: String, car: HashMap<String, Any>): Observable<Response<CarJson>> {
         return carAPI.updateCarDetail(
             id,
-            hashMapOf(
-                "model" to model,
-                "registryNumber" to registryNumber,
-                "wight" to wight,
-                "length" to length
-            )
+            car
         )
             .toObservable()
     }
