@@ -79,7 +79,7 @@ public class ExpListAdapterAdminCars extends BaseExpandableListAdapter {
         }
 
         TextView textGroup = (TextView) convertView.findViewById(R.id.textGroup);
-        textGroup.setText(mGroups.get(groupPosition).getModel() + ", " + mGroups.get(groupPosition).getNum());
+        textGroup.setText(mGroups.get(groupPosition).getModel() + ", " + mGroups.get(groupPosition).getRegistryNumber());
 
         return convertView;
 
@@ -97,7 +97,7 @@ public class ExpListAdapterAdminCars extends BaseExpandableListAdapter {
         TextView textChild1 = (TextView) convertView.findViewById(R.id.textModel);
         textChild1.setText(mGroups.get(groupPosition).getModel());
         TextView textChild2 = (TextView) convertView.findViewById(R.id.textNum);
-        textChild2.setText(mGroups.get(groupPosition).getNum());
+        textChild2.setText(mGroups.get(groupPosition).getRegistryNumber());
 
         Button button = (Button)convertView.findViewById(R.id.buttonDelete);
         button.setOnClickListener(view -> {
