@@ -42,10 +42,12 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
 }
 
 class MyActor : Actor<Command, Event> {
+    private val carRepository: CarRepository = CarRepository(
+        NetworkService("admin", "password").retrofit
+    )
+
     override fun execute(command: Command): Observable<Event> = when (command) {
-        is Command.CreateCar -> CarRepository(
-            NetworkService("admin", "password").retrofit
-        )
+        is Command.CreateCar -> carRepository
             .createCar(command.car.toHashMap(withID = false))
             .mapEvents(
                 eventMapper = { response -> response.statusCodeHandler(

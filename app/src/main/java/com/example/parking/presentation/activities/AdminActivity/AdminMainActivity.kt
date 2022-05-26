@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.parking.R
-import com.example.parking.presentation.fragments.CarsFragment
+import com.example.parking.presentation.fragments.carsFragment.CarsFragment
 import com.example.parking.presentation.fragments.ReservationsFragment
 import com.example.parking.presentation.fragments.SpotsFragment
 import com.example.parking.presentation.fragments.EmployeesFragment

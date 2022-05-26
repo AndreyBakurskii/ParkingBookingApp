@@ -1,4 +1,4 @@
-package com.example.parking.presentation.fragments
+package com.example.parking.presentation.fragments.carsFragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +14,8 @@ import com.example.parking.R
 import com.example.parking.presentation.adapters.ExpListAdapterAdminCars
 import com.example.parking.data.models.Car
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CarsFragment : Fragment() {
 
@@ -25,13 +27,14 @@ class CarsFragment : Fragment() {
         val listView = rootView.findViewById<ExpandableListView>(R.id.expListView)
 
         val groups = ArrayList<Car>()
-        val car1 = Car("123", "Nissan", "ADC")
+        val car1 = Car(
+            id = UUID.fromString("0f29717c-37e4-4a93-9165-6baacae64e98"),
+            model = "Nissan",
+            length = 3000,
+            wight = 1800,
+            registryNumber = "E475CX152"
+        )
         groups.add(car1)
-        val car2 = Car("345", "Lada", "BCD")
-        groups.add(car2)
-        val car3 = Car("567", "Honda", "CDE")
-        groups.add(car3)
-        groups.add(car2)
 
         val adapter =
             ExpListAdapterAdminCars(
