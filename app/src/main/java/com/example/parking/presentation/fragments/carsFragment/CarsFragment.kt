@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.ExpandableListView
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import com.example.parking.presentation.activities.AdminActivity.AdminMainActivity
 import com.example.parking.presentation.activities.CreateModelActivity.CreateModelActivity
@@ -19,12 +20,17 @@ import kotlin.collections.ArrayList
 
 class CarsFragment : Fragment() {
 
+    var btAdd : FloatingActionButton? = null
+    var progressBar : FrameLayout? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val rootView: View = inflater.inflate(R.layout.fragment_cars, null)
         val listView = rootView.findViewById<ExpandableListView>(R.id.expListView)
+        progressBar = rootView.findViewById(R.id.progressBarContainer)
+        btAdd = rootView.findViewById(R.id.fab)
 
         val groups = ArrayList<Car>()
 
@@ -44,8 +50,7 @@ class CarsFragment : Fragment() {
             )
         listView.setAdapter(adapter)
 
-        val btAdd = rootView.findViewById<FloatingActionButton>(R.id.fab)
-        btAdd.setOnClickListener {
+        btAdd?.setOnClickListener {
 //            val temp = Car("123", "Nissan", "ADC")
 //            groups.add(temp)
 //            adapter.notifyDataSetChanged()
@@ -55,6 +60,14 @@ class CarsFragment : Fragment() {
             intent.putExtra("fragment", data)
             (activity as AdminMainActivity).startActivity(intent)
         }
+
+        // нужно отключить кнопку btAdd на время загрузки
+//        progressBar?.visibility = View.VISIBLE
+//        btAdd?.isClickable = false
+        // а потом не забыть включить !!!!!!!!
+//        progressBar?.visibility = View.INVISIBLE
+//        btAdd?.isClickable = true
+
         listView.setOnScrollListener(object : AbsListView.OnScrollListener {
             override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {}
             override fun onScroll(
@@ -63,9 +76,9 @@ class CarsFragment : Fragment() {
             ) {
                 val lastItem = firstVisibleItem + visibleItemCount
                 if ((lastItem == totalItemCount) && (firstVisibleItem > 0)) {
-                    btAdd.hide()
+                    btAdd?.hide()
                 } else {
-                    btAdd.show()
+                    btAdd?.show()
                 }
             }
         })
