@@ -5,7 +5,7 @@ import com.example.parking.data.models.Car
 
 data class State(
     val loading: Boolean = false,
-    val cars: List<Car>? = null,
+    val cars: ArrayList<Car> = arrayListOf(),
     val doUpdate: Boolean = false
 )
 
@@ -18,13 +18,14 @@ sealed class Effect {
 
 sealed class Event {
     sealed class Ui : Event() {
+        object Init : Ui()
         object LoadCars : Ui()
         data class ClickEditCar(var car: Car, var positionInAdapter: Int) : Ui()
         data class ClickDeleteCar(var car: Car, var positionInAdapter: Int) : Ui()
     }
 
     sealed class Internal : Event() {
-        data class SuccessLoadCars(var cars: List<Car>) : Internal()
+        data class SuccessLoadCars(var cars: ArrayList<Car>) : Internal()
         object ErrorLoadCars : Internal()
 
 //        object SuccessEditCar : Internal()
