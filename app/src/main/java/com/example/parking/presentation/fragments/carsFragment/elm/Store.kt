@@ -1,6 +1,7 @@
 package com.example.parking.presentation.fragments.carsFragment.elm
 
 import com.example.parking.data.mapper.CarMapper
+import com.example.parking.data.models.Car
 import com.example.parking.data.network.NetworkService
 import com.example.parking.data.repository.CarRepository
 import com.example.parking.presentation.fragments.carsFragment.elm.Event.Internal
@@ -39,6 +40,9 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
         }
     }
     override fun Result.ui(event: Ui) = when (event) {
+        is Ui.Init -> {
+
+        }
         is Ui.LoadCars -> {
             state { copy(loading = true, doUpdate = false) }
             commands { +Command.LoadAllCar }
@@ -65,7 +69,7 @@ class MyActor : Actor<Command, Event> {
             .mapEvents(
                 eventMapper = { response -> response.statusCodeHandler(
                     successHandler = { Internal.SuccessLoadCars(
-                        cars = it.map { carJson -> carMapper.fromJsonToModel(carJson) }
+                        cars = it.map { carJson -> carMapper.fromJsonToModel(carJson) } as ArrayList<Car>
                     ) },
                     errorHandler = { Internal.ErrorLoadCars }
                 )},
