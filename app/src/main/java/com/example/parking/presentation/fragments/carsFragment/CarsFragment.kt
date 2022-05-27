@@ -24,9 +24,12 @@ import kotlin.collections.ArrayList
 
 class CarsFragment : ElmFragment<Event, Effect, State>() {
 
-    private var progressBar : FrameLayout? = null
+//    private var progressBar : FrameLayout? = null
     private var carsInAdapter : ArrayList<Car>? = null
     private var carsAdapter: ExpListAdapterAdminCars? = null
+
+    private var btAdd : FloatingActionButton? = null
+    private var progressBar : FrameLayout? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +37,8 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
     ): View? {
         val rootView: View = inflater.inflate(R.layout.fragment_cars, null)
         val listView = rootView.findViewById<ExpandableListView>(R.id.expListView)
+        progressBar = rootView.findViewById(R.id.progressBarContainer)
+        btAdd = rootView.findViewById(R.id.fab)
 
         progressBar = rootView.findViewById<FrameLayout>(R.id.progressBarContainer)
 
@@ -51,8 +56,7 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
         listView.setAdapter(carsAdapter)
 
 
-        val btAdd = rootView.findViewById<FloatingActionButton>(R.id.fab)
-        btAdd.setOnClickListener {
+        btAdd?.setOnClickListener {
 //            val temp = Car("123", "Nissan", "ADC")
 //            groups.add(temp)
 //            adapter.notifyDataSetChanged()
@@ -63,6 +67,7 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
             (activity as AdminMainActivity).startActivity(intent)
         }
 
+
         listView.setOnScrollListener(object : AbsListView.OnScrollListener {
             override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {}
             override fun onScroll(
@@ -71,9 +76,9 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
             ) {
                 val lastItem = firstVisibleItem + visibleItemCount
                 if ((lastItem == totalItemCount) && (firstVisibleItem > 0)) {
-                    btAdd.hide()
+                    btAdd?.hide()
                 } else {
-                    btAdd.show()
+                    btAdd?.show()
                 }
             }
         })
