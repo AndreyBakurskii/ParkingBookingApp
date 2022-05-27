@@ -37,12 +37,14 @@ class CreateCarFragment : ElmFragment<Event, Effect, State>() {
         val etNum = rootView.findViewById<EditText>(R.id.etCarNum)
 
         btContinue?.setOnClickListener {
-            // сюда вставить вызов функции создания в бэке
-            val car: Car = Car(
-                model = etModel.text.toString(),
-                registryNumber = etNum.text.toString()
-            )
-            store.accept(Event.Ui.CreateClick(car))
+            if (!isFieldEmpty(etModel) && !(isFieldEmpty(etNum))) {
+                // сюда вставить вызов функции создания в бэке
+                val car: Car = Car(
+                    model = etModel.text.toString(),
+                    registryNumber = etNum.text.toString()
+                )
+                store.accept(Event.Ui.CreateClick(car))
+            }
         }
         return rootView
     }
