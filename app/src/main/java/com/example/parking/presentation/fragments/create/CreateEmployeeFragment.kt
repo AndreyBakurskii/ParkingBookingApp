@@ -3,6 +3,7 @@ package com.example.parking.presentation.fragments.create
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,15 +14,20 @@ import com.example.parking.R
 
 class CreateEmployeeFragment : Fragment() {
 
+    private var progressBar : FrameLayout? = null
+    private var btContinue : Button? = null
+
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val rootView: View = inflater.inflate(R.layout.fragment_create_employee, null)
-        val btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
+        btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
+        progressBar = rootView.findViewById(R.id.progressBarContainer)
+        val etEmployeeEmail = rootView.findViewById<EditText>(R.id.etEmployeeEmail)
 
-        btContinue.setOnClickListener {
+        btContinue?.setOnClickListener {
             // сюда вставить вызов функции создания в бэке
 
             // с полученной информацией выводим окно
@@ -31,13 +37,13 @@ class CreateEmployeeFragment : Fragment() {
             alertDialog.setCancelable(false)
             // сюда информацию (уже добавила)
             val textOutput = view.findViewById<TextView>(R.id.textView)
-            textOutput.text = "E-mail: " + rootView.findViewById<EditText>(R.id.etEmployeeEmail).text
+            textOutput.text = "E-mail: " + etEmployeeEmail.text
             alertDialog.setPositiveButton("OK") { _, _ ->
                 // вот так вызывается загрузочная крутяшка (отключаем кнопку ещё на всякий)
-                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
-                btContinue.isClickable = false
+//                progressBar?.visibility = View.VISIBLE
+//                btContinue?.isClickable = false
                 // вот так она скрывается
-                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
+//                progressBar?.visibility = View.INVISIBLE
                 // выводим toast что всё ок и закрываем активность
                 val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
                 toast.show()
@@ -60,6 +66,15 @@ class CreateEmployeeFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+    }
+
+    private fun isFieldEmpty(etField : EditText) : Boolean {
+        return if (TextUtils.isEmpty(etField.text.toString())) {
+            etField.error = "This field cannot be empty"
+            true
+        } else {
+            false
+        }
     }
 
 }

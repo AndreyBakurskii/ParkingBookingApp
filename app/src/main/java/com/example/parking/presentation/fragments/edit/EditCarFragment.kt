@@ -3,6 +3,7 @@ package com.example.parking.presentation.fragments.edit
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,15 +14,21 @@ import com.example.parking.R
 
 class EditCarFragment : Fragment() {
 
+    private var progressBar : FrameLayout? = null
+    private var btContinue : Button? = null
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val rootView: View = inflater.inflate(R.layout.fragment_edit_car, null)
-        val btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
+        btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
+        progressBar = rootView.findViewById(R.id.progressBarContainer)
+        val etModel = rootView.findViewById<EditText>(R.id.etCarModel)
+        val etNum = rootView.findViewById<EditText>(R.id.etCarNum)
 
-        btContinue.setOnClickListener {
+        btContinue?.setOnClickListener {
             // сюда вставить вызов функции редактирования на бэке
 
             // с полученной информацией выводим окно
@@ -31,14 +38,14 @@ class EditCarFragment : Fragment() {
             alertDialog.setCancelable(false)
             // сюда информацию (уже добавила)
             val textOutput = view.findViewById<TextView>(R.id.textView)
-            textOutput.text = "Car model: " + rootView.findViewById<EditText>(R.id.etCarModel).text +
-                    "\nRegistry number: " + rootView.findViewById<EditText>(R.id.etCarNum).text
-            alertDialog.setPositiveButton("OK") { dialog, _ ->
+            textOutput.text = "Car model: " + etModel.text +
+                    "\nRegistry number: " + etNum.text
+            alertDialog.setPositiveButton("OK") { _, _ ->
                 // вот так вызывается загрузочная крутяшка (отключаем кнопку ещё на всякий)
-                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
-                btContinue.isClickable = false
+//                progressBar?.visibility = View.VISIBLE
+//                btContinue?.isClickable = false
                 // вот так она скрывается
-                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
+//                progressBar?.visibility = View.INVISIBLE
                 // выводим toast что всё ок и закрываем активность
                 val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
                 toast.show()
@@ -61,5 +68,14 @@ class EditCarFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+    }
+
+    private fun isFieldEmpty(etField : EditText) : Boolean {
+        return if (TextUtils.isEmpty(etField.text.toString())) {
+            etField.error = "This field cannot be empty"
+            true
+        } else {
+            false
+        }
     }
 }

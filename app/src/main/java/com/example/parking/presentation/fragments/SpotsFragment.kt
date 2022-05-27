@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.ExpandableListView
+import android.widget.FrameLayout
 import com.example.parking.presentation.activities.AdminActivity.AdminMainActivity
 import com.example.parking.presentation.activities.CreateModelActivity.CreateModelActivity
 import com.example.parking.R
@@ -17,12 +18,24 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SpotsFragment : Fragment() {
 
+    var btAdd : FloatingActionButton? = null
+    var progressBar : FrameLayout? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val rootView: View = inflater.inflate(R.layout.fragment_spots, null)
         val listView = rootView.findViewById<ExpandableListView>(R.id.expListView)
+        progressBar = rootView.findViewById(R.id.progressBarContainer)
+        btAdd = rootView.findViewById(R.id.fab)
+
+        // нужно отключить кнопку btAdd на время загрузки
+//        progressBar?.visibility = View.VISIBLE
+//        btAdd?.isClickable = false
+        // а потом не забыть включить !!!!!!!!
+//        progressBar?.visibility = View.INVISIBLE
+//        btAdd?.isClickable = true
 
         val groups = ArrayList<ParkingSpot>()
         val spot1 = ParkingSpot("123", "A123")
@@ -40,8 +53,7 @@ class SpotsFragment : Fragment() {
             )
         listView.setAdapter(adapter)
 
-        val btAdd = rootView.findViewById<FloatingActionButton>(R.id.fab)
-        btAdd.setOnClickListener {
+        btAdd?.setOnClickListener {
 //            val temp = ParkingSpot("123", "A123")
 //            groups.add(temp)
 //            adapter.notifyDataSetChanged()
@@ -59,9 +71,9 @@ class SpotsFragment : Fragment() {
             ) {
                 val lastItem = firstVisibleItem + visibleItemCount
                 if ((lastItem == totalItemCount) && (firstVisibleItem > 0)) {
-                    btAdd.hide()
+                    btAdd?.hide()
                 } else {
-                    btAdd.show()
+                    btAdd?.show()
                 }
             }
         })
