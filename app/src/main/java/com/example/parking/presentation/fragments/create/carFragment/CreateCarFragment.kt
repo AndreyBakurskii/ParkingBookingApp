@@ -3,6 +3,7 @@ package com.example.parking.presentation.fragments.create.carFragment
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -30,14 +31,16 @@ class CreateCarFragment : ElmFragment<Event, Effect, State>() {
         savedInstanceState: Bundle?
     ): View {
         val rootView: View = inflater.inflate(R.layout.fragment_create_car, null)
-        btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
-        progressBar = rootView.findViewById<FrameLayout>(R.id.progressBarContainer)
+        btContinue = rootView.findViewById(R.id.buttonContinue)
+        progressBar = rootView.findViewById(R.id.progressBarContainer)
+        val etModel = rootView.findViewById<EditText>(R.id.etCarModel)
+        val etNum = rootView.findViewById<EditText>(R.id.etCarNum)
 
         btContinue?.setOnClickListener {
             // сюда вставить вызов функции создания в бэке
             val car: Car = Car(
-                model = rootView.findViewById<EditText>(R.id.etCarModel).text.toString(),
-                registryNumber = rootView.findViewById<EditText>(R.id.etCarNum).text.toString()
+                model = etModel.text.toString(),
+                registryNumber = etNum.text.toString()
             )
             store.accept(Event.Ui.CreateClick(car))
         }
@@ -106,6 +109,15 @@ class CreateCarFragment : ElmFragment<Event, Effect, State>() {
             "Problems with your connection! Check your internet connection!",
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    private fun isFieldEmpty(etField : EditText) : Boolean {
+        return if (TextUtils.isEmpty(etField.text.toString())) {
+            etField.error = "This field cannot be empty"
+            true
+        } else {
+            false
+        }
     }
 
 }
