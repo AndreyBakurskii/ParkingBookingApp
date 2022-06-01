@@ -1,11 +1,11 @@
-package com.example.parking.presentation.fragments.carsFragment.elm
+package com.example.parking.presentation.fragments.car.list.elm
 
 import com.example.parking.data.mapper.CarMapper
 import com.example.parking.data.models.Car
 import com.example.parking.data.network.NetworkService
 import com.example.parking.data.repository.CarRepository
-import com.example.parking.presentation.fragments.carsFragment.elm.Event.Internal
-import com.example.parking.presentation.fragments.carsFragment.elm.Event.Ui
+import com.example.parking.presentation.fragments.car.list.elm.Event.Internal
+import com.example.parking.presentation.fragments.car.list.elm.Event.Ui
 import com.example.parking.presentation.utils.removeElementByIndex
 import com.example.parking.presentation.utils.statusCodeHandler
 import io.reactivex.Observable

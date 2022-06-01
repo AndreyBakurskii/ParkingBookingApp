@@ -1,4 +1,4 @@
-package com.example.parking.presentation.fragments.carsFragment
+package com.example.parking.presentation.fragments.car.list
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,22 +10,19 @@ import android.widget.AbsListView
 import android.widget.ExpandableListView
 import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.example.parking.presentation.activities.AdminActivity.AdminMainActivity
 import com.example.parking.presentation.activities.CreateModelActivity.CreateModelActivity
 import com.example.parking.R
-import com.example.parking.data.mapper.CarMapper
 import com.example.parking.presentation.adapters.ExpListAdapterAdminCars
 import com.example.parking.data.models.Car
 import com.example.parking.presentation.activities.EditModelActivity.EditModelActivity
-import com.example.parking.presentation.fragments.carsFragment.elm.Effect
-import com.example.parking.presentation.fragments.carsFragment.elm.Event
-import com.example.parking.presentation.fragments.carsFragment.elm.State
-import com.example.parking.presentation.fragments.carsFragment.elm.storeFactory
+import com.example.parking.presentation.fragments.car.list.elm.Effect
+import com.example.parking.presentation.fragments.car.list.elm.Event
+import com.example.parking.presentation.fragments.car.list.elm.State
+import com.example.parking.presentation.fragments.car.list.elm.storeFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import vivid.money.elmslie.android.base.ElmFragment
 import vivid.money.elmslie.core.store.Store
-import java.util.*
 import kotlin.collections.ArrayList
 
 class CarsFragment : ElmFragment<Event, Effect, State>() {

@@ -2,7 +2,6 @@ package com.example.parking.presentation.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +9,14 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.parking.presentation.activities.EditModelActivity.EditModelActivity;
 import com.example.parking.R;
 import com.example.parking.data.models.Car;
-import com.example.parking.presentation.fragments.carsFragment.elm.Effect;
-import com.example.parking.presentation.fragments.carsFragment.elm.Event;
-import com.example.parking.presentation.fragments.carsFragment.elm.State;
+import com.example.parking.presentation.fragments.car.list.elm.Effect;
+import com.example.parking.presentation.fragments.car.list.elm.Event;
+import com.example.parking.presentation.fragments.car.list.elm.State;
 
 import java.util.ArrayList;
-import java.util.concurrent.Callable;
 
-import kotlin.jvm.functions.Function2;
 import vivid.money.elmslie.core.store.Store;
 
 public class ExpListAdapterAdminCars extends BaseExpandableListAdapter {

@@ -1,10 +1,10 @@
-package com.example.parking.presentation.fragments.edit.carFragment.elm
+package com.example.parking.presentation.fragments.car.edit.elm
 
 import com.example.parking.data.network.NetworkService
 import com.example.parking.data.repository.CarRepository
 import vivid.money.elmslie.core.store.dsl_reducer.ScreenDslReducer
-import com.example.parking.presentation.fragments.edit.carFragment.elm.Event.Ui
-import com.example.parking.presentation.fragments.edit.carFragment.elm.Event.Internal
+import com.example.parking.presentation.fragments.car.edit.elm.Event.Ui
+import com.example.parking.presentation.fragments.car.edit.elm.Event.Internal
 import com.example.parking.presentation.utils.statusCodeHandler
 import io.reactivex.Observable
 import vivid.money.elmslie.core.Actor

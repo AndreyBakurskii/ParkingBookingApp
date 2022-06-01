@@ -1,4 +1,4 @@
-package com.example.parking.presentation.fragments.carsFragment.elm
+package com.example.parking.presentation.fragments.car.list.elm
 
 import com.example.parking.data.models.Car
 
