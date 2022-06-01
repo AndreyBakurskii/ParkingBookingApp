@@ -9,12 +9,15 @@ import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.ExpandableListView
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.parking.presentation.activities.AdminActivity.AdminMainActivity
 import com.example.parking.presentation.activities.CreateModelActivity.CreateModelActivity
 import com.example.parking.R
+import com.example.parking.data.mapper.CarMapper
 import com.example.parking.presentation.adapters.ExpListAdapterAdminCars
 import com.example.parking.data.models.Car
+import com.example.parking.presentation.activities.EditModelActivity.EditModelActivity
 import com.example.parking.presentation.fragments.carsFragment.elm.Effect
 import com.example.parking.presentation.fragments.carsFragment.elm.Event
 import com.example.parking.presentation.fragments.carsFragment.elm.State
@@ -44,29 +47,12 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
 
         progressBar = rootView.findViewById<FrameLayout>(R.id.progressBarContainer)
 
-//        val groups = ArrayList<Car>()
-
-//        val car1 = Car(
-//            id = UUID.fromString("0f29717c-37e4-4a93-9165-6baacae64e98"),
-//            model = "Nissan",
-//            length = 3000,
-//            wight = 1800,
-//            registryNumber = "E475CX152"
-//        )
-
-        carsAdapter = ExpListAdapterAdminCars(activity, carsInAdapter)
+        carsAdapter = ExpListAdapterAdminCars(activity, carsInAdapter, store)
         listView.setAdapter(carsAdapter)
 
 
         btAdd?.setOnClickListener {
-//            val temp = Car("123", "Nissan", "ADC")
-//            groups.add(temp)
-//            adapter.notifyDataSetChanged()
-
-            val data = "cars"
-            val intent = Intent((activity as AdminMainActivity), CreateModelActivity::class.java)
-            intent.putExtra("fragment", data)
-            (activity as AdminMainActivity).startActivity(intent)
+            store.accept(Event.Ui.ClickCreateCar)
         }
 
 
@@ -85,14 +71,13 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
             }
         })
 
-//        store.accept(Event.Ui.LoadCars)
-
         return rootView
     }
 
     override fun onResume() {
         super.onResume()
         Log.i("ONRESUME", "on resume work!!!")
+        // todo возможно вызывать LoadCars отсюда
     }
 
     override fun createStore(): Store<Event, Effect, State> = storeFactory()
@@ -100,22 +85,53 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
     override val initEvent: Event = Event.Ui.LoadCars
 
     override fun render(state: State) {
-//        if (state.loading) {
-//            progressBar!!.visibility = View.VISIBLE
-//        } else {
-//            progressBar!!.visibility = View.INVISIBLE
-//        }
+        if (state.loading) {
+            progressBar!!.visibility = View.VISIBLE
+        } else {
+            progressBar!!.visibility = View.INVISIBLE
+        }
 
         if (state.doUpdate) {
-//            carsInAdapter = state.cars
             carsInAdapter!!.clear()
             carsInAdapter!!.addAll(state.cars as Collection<Car>)
             carsAdapter!!.notifyDataSetChanged()
         }
     }
 
-    override fun handleEffect(effect: Effect): Unit? {
-        return super.handleEffect(effect)
+    override fun handleEffect(effect: Effect) = when (effect) {
+        is Effect.ShowErrorLoadCars -> Toast.makeText(
+            activity,
+            "Unexpected problems on the server! Try restarting the application!",
+            Toast.LENGTH_SHORT
+        ).show()
+        is Effect.ShowErrorNetwork -> Toast.makeText(
+            activity,
+            "Problems with your connection! Check your internet connection!",
+            Toast.LENGTH_SHORT
+        ).show()
+        is Effect.ShowErrorDeleteCar -> Toast.makeText(
+            activity,
+            "Error during deletion, try again later!",
+            Toast.LENGTH_SHORT
+        ).show()
+        is Effect.ToEditCarFragment -> toEditCarFragment(effect.car, effect.positionInAdapter)
+        is Effect.ToCreateCarFragment -> toCreateCarFragment()
     }
 
+    private fun toCreateCarFragment() {
+        val data = "cars"
+        val intent = Intent((activity as AdminMainActivity), CreateModelActivity::class.java)
+        intent.putExtra("fragment", data)
+        (activity as AdminMainActivity).startActivity(intent)
+    }
+
+    private fun toEditCarFragment(car: Car, positionInAdapter: Int) {
+        val data = "cars";
+        val intent = Intent((activity as AdminMainActivity), EditModelActivity::class.java);
+        intent.putExtra("fragment", data);
+        intent.putExtra("car", car.toHashMap(withID = true))
+        intent.putExtra("positionInAdapter", positionInAdapter)
+
+        (activity as AdminMainActivity).startActivity(intent);
+    }
 }

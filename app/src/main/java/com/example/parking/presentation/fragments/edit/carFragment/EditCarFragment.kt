@@ -1,45 +1,43 @@
-package com.example.parking.presentation.fragments.create.carFragment
+package com.example.parking.presentation.fragments.edit.carFragment
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.parking.R
 import com.example.parking.data.models.Car
-
-import com.example.parking.presentation.fragments.create.carFragment.elm.*
-import com.example.parking.presentation.fragments.create.carFragment.elm.storeFactory
+import com.example.parking.presentation.fragments.edit.carFragment.elm.Effect
+import com.example.parking.presentation.fragments.edit.carFragment.elm.Event
+import com.example.parking.presentation.fragments.edit.carFragment.elm.State
+import com.example.parking.presentation.fragments.edit.carFragment.elm.storeFactory
 import vivid.money.elmslie.android.base.ElmFragment
-import vivid.money.elmslie.core.ElmStoreCompat
-import vivid.money.elmslie.core.store.ElmStore
 import vivid.money.elmslie.core.store.Store
 
-class CreateCarFragment : ElmFragment<Event, Effect, State>() {
+class EditCarFragment : ElmFragment<Event, Effect, State>() {
 
     private var progressBar : FrameLayout? = null
     private var btContinue : Button? = null
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView: View = inflater.inflate(R.layout.fragment_create_car, null)
+        val rootView: View = inflater.inflate(R.layout.fragment_edit_car, null)
         btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
         progressBar = rootView.findViewById<FrameLayout>(R.id.progressBarContainer)
 
-        btContinue?.setOnClickListener {
-            // сюда вставить вызов функции создания в бэке
-            val car: Car = Car(
-                model = rootView.findViewById<EditText>(R.id.etCarModel).text.toString(),
-                registryNumber = rootView.findViewById<EditText>(R.id.etCarNum).text.toString()
-            )
-            store.accept(Event.Ui.CreateClick(car))
+        val updatedModel = rootView.findViewById<EditText>(R.id.etCarModel)
+        val updatedNum = rootView.findViewById<EditText>(R.id.etCarNum)
+
+        // обновить старую инфу машины на новую
+        btContinue!!.setOnClickListener {
+//            store.accept(Event.Ui.EditClick)
         }
         return rootView
     }
@@ -55,16 +53,18 @@ class CreateCarFragment : ElmFragment<Event, Effect, State>() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun showConfirmDialog(car: Car) {
+    fun showConfirmDialog(car: Car) {
         val view = layoutInflater.inflate(R.layout.alertdialog_model, null)
         val alertDialog = AlertDialog.Builder(activity, R.style.AlertDialog)
         alertDialog.setTitle("Confirm")
         alertDialog.setCancelable(false)
         // сюда информацию (уже добавила)
         val textOutput = view.findViewById<TextView>(R.id.textView)
-        textOutput.text = "Car model: " + car.model + "\nRegistry number: " + car.registryNumber
+        textOutput.text = "Car model: " + view.findViewById<EditText>(R.id.etCarModel).text +
+                "\nRegistry number: " + view.findViewById<EditText>(R.id.etCarNum).text
+
         alertDialog.setPositiveButton("OK") { _, _ ->
-            store.accept(Event.Ui.OkClickConfirmDialog(car))
+            // выводим toast что всё ок и закрываем активность
         }
         alertDialog.setNegativeButton("Cancel") { dialog, _ ->
             dialog.cancel()
@@ -73,7 +73,7 @@ class CreateCarFragment : ElmFragment<Event, Effect, State>() {
         alertDialog.show()
     }
 
-    private fun toCarsFragment() {
+    fun toCarsFragment() {
         val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
         toast.show()
         activity?.finish()
@@ -96,9 +96,9 @@ class CreateCarFragment : ElmFragment<Event, Effect, State>() {
     override fun handleEffect(effect: Effect) = when (effect) {
         is Effect.ShowConfirmDialog -> showConfirmDialog(effect.car)
         is Effect.ToCarsFragment -> toCarsFragment()
-        is Effect.ShowErrorCreateCar -> Toast.makeText(
+        is Effect.ShowErrorEditCar -> Toast.makeText(
             activity,
-            "Unable to create a car, error on the server! Please check the entered data!",
+            "Unable to edit a car, error on the server! Please check the entered data!",
             Toast.LENGTH_SHORT
         ).show()
         is Effect.ShowErrorNetwork -> Toast.makeText(
@@ -107,5 +107,4 @@ class CreateCarFragment : ElmFragment<Event, Effect, State>() {
             Toast.LENGTH_SHORT
         ).show()
     }
-
 }

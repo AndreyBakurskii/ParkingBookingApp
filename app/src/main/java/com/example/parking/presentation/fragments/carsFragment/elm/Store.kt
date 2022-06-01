@@ -6,6 +6,7 @@ import com.example.parking.data.network.NetworkService
 import com.example.parking.data.repository.CarRepository
 import com.example.parking.presentation.fragments.carsFragment.elm.Event.Internal
 import com.example.parking.presentation.fragments.carsFragment.elm.Event.Ui
+import com.example.parking.presentation.utils.removeElementByIndex
 import com.example.parking.presentation.utils.statusCodeHandler
 import io.reactivex.Observable
 import vivid.money.elmslie.core.Actor
@@ -27,8 +28,12 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
             state { copy(loading = false, doUpdate = false) }
             effects { +Effect.ShowErrorLoadCars }
         }
-        is Internal.SuccessDeleteCar -> {
-            state { copy(loading = false, doUpdate = true) }  // todo решить что будет с cars
+        is Internal.SuccessDeleteFromServer -> {
+            state { copy(loading = true, doUpdate = false) }  // todo решить что будет с cars
+            commands { +Command.DeleteFromAdapter(state.cars, event.positionInAdapter) }
+        }
+        is Internal.SuccessDeleteFromAdapter -> {
+            state { copy(loading = false, cars = event.cars, doUpdate = true) }
         }
         is Internal.ErrorDeleteCar -> {
             state { copy(loading = false, doUpdate = false) }
@@ -36,12 +41,11 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
         }
         is Internal.ErrorNetwork -> {
             state { copy(loading = false, doUpdate = false) }
-            effects { +Effect.ShowErrorDeleteCar }
+            effects { +Effect.ShowErrorNetwork }
         }
     }
     override fun Result.ui(event: Ui) = when (event) {
         is Ui.Init -> {
-
         }
         is Ui.LoadCars -> {
             state { copy(loading = true, doUpdate = false) }
@@ -49,10 +53,15 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
         }
         is Ui.ClickDeleteCar -> {
             state { copy(loading = true, doUpdate = false) }
-            commands { +Command.DeleteCar(event.car, event.positionInAdapter) }
+            commands { +Command.DeleteFromServer(event.car, event.positionInAdapter) }
         }
         is Ui.ClickEditCar -> {
-            // todo обработать!
+            state {copy(loading = false, doUpdate = false)}
+            effects { +Effect.ToEditCarFragment(event.car, event.positionInAdapter) }
+        }
+        is Ui.ClickCreateCar -> {
+            state {copy(loading = false, doUpdate = false)}
+            effects { +Effect.ToCreateCarFragment }
         }
     }
 }
@@ -75,14 +84,20 @@ class MyActor : Actor<Command, Event> {
                 )},
                 errorMapper = { Internal.ErrorNetwork }
             )
-        is Command.DeleteCar -> carRepository
+        is Command.DeleteFromServer -> carRepository
             .deleteCar(id = command.car.id.toString())
             .mapEvents(
                 eventMapper = { response -> response.statusCodeHandler(
-                    successHandler = { Internal.SuccessDeleteCar },
+                    successHandler = { Internal.SuccessDeleteFromServer(command.car, command.positionInAdapter) },
                     errorHandler = { Internal.ErrorDeleteCar }
                 )},
                 errorMapper = { Internal.ErrorNetwork }
+            )
+        is Command.DeleteFromAdapter -> Observable
+            .fromArray(command.cars.removeElementByIndex(command.positionInAdapter))
+            .mapEvents(
+                eventMapper = { Internal.SuccessDeleteFromAdapter(cars = it) },
+                errorMapper = { Internal.ErrorDeleteCar}
             )
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.parking.R
 import com.example.parking.presentation.fragments.edit.*
+import com.example.parking.presentation.fragments.edit.carFragment.EditCarFragment
 
 class EditModelActivity : AppCompatActivity() {
     private val editCarFragment = EditCarFragment()

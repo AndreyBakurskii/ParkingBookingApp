@@ -14,4 +14,14 @@ class CarMapper {
             registryNumber = jsonModel.registryNumber
         )
     }
+
+    fun fromModelToJson(car: Car): CarJson {
+        return CarJson(
+            id = car.id.toString(),
+            model = car.model,
+            registryNumber = car.registryNumber,
+            wight = car.wight,
+            length = car.length
+        )
+    }
 }
