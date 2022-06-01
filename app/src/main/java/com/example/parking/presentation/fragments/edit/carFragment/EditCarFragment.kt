@@ -3,6 +3,7 @@ package com.example.parking.presentation.fragments.edit.carFragment
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -106,5 +107,14 @@ class EditCarFragment : ElmFragment<Event, Effect, State>() {
             "Problems with your connection! Check your internet connection!",
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    private fun isFieldEmpty(etField : EditText) : Boolean {
+        return if (TextUtils.isEmpty(etField.text.toString())) {
+            etField.error = "This field cannot be empty"
+            true
+        } else {
+            false
+        }
     }
 }

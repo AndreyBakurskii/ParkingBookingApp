@@ -39,7 +39,7 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val rootView: View = inflater.inflate(R.layout.fragment_cars, null)
         val listView = rootView.findViewById<ExpandableListView>(R.id.expListView)
         progressBar = rootView.findViewById(R.id.progressBarContainer)
