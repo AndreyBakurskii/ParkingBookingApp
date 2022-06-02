@@ -2,7 +2,6 @@ package com.example.parking.presentation.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,19 +9,29 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.parking.presentation.activities.EditModelActivity.EditModelActivity;
 import com.example.parking.R;
 import com.example.parking.data.models.Car;
+import com.example.parking.presentation.fragments.car.list.elm.Effect;
+import com.example.parking.presentation.fragments.car.list.elm.Event;
+import com.example.parking.presentation.fragments.car.list.elm.State;
 
 import java.util.ArrayList;
+
+import vivid.money.elmslie.core.store.Store;
 
 public class ExpListAdapterAdminCars extends BaseExpandableListAdapter {
     private final ArrayList<Car> mGroups;
     private final Context mContext;
+    public Store<Event, Effect, State> store;
 
-    public ExpListAdapterAdminCars(Context context, ArrayList<Car> groups){
+    public ExpListAdapterAdminCars(
+            Context context,
+            ArrayList<Car> groups,
+            Store store
+    ){
         this.mContext = context;
         this.mGroups = groups;
+        this.store = store;
     }
 
     @Override
@@ -79,7 +88,7 @@ public class ExpListAdapterAdminCars extends BaseExpandableListAdapter {
         }
 
         TextView textGroup = (TextView) convertView.findViewById(R.id.textGroup);
-        textGroup.setText(mGroups.get(groupPosition).getModel() + ", " + mGroups.get(groupPosition).getNum());
+        textGroup.setText(mGroups.get(groupPosition).getModel() + ", " + mGroups.get(groupPosition).getRegistryNumber());
 
         return convertView;
 
@@ -94,28 +103,27 @@ public class ExpListAdapterAdminCars extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.admin_cars_child_view, null);
         }
 
-        TextView textChild = (TextView) convertView.findViewById(R.id.textId);
-        textChild.setText(mGroups.get(groupPosition).getId());
-        TextView textChild1 = (TextView) convertView.findViewById(R.id.textModel);
-        textChild1.setText(mGroups.get(groupPosition).getModel());
-        TextView textChild2 = (TextView) convertView.findViewById(R.id.textNum);
-        textChild2.setText(mGroups.get(groupPosition).getNum());
+        Car currentCar = mGroups.get(groupPosition);
 
+        TextView textChild1 = (TextView) convertView.findViewById(R.id.textModel);
+        textChild1.setText(currentCar.getModel());
+
+        TextView textChild2 = (TextView) convertView.findViewById(R.id.textNum);
+        textChild2.setText(currentCar.getRegistryNumber());
+
+        // delete btn
         Button button = (Button)convertView.findViewById(R.id.buttonDelete);
         button.setOnClickListener(view -> {
-            mGroups.remove(groupPosition);
-            notifyDataSetChanged();
+            store.accept(new Event.Ui.ClickDeleteCar(currentCar, groupPosition));
         });
 
+        // edit btn
         // здесь переходим в активность с редактированием, вызывая фрагмент для машин
         Button buttonEdit = (Button)convertView.findViewById(R.id.buttonEdit);
         buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String data = "cars";
-                Intent intent = new Intent(mContext.getApplicationContext(), EditModelActivity.class);
-                intent.putExtra("fragment", data);
-                mContext.startActivity(intent);
+                store.accept(new Event.Ui.ClickEditCar(currentCar, groupPosition));
             }
         });
 

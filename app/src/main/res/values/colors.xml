@@ -3,6 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="load">#95262626</color>
+
     <color name="base_50">#F5F5F5</color>
     <color name="base_100">#E9E9E9</color>
     <color name="base_200">#D9D9D9</color>

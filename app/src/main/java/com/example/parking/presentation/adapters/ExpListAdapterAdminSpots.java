@@ -93,8 +93,6 @@ public class ExpListAdapterAdminSpots extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.admin_spots_child_view, null);
         }
 
-        TextView textChild = (TextView) convertView.findViewById(R.id.textId);
-        textChild.setText(mGroups.get(groupPosition).getId());
         TextView textChild2 = (TextView) convertView.findViewById(R.id.textNum);
         textChild2.setText(mGroups.get(groupPosition).getNum());
 

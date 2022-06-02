@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.parking.R
+import com.example.parking.data.mapper.CarMapper
+import com.example.parking.data.models.Car
 import com.example.parking.presentation.fragments.edit.*
+import com.example.parking.presentation.fragments.car.edit.EditCarFragment
+import java.util.HashMap
 
 class EditModelActivity : AppCompatActivity() {
-
-    private val editEmployeeFragment = EditEmployeeFragment()
     private val editCarFragment = EditCarFragment()
     private val editSpotsFragment = EditSpotFragment()
     private val editUserReservationFragment = EditUserReservationFragment()
@@ -21,7 +23,6 @@ class EditModelActivity : AppCompatActivity() {
             "reservations" -> replaceFragment(editAdminReservationFragment)
             "user" -> replaceFragment(editUserReservationFragment)
             "cars" -> replaceFragment(editCarFragment)
-            "employees" -> replaceFragment(editEmployeeFragment)
             "spots" -> replaceFragment(editSpotsFragment)
         }
     }

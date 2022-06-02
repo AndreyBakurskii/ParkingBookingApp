@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.ExpandableListView
+import android.widget.FrameLayout
 import com.example.parking.presentation.activities.AdminActivity.AdminMainActivity
 import com.example.parking.presentation.activities.CreateModelActivity.CreateModelActivity
 import com.example.parking.R
@@ -17,21 +18,33 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class EmployeesFragment : Fragment() {
 
+    var btAdd : FloatingActionButton? = null
+    var progressBar : FrameLayout? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val rootView: View = inflater.inflate(R.layout.fragment_employees, null)
         val listView = rootView.findViewById<ExpandableListView>(R.id.expListView)
+        progressBar = rootView.findViewById(R.id.progressBarContainer)
+        btAdd = rootView.findViewById(R.id.fab)
+
+        // нужно отключить кнопку btAdd на время загрузки
+//        progressBar?.visibility = View.VISIBLE
+//        btAdd?.isClickable = false
+        // а потом не забыть включить !!!!!!!!
+//        progressBar?.visibility = View.INVISIBLE
+//        btAdd?.isClickable = true
 
         val groups = ArrayList<Employee>()
         val emp1 =
-            Employee("Khoroshavina Ekaterina", "test")
+            Employee("test")
         groups.add(emp1)
         val emp2 =
-            Employee("Bakurskii Andrei", "test1")
+            Employee("test1")
         groups.add(emp2)
-        val emp3 = Employee("Name Surname", "test3")
+        val emp3 = Employee("test3")
         groups.add(emp3)
         groups.add(emp2)
 
@@ -42,8 +55,7 @@ class EmployeesFragment : Fragment() {
             )
         listView.setAdapter(adapter)
 
-        val btAdd = rootView.findViewById<FloatingActionButton>(R.id.fab)
-        btAdd.setOnClickListener {
+        btAdd?.setOnClickListener {
             val data = "employees"
             val intent = Intent((activity as AdminMainActivity), CreateModelActivity::class.java)
             intent.putExtra("fragment", data)
@@ -57,9 +69,9 @@ class EmployeesFragment : Fragment() {
             ) {
                 val lastItem = firstVisibleItem + visibleItemCount
                 if ((lastItem == totalItemCount) && (firstVisibleItem > 0)) {
-                    btAdd.hide()
+                    btAdd?.hide()
                 } else {
-                    btAdd.show()
+                    btAdd?.show()
                 }
             }
         })

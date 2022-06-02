@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import com.example.parking.presentation.activities.MainActivity.elm.Effect
 import com.example.parking.presentation.activities.MainActivity.elm.Event
@@ -13,7 +14,6 @@ import com.example.parking.R
 import com.example.parking.presentation.activities.UserActivity.UserMainActivity
 import com.example.parking.presentation.activities.AdminActivity.AdminMainActivity
 import vivid.money.elmslie.android.base.ElmActivity
-
 
 class MainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_main) {
 
@@ -32,6 +32,11 @@ class MainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_main) {
         )
         adapter.setDropDownViewResource(R.layout.dropdown_item)
         spinner.adapter = adapter
+
+        // вот так показывается загрузочная крутяшка
+        // findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
+        // вот так она скрывается
+        // findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
 
         val buttonStart = findViewById<Button>(R.id.buttonStart)
         buttonStart.setOnClickListener {
@@ -98,6 +103,5 @@ class MainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_main) {
         is Effect.ShowErrorInvalidEmail -> Toast.makeText(applicationContext, "Invalid e-mail address", Toast.LENGTH_SHORT).show()
         is Effect.ToUserMainActivity -> startActivity(Intent(this, UserMainActivity::class.java))
         is Effect.ToAdminMainActivity -> startActivity(Intent(this, AdminMainActivity::class.java))
-        is Effect.ShowCars -> Toast.makeText(applicationContext, effect.cars[0].toString(), Toast.LENGTH_SHORT).show()
     }
 }

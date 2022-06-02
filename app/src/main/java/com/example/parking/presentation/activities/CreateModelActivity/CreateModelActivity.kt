@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.parking.R
 import com.example.parking.presentation.fragments.create.*
+import com.example.parking.presentation.fragments.car.create.CreateCarFragment
 
 class CreateModelActivity : AppCompatActivity() {
 

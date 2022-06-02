@@ -71,6 +71,27 @@
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/layout/user_reservations_child_view.xml" value="0.25317028985507245" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/menu/menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Study/project2022/Parking/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2205" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/activity_main.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/activity_user_main.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/admin_cars_child_view.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/admin_employees_child_view.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/admin_reservations_child_view.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/admin_spots_child_view.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/alertdialog_model.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/fragment_cars.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/fragment_create_admin_reservation.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/fragment_create_car.xml" value="0.264" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/fragment_create_employee.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/fragment_create_spots.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/fragment_create_user_reservation.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/fragment_edit_admin_reservation.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/fragment_edit_car.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/fragment_edit_employee.xml" value="0.11354166666666667" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/fragment_edit_spot.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/fragment_edit_user_reservation.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/fragment_employees.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/fragment_reservations.xml" value="0.25317028985507245" />
+        <entry key="..\:/repos/ParkingBookingApp/app/src/main/res/layout/fragment_spots.xml" value="0.25317028985507245" />
       </map>
     </option>
   </component>

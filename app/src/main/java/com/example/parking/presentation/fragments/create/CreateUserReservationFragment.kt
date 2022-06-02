@@ -3,12 +3,11 @@ package com.example.parking.presentation.fragments.create
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.parking.R
@@ -29,10 +28,14 @@ class CreateUserReservationFragment : Fragment() {
     ): View {
         val rootView: View = inflater.inflate(R.layout.fragment_create_user_reservation, null)
         val btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
+        val dateChips = rootView.findViewById<ChipGroup>(R.id.DateChips)
+        val startTimeChips = rootView.findViewById<ChipGroup>(R.id.StartTimeChips)
+        val endTimeChips = rootView.findViewById<ChipGroup>(R.id.EndTimeChips)
+        val etModel = rootView.findViewById<EditText>(R.id.etCarModel)
+        val etNum = rootView.findViewById<EditText>(R.id.etCarNum)
 
         val c = Calendar.getInstance()
         val df: DateFormat = SimpleDateFormat("EEE dd/MM")
-        val dateChips = rootView.findViewById<ChipGroup>(R.id.DateChips)
         for (i in 0..6) {
             val chip = inflater.inflate(R.layout.layout_chip_choice, dateChips, false) as Chip
             chip.text=df.format(c.time)
@@ -41,19 +44,6 @@ class CreateUserReservationFragment : Fragment() {
         }
 
         btContinue.setOnClickListener {
-            // вот так можно посчитать, какая дата выбрана
-//            val chipsCount: Int = dateChips.childCount
-//            var msg = ""
-//            if (chipsCount != 0) {
-//                var i = 0
-//                while (i < chipsCount) {
-//                    val chip = dateChips.getChildAt(i) as Chip
-//                    if (chip.isChecked) {
-//                        msg += chip.getText().toString()
-//                    }
-//                    i++
-//                }
-//            }
             // сюда вставить вызов функции создания в бэке
 
             // с полученной информацией выводим окно
@@ -63,7 +53,13 @@ class CreateUserReservationFragment : Fragment() {
             alertDialog.setCancelable(false)
             // сюда информацию
             val textOutput = view.findViewById<TextView>(R.id.textView)
-            alertDialog.setPositiveButton("OK") { dialog, _ ->
+            alertDialog.setPositiveButton("OK") { _, _ ->
+                // вот так вызывается загрузочная крутяшка (отключаем кнопку ещё на всякий)
+                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
+                btContinue.isClickable = false
+                // вот так она скрывается
+                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
+                // выводим toast что всё ок и закрываем активность
                 val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
                 toast.show()
                 activity?.finish()
@@ -85,6 +81,41 @@ class CreateUserReservationFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+    }
+
+    private fun getSelectedChip(chips : ChipGroup) : String {
+        val chipsCount: Int = chips.childCount
+        var msg = ""
+        if (chipsCount != 0) {
+            var i = 0
+            while (i < chipsCount) {
+                val chip = chips.getChildAt(i) as Chip
+                if (chip.isChecked) {
+                    msg += chip.getText().toString()
+                }
+                i++
+            }
+        }
+        return msg
+    }
+
+    private fun isChipSelected(chips : ChipGroup) : Boolean {
+        return if (getSelectedChip(chips) == "") {
+            val toast = Toast.makeText(activity, "Select date and time", Toast.LENGTH_SHORT)
+            toast.show()
+            false
+        } else {
+            true
+        }
+    }
+
+    private fun isFieldEmpty(etField : EditText) : Boolean {
+        return if (TextUtils.isEmpty(etField.text.toString())) {
+            etField.error = "This field cannot be empty"
+            true
+        } else {
+            false
+        }
     }
 
 }

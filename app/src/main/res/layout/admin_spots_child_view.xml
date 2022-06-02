@@ -11,33 +11,7 @@
         android:orientation="horizontal" >
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" >
-            <TextView
-                style="@style/Body3"
-                android:id="@+id/captionId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/base_400"
-                android:layout_alignParentTop="true"
-                android:text="Id"
-                />
-            <TextView
-                style="@style/Body2"
-                android:id="@+id/textId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="10dp"
-                android:layout_below="@id/captionId"
-                />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_height="wrap_content">
             <TextView
                 style="@style/Body3"
                 android:id="@+id/captionNum"
