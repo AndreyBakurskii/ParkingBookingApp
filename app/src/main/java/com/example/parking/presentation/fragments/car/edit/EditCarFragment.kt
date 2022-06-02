@@ -1,42 +1,57 @@
 package com.example.parking.presentation.fragments.car.edit
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.parking.R
+import com.example.parking.data.mapper.CarMapper
 import com.example.parking.data.models.Car
 import com.example.parking.presentation.fragments.car.edit.elm.Effect
 import com.example.parking.presentation.fragments.car.edit.elm.Event
 import com.example.parking.presentation.fragments.car.edit.elm.State
 import com.example.parking.presentation.fragments.car.edit.elm.storeFactory
 import vivid.money.elmslie.android.base.ElmFragment
+import java.util.*
 
 class EditCarFragment : ElmFragment<Event, Effect, State>() {
 
     private var progressBar : FrameLayout? = null
     private var btContinue : Button? = null
+    private lateinit var car: Car
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        car = CarMapper().fromHashMapToModel(activity?.intent?.extras?.get("car")!! as HashMap<String, Any>)
+
         val rootView: View = inflater.inflate(R.layout.fragment_edit_car, null)
         btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
         progressBar = rootView.findViewById<FrameLayout>(R.id.progressBarContainer)
 
-        val updatedModel = rootView.findViewById<EditText>(R.id.etCarModel)
-        val updatedNum = rootView.findViewById<EditText>(R.id.etCarNum)
+        var updatedModel = rootView.findViewById<EditText>(R.id.etCarModel)
+        var updatedRegistryNumber = rootView.findViewById<EditText>(R.id.etCarNum)
+
+        updatedModel.setText(car.model, TextView.BufferType.EDITABLE)
+        updatedRegistryNumber.setText(car.registryNumber, TextView.BufferType.EDITABLE)
+
 
         // обновить старую инфу машины на новую
         btContinue!!.setOnClickListener {
-//            store.accept(Event.Ui.EditClick)
+            if (!isFieldEmpty(updatedModel) && !isFieldEmpty(updatedRegistryNumber)){
+                car.model = updatedModel.text.toString()
+                car.registryNumber = updatedRegistryNumber.text.toString()
+                store.accept(Event.Ui.EditClick(car))
+            }
         }
         return rootView
     }
@@ -59,11 +74,10 @@ class EditCarFragment : ElmFragment<Event, Effect, State>() {
         alertDialog.setCancelable(false)
         // сюда информацию (уже добавила)
         val textOutput = view.findViewById<TextView>(R.id.textView)
-        textOutput.text = "Car model: " + view.findViewById<EditText>(R.id.etCarModel).text +
-                "\nRegistry number: " + view.findViewById<EditText>(R.id.etCarNum).text
+        textOutput.text = "Car model: ${car.model}\nRegistry number: ${car.registryNumber}"
 
         alertDialog.setPositiveButton("OK") { _, _ ->
-            // выводим toast что всё ок и закрываем активность
+            store.accept(Event.Ui.OkClickConfirmDialog(car))
         }
         alertDialog.setNegativeButton("Cancel") { dialog, _ ->
             dialog.cancel()
@@ -75,6 +89,7 @@ class EditCarFragment : ElmFragment<Event, Effect, State>() {
     fun toCarsFragment() {
         val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
         toast.show()
+        activity?.setResult(Activity.RESULT_OK)
         activity?.finish()
     }
 

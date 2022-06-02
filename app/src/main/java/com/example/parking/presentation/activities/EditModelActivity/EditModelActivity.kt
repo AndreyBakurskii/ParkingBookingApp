@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.parking.R
+import com.example.parking.data.mapper.CarMapper
+import com.example.parking.data.models.Car
 import com.example.parking.presentation.fragments.edit.*
 import com.example.parking.presentation.fragments.car.edit.EditCarFragment
+import java.util.HashMap
 
 class EditModelActivity : AppCompatActivity() {
     private val editCarFragment = EditCarFragment()

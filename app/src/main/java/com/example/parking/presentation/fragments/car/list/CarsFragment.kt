@@ -1,5 +1,6 @@
 package com.example.parking.presentation.fragments.car.list
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -119,16 +120,25 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
         val data = "cars"
         val intent = Intent((activity as AdminMainActivity), CreateModelActivity::class.java)
         intent.putExtra("fragment", data)
-        (activity as AdminMainActivity).startActivity(intent)
+
+        startActivityForResult(intent, 200);
     }
 
     private fun toEditCarFragment(car: Car, positionInAdapter: Int) {
         val data = "cars";
         val intent = Intent((activity as AdminMainActivity), EditModelActivity::class.java);
         intent.putExtra("fragment", data);
+
         intent.putExtra("car", car.toHashMap(withID = true))
         intent.putExtra("positionInAdapter", positionInAdapter)
 
-        (activity as AdminMainActivity).startActivity(intent);
+        startActivityForResult(intent, 200);
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            store.accept(Event.Ui.LoadCars)
+        }
     }
 }

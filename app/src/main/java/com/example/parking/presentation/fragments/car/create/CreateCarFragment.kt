@@ -1,6 +1,7 @@
 package com.example.parking.presentation.fragments.car.create
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.TextUtils
@@ -79,6 +80,7 @@ class CreateCarFragment : ElmFragment<Event, Effect, State>() {
     private fun toCarsFragment() {
         val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
         toast.show()
+        activity?.setResult(Activity.RESULT_OK)
         activity?.finish()
     }
 

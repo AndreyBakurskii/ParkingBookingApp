@@ -78,7 +78,10 @@ class MyActor : Actor<Command, Event> {
             .mapEvents(
                 eventMapper = { response -> response.statusCodeHandler(
                     successHandler = { Internal.SuccessLoadCars(
-                        cars = it.map { carJson -> carMapper.fromJsonToModel(carJson) } as ArrayList<Car>
+                        cars = ArrayList(it
+                            .map { carJson -> carMapper.fromJsonToModel(carJson) }
+                            .sortedBy { car -> car.model }
+                        )
                     ) },
                     errorHandler = { Internal.ErrorLoadCars }
                 )},

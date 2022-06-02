@@ -24,4 +24,14 @@ class CarMapper {
             length = car.length
         )
     }
+
+    fun fromHashMapToModel(hashMapModel: HashMap<String, Any>): Car {
+        return Car(
+            id = UUID.fromString(hashMapModel["id"].toString()),
+            model = hashMapModel["model"].toString(),
+            length = hashMapModel["length"] as Int,
+            wight = hashMapModel["wight"] as Int,
+            registryNumber = hashMapModel["registryNumber"].toString()
+        )
+    }
 }
