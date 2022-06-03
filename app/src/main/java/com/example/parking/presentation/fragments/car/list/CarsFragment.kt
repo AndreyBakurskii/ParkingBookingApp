@@ -72,7 +72,8 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
         val alertDialog = AlertDialog.Builder(activity, R.style.AlertDialog)
         alertDialog.setTitle("Confirm")
         alertDialog.setCancelable(false)
-
+        val text = view.findViewById<TextView>(R.id.textView)
+        text.text = "Are you sure you\nwant to delete?"
         alertDialog.setPositiveButton("OK") { _, _ ->
             // todo удаляем машину
         }
