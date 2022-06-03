@@ -1,5 +1,7 @@
 package com.example.parking.presentation.fragments
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,9 +11,11 @@ import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.ExpandableListView
 import android.widget.FrameLayout
+import android.widget.TextView
 import com.example.parking.presentation.activities.AdminActivity.AdminMainActivity
 import com.example.parking.presentation.activities.CreateModelActivity.CreateModelActivity
 import com.example.parking.R
+import com.example.parking.data.models.Car
 import com.example.parking.presentation.adapters.ExpListAdapterAdminSpots
 import com.example.parking.data.models.ParkingSpot
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -79,6 +83,24 @@ class SpotsFragment : Fragment() {
         })
 
         return rootView
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun showDeleteDialog(parkingSpot: ParkingSpot) {
+        val view = layoutInflater.inflate(R.layout.alertdialog_model, null)
+        val alertDialog = AlertDialog.Builder(activity, R.style.AlertDialog)
+        alertDialog.setTitle("Confirm")
+        alertDialog.setCancelable(false)
+        val text = view.findViewById<TextView>(R.id.textView)
+        text.text = "Are you sure you\nwant to delete?"
+        alertDialog.setPositiveButton("OK") { _, _ ->
+            // todo удаляем место
+        }
+        alertDialog.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.cancel()
+        }
+        alertDialog.setView(view)
+        alertDialog.show()
     }
 
 }
