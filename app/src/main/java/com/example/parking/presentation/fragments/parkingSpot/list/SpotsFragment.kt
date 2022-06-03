@@ -1,4 +1,4 @@
-package com.example.parking.presentation.fragments
+package com.example.parking.presentation.fragments.parkingSpot.list
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -15,7 +15,6 @@ import android.widget.TextView
 import com.example.parking.presentation.activities.AdminActivity.AdminMainActivity
 import com.example.parking.presentation.activities.CreateModelActivity.CreateModelActivity
 import com.example.parking.R
-import com.example.parking.data.models.Car
 import com.example.parking.presentation.adapters.ExpListAdapterAdminSpots
 import com.example.parking.data.models.ParkingSpot
 import com.google.android.material.floatingactionbutton.FloatingActionButton

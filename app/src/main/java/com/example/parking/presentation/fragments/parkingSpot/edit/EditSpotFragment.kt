@@ -1,34 +1,34 @@
-package com.example.parking.presentation.fragments.create
+package com.example.parking.presentation.fragments.parkingSpot.edit
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.TextUtils
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.parking.R
 
-class CreateSpotsFragment : Fragment() {
+class EditSpotFragment : Fragment() {
 
     private var progressBar : FrameLayout? = null
     private var btContinue : Button? = null
 
-    @SuppressLint("SimpleDateFormat", "SetTextI18n")
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView: View = inflater.inflate(R.layout.fragment_create_spots, null)
+        val rootView: View = inflater.inflate(R.layout.fragment_edit_spot, null)
         btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
         progressBar = rootView.findViewById(R.id.progressBarContainer)
         val etNumSpot = rootView.findViewById<EditText>(R.id.etNumSpot)
 
         btContinue?.setOnClickListener {
-            // сюда вставить вызов функции создания в бэке
+            // сюда вставить вызов функции редактирования на бэке
 
             // с полученной информацией выводим окно
             val view = layoutInflater.inflate(R.layout.alertdialog_model, null)
@@ -38,7 +38,7 @@ class CreateSpotsFragment : Fragment() {
             // сюда информацию (уже добавила)
             val textOutput = view.findViewById<TextView>(R.id.textView)
             textOutput.text = "Car model: " + etNumSpot.text
-            alertDialog.setPositiveButton("OK") { _, _ ->
+            alertDialog.setPositiveButton("OK") { dialog, _ ->
                 // вот так вызывается загрузочная крутяшка (отключаем кнопку ещё на всякий)
 //                progressBar?.visibility = View.VISIBLE
 //                btContinue?.isClickable = false

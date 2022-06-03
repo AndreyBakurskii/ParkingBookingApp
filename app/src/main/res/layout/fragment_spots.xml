@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.fragments.SpotsFragment"
+    tools:context=".presentation.fragments.parkingSpot.list.SpotsFragment"
     android:background="@color/base_900">
 
     <TextView
