@@ -40,7 +40,7 @@ class UserMainActivity : AppCompatActivity() {
         val res3 = Reservation(
             "03/02/2022",
             "12 am - 1 pm",
-            "Hondai",
+            "Honda",
             "BCD",
             email
         )

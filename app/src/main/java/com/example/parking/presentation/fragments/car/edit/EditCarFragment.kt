@@ -35,15 +35,14 @@ class EditCarFragment : ElmFragment<Event, Effect, State>() {
         car = CarMapper().fromHashMapToModel(activity?.intent?.extras?.get("car")!! as HashMap<String, Any>)
 
         val rootView: View = inflater.inflate(R.layout.fragment_edit_car, null)
-        btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
-        progressBar = rootView.findViewById<FrameLayout>(R.id.progressBarContainer)
+        btContinue = rootView.findViewById(R.id.buttonContinue)
+        progressBar = rootView.findViewById(R.id.progressBarContainer)
 
-        var updatedModel = rootView.findViewById<EditText>(R.id.etCarModel)
-        var updatedRegistryNumber = rootView.findViewById<EditText>(R.id.etCarNum)
+        val updatedModel = rootView.findViewById<EditText>(R.id.etCarModel)
+        val updatedRegistryNumber = rootView.findViewById<EditText>(R.id.etCarNum)
 
         updatedModel.setText(car.model, TextView.BufferType.EDITABLE)
         updatedRegistryNumber.setText(car.registryNumber, TextView.BufferType.EDITABLE)
-
 
         // обновить старую инфу машины на новую
         btContinue!!.setOnClickListener {

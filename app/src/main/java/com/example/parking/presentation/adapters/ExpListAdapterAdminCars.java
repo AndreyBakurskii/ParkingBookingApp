@@ -113,19 +113,12 @@ public class ExpListAdapterAdminCars extends BaseExpandableListAdapter {
 
         // delete btn
         Button button = (Button)convertView.findViewById(R.id.buttonDelete);
-        button.setOnClickListener(view -> {
-            store.accept(new Event.Ui.ClickDeleteCar(currentCar, groupPosition));
-        });
+        button.setOnClickListener(view -> store.accept(new Event.Ui.ClickDeleteCar(currentCar, groupPosition)));
 
         // edit btn
         // здесь переходим в активность с редактированием, вызывая фрагмент для машин
         Button buttonEdit = (Button)convertView.findViewById(R.id.buttonEdit);
-        buttonEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                store.accept(new Event.Ui.ClickEditCar(currentCar, groupPosition));
-            }
-        });
+        buttonEdit.setOnClickListener(view -> store.accept(new Event.Ui.ClickEditCar(currentCar, groupPosition)));
 
         return convertView;
     }
