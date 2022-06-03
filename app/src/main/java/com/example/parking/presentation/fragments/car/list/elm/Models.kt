@@ -14,6 +14,7 @@ sealed class Effect {
     object ShowErrorDeleteCar : Effect()
     object ShowErrorNetwork : Effect()
     object ToCreateCarFragment : Effect()
+    data class ShowDeleteDialog(var car: Car, var positionInAdapter: Int) : Effect()
     data class ToEditCarFragment(var car: Car, var positionInAdapter: Int) : Effect()
 }
 
@@ -23,6 +24,7 @@ sealed class Event {
         object LoadCars : Ui()
         data class ClickEditCar(var car: Car, var positionInAdapter: Int) : Ui()
         data class ClickDeleteCar(var car: Car, var positionInAdapter: Int) : Ui()
+        data class OkClickDeleteDialog(var car: Car, var positionInAdapter: Int) : Ui()
         object ClickCreateCar : Ui()
     }
 

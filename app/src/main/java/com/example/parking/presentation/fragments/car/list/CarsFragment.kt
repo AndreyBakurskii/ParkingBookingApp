@@ -67,7 +67,7 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
     }
 
     @SuppressLint("SetTextI18n")
-    fun showDeleteDialog(car: Car) {
+    fun showDeleteDialog(car: Car, positionInAdapter: Int) {
         val view = layoutInflater.inflate(R.layout.alertdialog_model, null)
         val alertDialog = AlertDialog.Builder(activity, R.style.AlertDialog)
         alertDialog.setTitle("Confirm")
@@ -75,7 +75,7 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
         val text = view.findViewById<TextView>(R.id.textView)
         text.text = "Are you sure you\nwant to delete?"
         alertDialog.setPositiveButton("OK") { _, _ ->
-            // todo удаляем машину
+            store.accept(Event.Ui.OkClickDeleteDialog(car, positionInAdapter))
         }
         alertDialog.setNegativeButton("Cancel") { dialog, _ ->
             dialog.cancel()
@@ -126,6 +126,7 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
         ).show()
         is Effect.ToEditCarFragment -> toEditCarFragment(effect.car, effect.positionInAdapter)
         is Effect.ToCreateCarFragment -> toCreateCarFragment()
+        is Effect.ShowDeleteDialog -> showDeleteDialog(effect.car, effect.positionInAdapter)
     }
 
     private fun toCreateCarFragment() {

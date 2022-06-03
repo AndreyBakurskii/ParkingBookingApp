@@ -53,7 +53,7 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
         }
         is Ui.ClickDeleteCar -> {
             state { copy(loading = true, doUpdate = false) }
-            commands { +Command.DeleteFromServer(event.car, event.positionInAdapter) }
+            effects { +Effect.ShowDeleteDialog(event.car, event.positionInAdapter) }
         }
         is Ui.ClickEditCar -> {
             state {copy(loading = false, doUpdate = false)}
@@ -62,6 +62,10 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
         is Ui.ClickCreateCar -> {
             state {copy(loading = false, doUpdate = false)}
             effects { +Effect.ToCreateCarFragment }
+        }
+        is Ui.OkClickDeleteDialog -> {
+            state {copy(loading = true, doUpdate = false)}
+            commands { +Command.DeleteFromServer(event.car, event.positionInAdapter) }
         }
     }
 }
