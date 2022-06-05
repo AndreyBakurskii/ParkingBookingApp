@@ -4,8 +4,8 @@ import java.util.UUID;
 
 class ParkingSpot(
     val id: UUID = UUID.fromString("0f29717c-37e4-4a93-9165-6baacae64e98"),
-    val parkingNumber: Int,
-    val isFree: Boolean = false
+    var parkingNumber: Int,
+    var isFree: Boolean = true
 ) {
 
     fun toHashMap(withID: Boolean = false): HashMap<String, Any> {

@@ -86,8 +86,6 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
 
     override fun onResume() {
         super.onResume()
-        Log.i("ONRESUME", "on resume work!!!")
-        // todo возможно вызывать LoadCars отсюда
     }
 
     override fun createStore(): Store<Event, Effect, State> = storeFactory()
@@ -124,7 +122,7 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
             "Error during deletion, try again later!",
             Toast.LENGTH_SHORT
         ).show()
-        is Effect.ToEditCarFragment -> toEditCarFragment(effect.car, effect.positionInAdapter)
+        is Effect.ToEditCarFragment -> toEditCarFragment(effect.car)
         is Effect.ToCreateCarFragment -> toCreateCarFragment()
         is Effect.ShowDeleteDialog -> showDeleteDialog(effect.car, effect.positionInAdapter)
     }
@@ -137,13 +135,12 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
         startActivityForResult(intent, 200);
     }
 
-    private fun toEditCarFragment(car: Car, positionInAdapter: Int) {
+    private fun toEditCarFragment(car: Car) {
         val data = "cars";
         val intent = Intent((activity as AdminMainActivity), EditModelActivity::class.java);
         intent.putExtra("fragment", data);
 
         intent.putExtra("car", car.toHashMap(withID = true))
-        intent.putExtra("positionInAdapter", positionInAdapter)
 
         startActivityForResult(intent, 200);
     }

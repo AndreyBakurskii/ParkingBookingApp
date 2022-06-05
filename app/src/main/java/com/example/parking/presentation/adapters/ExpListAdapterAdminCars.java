@@ -112,8 +112,8 @@ public class ExpListAdapterAdminCars extends BaseExpandableListAdapter {
         textChild2.setText(currentCar.getRegistryNumber());
 
         // delete btn
-        Button button = (Button)convertView.findViewById(R.id.buttonDelete);
-        button.setOnClickListener(view -> store.accept(new Event.Ui.ClickDeleteCar(currentCar, groupPosition)));
+        Button buttonDelete = (Button)convertView.findViewById(R.id.buttonDelete);
+        buttonDelete.setOnClickListener(view -> store.accept(new Event.Ui.ClickDeleteCar(currentCar, groupPosition)));
 
         // edit btn
         // здесь переходим в активность с редактированием, вызывая фрагмент для машин

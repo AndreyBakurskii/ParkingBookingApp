@@ -1,5 +1,6 @@
 package com.example.parking.data.repository
 
+import com.example.parking.data.models.ParkingSpot
 import com.example.parking.data.network.modelJSON.ParkingSpotJson
 import com.example.parking.data.network.api.ParkingSpotAPI
 import io.reactivex.Observable
@@ -23,23 +24,17 @@ class ParkingSpotRepository(private val retrofit: Retrofit) {
             .toObservable()
     }
 
-    fun createParkingSpot(parkingNumber: Int, isFree: Boolean): Observable<Response<ParkingSpotJson>> {
+    fun createParkingSpot(parkingSpot: HashMap<String, Any>): Observable<Response<ParkingSpotJson>> {
         return parkingSpotAPI.createParkingSpot(
-            hashMapOf(
-                "parkingNumber" to parkingNumber,
-                "isFree" to isFree,
-            )
+            parkingSpot
         )
             .toObservable()
     }
 
-    fun updateParkingSpot(id: String, parkingNumber: Int, isFree: Boolean): Observable<Response<ParkingSpotJson>> {
+    fun updateParkingSpot(id: String, parkingSpot: HashMap<String, Any>): Observable<Response<ParkingSpotJson>> {
         return parkingSpotAPI.updateParkingSpotDetail(
             id,
-            hashMapOf(
-                "parkingNumber" to parkingNumber,
-                "isFree" to isFree
-            )
+            parkingSpot
         )
             .toObservable()
     }

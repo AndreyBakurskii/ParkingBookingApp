@@ -3,6 +3,7 @@ package com.example.parking.presentation.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +14,23 @@ import android.widget.TextView;
 import com.example.parking.presentation.activities.EditModelActivity.EditModelActivity;
 import com.example.parking.R;
 import com.example.parking.data.models.ParkingSpot;
+import com.example.parking.presentation.fragments.parkingSpot.list.elm.Event;
+import com.example.parking.presentation.fragments.parkingSpot.list.elm.Effect;
+import com.example.parking.presentation.fragments.parkingSpot.list.elm.State;
 
 import java.util.ArrayList;
+
+import vivid.money.elmslie.core.store.Store;
 
 public class ExpListAdapterAdminSpots extends BaseExpandableListAdapter {
     private final ArrayList<ParkingSpot> mGroups;
     private final Context mContext;
+    public Store<Event, Effect, State> store;
 
-    public ExpListAdapterAdminSpots(Context context, ArrayList<ParkingSpot> groups){
+    public ExpListAdapterAdminSpots(Context context, ArrayList<ParkingSpot> groups, Store store){
         this.mContext = context;
         this.mGroups = groups;
+        this.store = store;
     }
 
     @Override
@@ -79,7 +87,7 @@ public class ExpListAdapterAdminSpots extends BaseExpandableListAdapter {
         }
 
         TextView textGroup = (TextView) convertView.findViewById(R.id.textGroup);
-        textGroup.setText(mGroups.get(groupPosition).getNum());
+        textGroup.setText(String.valueOf(mGroups.get(groupPosition).getParkingNumber()));
         return convertView;
 
     }
@@ -93,25 +101,19 @@ public class ExpListAdapterAdminSpots extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.admin_spots_child_view, null);
         }
 
-        TextView textChild2 = (TextView) convertView.findViewById(R.id.textNum);
-        textChild2.setText(mGroups.get(groupPosition).getNum());
+        ParkingSpot currentParkingSpot = mGroups.get(groupPosition);
 
-        Button button = (Button)convertView.findViewById(R.id.buttonDelete);
-        button.setOnClickListener(view -> {
-            mGroups.remove(groupPosition);
-            notifyDataSetChanged();
-        });
+        TextView textChild2 = (TextView) convertView.findViewById(R.id.textNum);
+        textChild2.setText(String.valueOf(currentParkingSpot.getParkingNumber()));
+
+        Button buttonDelete = (Button)convertView.findViewById(R.id.buttonDelete);
+        buttonDelete.setOnClickListener(view -> store.accept(new Event.Ui.ClickDeleteParkingSpot(currentParkingSpot, groupPosition)));
 
         // здесь переходим в активность с редактированием, вызывая фрагмент для мест
         Button buttonEdit = (Button)convertView.findViewById(R.id.buttonEdit);
-        buttonEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String data = "spots";
-                Intent intent = new Intent(mContext.getApplicationContext(), EditModelActivity.class);
-                intent.putExtra("fragment", data);
-                mContext.startActivity(intent);
-            }
+        buttonEdit.setOnClickListener(view -> {
+            Log.i("BUTTON EDIT", "CLICKED");
+            store.accept(new Event.Ui.ClickEditParkingSpot(currentParkingSpot, groupPosition));
         });
 
         return convertView;
