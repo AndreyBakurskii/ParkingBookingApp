@@ -1,4 +1,4 @@
-package com.example.parking.presentation.fragments
+package com.example.parking.presentation.fragments.employee.list
 
 import android.content.Intent
 import android.os.Bundle

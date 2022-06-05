@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.parking.R
 import com.example.parking.presentation.fragments.create.*
 import com.example.parking.presentation.fragments.car.create.CreateCarFragment
+import com.example.parking.presentation.fragments.employee.create.CreateEmployeeFragment
 import com.example.parking.presentation.fragments.parkingSpot.create.CreateSpotsFragment
 
 class CreateModelActivity : AppCompatActivity() {
