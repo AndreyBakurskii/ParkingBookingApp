@@ -3,6 +3,7 @@ package com.example.parking.presentation.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,7 +111,10 @@ public class ExpListAdapterAdminSpots extends BaseExpandableListAdapter {
 
         // здесь переходим в активность с редактированием, вызывая фрагмент для мест
         Button buttonEdit = (Button)convertView.findViewById(R.id.buttonEdit);
-        buttonEdit.setOnClickListener(view -> store.accept(new Event.Ui.ClickEditParkingSpot(currentParkingSpot, groupPosition)));
+        buttonEdit.setOnClickListener(view -> {
+            Log.i("BUTTON EDIT", "CLICKED");
+            store.accept(new Event.Ui.ClickEditParkingSpot(currentParkingSpot, groupPosition));
+        });
 
         return convertView;
     }

@@ -46,7 +46,7 @@ class EditCarFragment : ElmFragment<Event, Effect, State>() {
 
         // обновить старую инфу машины на новую
         btContinue!!.setOnClickListener {
-            if (!isFieldEmpty(updatedModel) && !isFieldEmpty(updatedRegistryNumber)){
+            if (!isFieldEmpty(updatedModel) && (!isFieldEmpty(updatedRegistryNumber))){
                 car.model = updatedModel.text.toString()
                 car.registryNumber = updatedRegistryNumber.text.toString()
                 store.accept(Event.Ui.EditClick(car))

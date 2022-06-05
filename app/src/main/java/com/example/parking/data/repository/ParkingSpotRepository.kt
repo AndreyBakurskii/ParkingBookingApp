@@ -31,13 +31,10 @@ class ParkingSpotRepository(private val retrofit: Retrofit) {
             .toObservable()
     }
 
-    fun updateParkingSpot(id: String, parkingNumber: Int, isFree: Boolean): Observable<Response<ParkingSpotJson>> {
+    fun updateParkingSpot(id: String, parkingSpot: HashMap<String, Any>): Observable<Response<ParkingSpotJson>> {
         return parkingSpotAPI.updateParkingSpotDetail(
             id,
-            hashMapOf(
-                "parkingNumber" to parkingNumber,
-                "isFree" to isFree
-            )
+            parkingSpot
         )
             .toObservable()
     }
