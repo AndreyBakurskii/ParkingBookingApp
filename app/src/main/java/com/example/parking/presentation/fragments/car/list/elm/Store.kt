@@ -15,9 +15,9 @@ import vivid.money.elmslie.core.store.dsl_reducer.DslReducer
 import vivid.money.elmslie.core.store.dsl_reducer.ScreenDslReducer
 
 
-class Reducer : DslReducer<Event, State, Effect, Command>() {
+class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui::class, Internal::class) {
 
-    override fun Result.reduce(event: Event) = when (event) {
+    override fun Result.internal(event: Internal) = when (event) {
         is Internal.SuccessLoadCars -> {
             state { copy(
                 loading = false,
@@ -44,7 +44,9 @@ class Reducer : DslReducer<Event, State, Effect, Command>() {
             state { copy(loading = false, doUpdate = false) }
             effects { +Effect.ShowErrorNetwork }
         }
+    }
 
+    override fun Result.ui(event: Ui) = when (event) {
         is Ui.Init -> {
         }
         is Ui.LoadCars -> {
