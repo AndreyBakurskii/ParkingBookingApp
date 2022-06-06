@@ -34,6 +34,7 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.i("CAR FRAGMENT", "OnCreateView work")
         val rootView: View = inflater.inflate(R.layout.fragment_cars, null)
         val listView = rootView.findViewById<ExpandableListView>(R.id.expListView)
         progressBar = rootView.findViewById(R.id.progressBarContainer)
@@ -84,8 +85,30 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
         alertDialog.show()
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.i("CAR FRAGMENT", "OnStart work\n" +
+                "${carsAdapter} - ${carsInAdapter}")
+    }
     override fun onResume() {
         super.onResume()
+        Log.i("CAR FRAGMENT", "OnResume work\n${carsAdapter} - ${carsInAdapter}")
+        store.accept(Event.Ui.LoadCars)
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("CAR FRAGMENT", "OnPause work")
+    }
+    override fun onStop() {
+        super.onStop()
+        Log.i("CAR FRAGMENT", "OnStop work")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("CAR FRAGMENT", "OnDestroy work")
     }
 
     override fun createStore(): Store<Event, Effect, State> = storeFactory()
@@ -106,28 +129,32 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
         }
     }
 
-    override fun handleEffect(effect: Effect) = when (effect) {
-        is Effect.ShowErrorLoadCars -> Toast.makeText(
-            activity,
-            "Unexpected problems on the server! Try restarting the application!",
-            Toast.LENGTH_SHORT
-        ).show()
-        is Effect.ShowErrorNetwork -> Toast.makeText(
-            activity,
-            "Problems with your connection! Check your internet connection!",
-            Toast.LENGTH_SHORT
-        ).show()
-        is Effect.ShowErrorDeleteCar -> Toast.makeText(
-            activity,
-            "Error during deletion, try again later!",
-            Toast.LENGTH_SHORT
-        ).show()
-        is Effect.ToEditCarFragment -> toEditCarFragment(effect.car)
-        is Effect.ToCreateCarFragment -> toCreateCarFragment()
-        is Effect.ShowDeleteDialog -> showDeleteDialog(effect.car, effect.positionInAdapter)
+    override fun handleEffect(effect: Effect) {
+        Log.i("HANDLE_EFFECT_CAR", "work handle effect")
+        when (effect) {
+            is Effect.ShowErrorLoadCars -> Toast.makeText(
+                activity,
+                "Unexpected problems on the server! Try restarting the application!",
+                Toast.LENGTH_SHORT
+            ).show()
+            is Effect.ShowErrorNetwork -> Toast.makeText(
+                activity,
+                "Problems with your connection! Check your internet connection!",
+                Toast.LENGTH_SHORT
+            ).show()
+            is Effect.ShowErrorDeleteCar -> Toast.makeText(
+                activity,
+                "Error during deletion, try again later!",
+                Toast.LENGTH_SHORT
+            ).show()
+            is Effect.ToEditCarFragment -> toEditCarFragment(effect.car)
+            is Effect.ToCreateCarFragment -> toCreateCarFragment()
+            is Effect.ShowDeleteDialog -> showDeleteDialog(effect.car, effect.positionInAdapter)
+        }
     }
 
     private fun toCreateCarFragment() {
+        Log.i("LIST_CARS", "TO CREATE FRAGMENT")
         val data = "cars"
         val intent = Intent((activity as AdminMainActivity), CreateModelActivity::class.java)
         intent.putExtra("fragment", data)
@@ -136,6 +163,8 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
     }
 
     private fun toEditCarFragment(car: Car) {
+        Log.i("LIST_CARS", "TO EDIT FRAGMENT")
+
         val data = "cars";
         val intent = Intent((activity as AdminMainActivity), EditModelActivity::class.java);
         intent.putExtra("fragment", data);

@@ -11,12 +11,13 @@ import com.example.parking.presentation.utils.statusCodeHandler
 import io.reactivex.Observable
 import vivid.money.elmslie.core.Actor
 import vivid.money.elmslie.core.ElmStoreCompat
+import vivid.money.elmslie.core.store.dsl_reducer.DslReducer
 import vivid.money.elmslie.core.store.dsl_reducer.ScreenDslReducer
 
 
-class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui::class, Internal::class) {
+class Reducer : DslReducer<Event, State, Effect, Command>() {
 
-    override fun Result.internal(event: Internal) = when (event) {
+    override fun Result.reduce(event: Event) = when (event) {
         is Internal.SuccessLoadCars -> {
             state { copy(
                 loading = false,
@@ -43,8 +44,7 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
             state { copy(loading = false, doUpdate = false) }
             effects { +Effect.ShowErrorNetwork }
         }
-    }
-    override fun Result.ui(event: Ui) = when (event) {
+
         is Ui.Init -> {
         }
         is Ui.LoadCars -> {

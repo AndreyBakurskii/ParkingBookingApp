@@ -9,19 +9,14 @@ import com.example.parking.presentation.fragments.car.edit.EditCarFragment
 import com.example.parking.presentation.fragments.parkingSpot.edit.EditSpotFragment
 
 class EditModelActivity : AppCompatActivity() {
-    private val editCarFragment = EditCarFragment()
-    private val editSpotsFragment = EditSpotFragment()
-    private val editUserReservationFragment = EditUserReservationFragment()
-    private val editAdminReservationFragment = EditAdminReservationFragment()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_model)
         when(intent.extras!!.getString("fragment")) {
-            "reservations" -> replaceFragment(editAdminReservationFragment)
-            "user" -> replaceFragment(editUserReservationFragment)
-            "cars" -> replaceFragment(editCarFragment)
-            "spots" -> replaceFragment(editSpotsFragment)
+            "reservations" -> replaceFragment(EditAdminReservationFragment())
+            "user" -> replaceFragment(EditUserReservationFragment())
+            "cars" -> replaceFragment(EditCarFragment())
+            "spots" -> replaceFragment(EditSpotFragment())
         }
     }
 
