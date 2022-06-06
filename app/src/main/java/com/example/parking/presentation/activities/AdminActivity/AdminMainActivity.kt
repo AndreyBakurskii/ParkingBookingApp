@@ -7,7 +7,7 @@ import com.example.parking.R
 import com.example.parking.presentation.fragments.car.list.CarsFragment
 import com.example.parking.presentation.fragments.ReservationsFragment
 import com.example.parking.presentation.fragments.parkingSpot.list.SpotsFragment
-import com.example.parking.presentation.fragments.EmployeesFragment
+import com.example.parking.presentation.fragments.employee.list.EmployeesFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AdminMainActivity : AppCompatActivity() {

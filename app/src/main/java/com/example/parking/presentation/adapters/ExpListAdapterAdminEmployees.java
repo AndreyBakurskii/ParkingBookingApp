@@ -13,16 +13,23 @@ import android.widget.TextView;
 import com.example.parking.presentation.activities.EditModelActivity.EditModelActivity;
 import com.example.parking.R;
 import com.example.parking.data.models.Employee;
+import com.example.parking.presentation.fragments.employee.list.elm.Effect;
+import com.example.parking.presentation.fragments.employee.list.elm.Event;
+import com.example.parking.presentation.fragments.employee.list.elm.State;
 
 import java.util.ArrayList;
+
+import vivid.money.elmslie.core.store.Store;
 
 public class ExpListAdapterAdminEmployees extends BaseExpandableListAdapter {
     private final ArrayList<Employee> mGroups;
     private final Context mContext;
+    public Store<Event, Effect, State> store;
 
-    public ExpListAdapterAdminEmployees(Context context, ArrayList<Employee> groups){
+    public ExpListAdapterAdminEmployees(Context context, ArrayList<Employee> groups, Store store){
         this.mContext = context;
         this.mGroups = groups;
+        this.store = store;
     }
 
     @Override
@@ -79,7 +86,7 @@ public class ExpListAdapterAdminEmployees extends BaseExpandableListAdapter {
         }
 
         TextView textGroup = (TextView) convertView.findViewById(R.id.textGroup);
-        textGroup.setText(mGroups.get(groupPosition).getEmail());
+        textGroup.setText(mGroups.get(groupPosition).getName());
 
         return convertView;
 
@@ -93,16 +100,13 @@ public class ExpListAdapterAdminEmployees extends BaseExpandableListAdapter {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.admin_employees_child_view, null);
         }
+        Employee currentEmployee = mGroups.get(groupPosition);
 
         TextView textChild1 = (TextView) convertView.findViewById(R.id.textEmail);
-        textChild1.setText(mGroups.get(groupPosition).getEmail());
+        textChild1.setText(currentEmployee.getName());
 
-        // тут вызываем функцию удаления
         Button buttonDelete = (Button)convertView.findViewById(R.id.buttonDelete);
-        buttonDelete.setOnClickListener(view -> {
-            mGroups.remove(groupPosition);
-            notifyDataSetChanged();
-        });
+        buttonDelete.setOnClickListener(view -> store.accept(new Event.Ui.ClickDeleteEmployee(currentEmployee, groupPosition)));
 
         return convertView;
     }

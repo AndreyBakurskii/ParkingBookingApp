@@ -8,9 +8,9 @@ import vivid.money.elmslie.core.store.NoOpActor
 import vivid.money.elmslie.core.store.dsl_reducer.DslReducer
 
 
-class Reducer : DslReducer<Event, State, Effect, Command>() {
+class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui::class, Internal::class) {
 
-    override fun Result.reduce(event: Event) = when (event) {
+    override fun Result.internal(event: Internal) = when (event) {
         is Internal.SuccessCheckAdminPassword -> {
             state { copy(pass = true) }
             effects { +Effect.ToAdminMainActivity }
@@ -27,7 +27,9 @@ class Reducer : DslReducer<Event, State, Effect, Command>() {
             state { copy(pass = false) }
             effects { +Effect.ShowErrorInvalidEmail }
         }
+    }
 
+    override fun Result.ui(event: Ui) = when (event) {
         is Ui.Init -> { }
         is Ui.StartClick -> {
             state { copy(pass = false) }
