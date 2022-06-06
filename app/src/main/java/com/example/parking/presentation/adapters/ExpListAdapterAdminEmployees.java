@@ -79,7 +79,7 @@ public class ExpListAdapterAdminEmployees extends BaseExpandableListAdapter {
         }
 
         TextView textGroup = (TextView) convertView.findViewById(R.id.textGroup);
-        textGroup.setText(mGroups.get(groupPosition).getEmail());
+        textGroup.setText(mGroups.get(groupPosition).getName());
 
         return convertView;
 
@@ -95,7 +95,7 @@ public class ExpListAdapterAdminEmployees extends BaseExpandableListAdapter {
         }
 
         TextView textChild1 = (TextView) convertView.findViewById(R.id.textEmail);
-        textChild1.setText(mGroups.get(groupPosition).getEmail());
+        textChild1.setText(mGroups.get(groupPosition).getName());
 
         // тут вызываем функцию удаления
         Button buttonDelete = (Button)convertView.findViewById(R.id.buttonDelete);

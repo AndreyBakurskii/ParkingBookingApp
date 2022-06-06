@@ -30,23 +30,7 @@ class EmployeesFragment : Fragment() {
         progressBar = rootView.findViewById(R.id.progressBarContainer)
         btAdd = rootView.findViewById(R.id.fab)
 
-        // нужно отключить кнопку btAdd на время загрузки
-//        progressBar?.visibility = View.VISIBLE
-//        btAdd?.isClickable = false
-        // а потом не забыть включить !!!!!!!!
-//        progressBar?.visibility = View.INVISIBLE
-//        btAdd?.isClickable = true
-
         val groups = ArrayList<Employee>()
-        val emp1 =
-            Employee("test")
-        groups.add(emp1)
-        val emp2 =
-            Employee("test1")
-        groups.add(emp2)
-        val emp3 = Employee("test3")
-        groups.add(emp3)
-        groups.add(emp2)
 
         val adapter =
             ExpListAdapterAdminEmployees(
@@ -56,11 +40,9 @@ class EmployeesFragment : Fragment() {
         listView.setAdapter(adapter)
 
         btAdd?.setOnClickListener {
-            val data = "employees"
-            val intent = Intent((activity as AdminMainActivity), CreateModelActivity::class.java)
-            intent.putExtra("fragment", data)
-            (activity as AdminMainActivity).startActivity(intent)
+
         }
+
         listView.setOnScrollListener(object : AbsListView.OnScrollListener {
             override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {}
             override fun onScroll(
@@ -75,8 +57,15 @@ class EmployeesFragment : Fragment() {
                 }
             }
         })
-
         return rootView
+    }
+
+    fun toCreateFragment() {
+        val data = "employees"
+        val intent = Intent((activity as AdminMainActivity), CreateModelActivity::class.java)
+        intent.putExtra("fragment", data)
+
+        startActivityForResult(intent, 200)
     }
 
 }
