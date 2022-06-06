@@ -11,24 +11,18 @@ import com.example.parking.presentation.fragments.EmployeesFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AdminMainActivity : AppCompatActivity() {
-
-    private val employeesFragment = EmployeesFragment()
-    private val carsFragment = CarsFragment()
-    private val reservationsFragment = ReservationsFragment()
-    private val spotsFragment = SpotsFragment()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_main)
-        replaceFragment(employeesFragment)
+        replaceFragment(EmployeesFragment())
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigation.setOnNavigationItemSelectedListener {
             when(it.itemId) {
-                R.id.menu_cars -> replaceFragment(carsFragment)
-                R.id.menu_bookings -> replaceFragment(reservationsFragment)
-                R.id.menu_employees -> replaceFragment(employeesFragment)
-                R.id.menu_spot -> replaceFragment(spotsFragment)
+                R.id.menu_cars -> replaceFragment(CarsFragment())
+                R.id.menu_bookings -> replaceFragment(ReservationsFragment())
+                R.id.menu_employees -> replaceFragment(EmployeesFragment())
+                R.id.menu_spot -> replaceFragment(SpotsFragment())
             }
             true
         }

@@ -9,25 +9,18 @@ import com.example.parking.presentation.fragments.car.create.CreateCarFragment
 import com.example.parking.presentation.fragments.parkingSpot.create.CreateSpotsFragment
 
 class CreateModelActivity : AppCompatActivity() {
-
-    private val createUserReservationFragment = CreateUserReservationFragment()
-    private val createCarFragment = CreateCarFragment()
-    private val createUserFragment = CreateEmployeeFragment()
-    private val createSpotsFragment = CreateSpotsFragment()
-    private val createAdminReservationFragment = CreateAdminReservationFragment()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_reservation)
         when(intent.extras!!.getString("fragment")) {
-            "reservations" -> replaceFragment(createAdminReservationFragment)
+            "reservations" -> replaceFragment(CreateAdminReservationFragment())
             "user" -> {
                 val userEmail = intent.extras?.getString("email")
-                replaceFragment(createUserReservationFragment)
+                replaceFragment(CreateUserReservationFragment())
             }
-            "cars" -> replaceFragment(createCarFragment)
-            "employees" -> replaceFragment(createUserFragment)
-            "spots" -> replaceFragment(createSpotsFragment)
+            "cars" -> replaceFragment(CreateCarFragment())
+            "employees" -> replaceFragment(CreateEmployeeFragment())
+            "spots" -> replaceFragment(CreateSpotsFragment())
         }
     }
 

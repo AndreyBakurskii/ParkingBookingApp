@@ -33,11 +33,6 @@ class MainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_main) {
         adapter.setDropDownViewResource(R.layout.dropdown_item)
         spinner.adapter = adapter
 
-        // вот так показывается загрузочная крутяшка
-        // findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
-        // вот так она скрывается
-        // findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
-
         val buttonStart = findViewById<Button>(R.id.buttonStart)
         buttonStart.setOnClickListener {
             store.accept(Event.Ui.StartClick(spinner.selectedItemPosition))
@@ -62,7 +57,6 @@ class MainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_main) {
                     .toString()
                 )
             )
-
         }
 
         alertDialog.setNegativeButton("Cancel") { dialog, _ ->
