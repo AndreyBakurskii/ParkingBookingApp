@@ -92,28 +92,25 @@ class SpotsFragment : ElmFragment<Event, Effect, State>() {
         }
     }
 
-    override fun handleEffect(effect: Effect) {
-        Log.i("HANDLE_EFFECT_PARKING", "work handle effect")
-        when (effect) {
-            is Effect.ShowErrorLoadParkingSpots -> Toast.makeText(
-                activity,
-                "Unexpected problems on the server! Try restarting the application!",
-                Toast.LENGTH_SHORT
-            ).show()
-            is Effect.ShowErrorNetwork -> Toast.makeText(
-                activity,
-                "Problems with your connection! Check your internet connection!",
-                Toast.LENGTH_SHORT
-            ).show()
-            is Effect.ShowErrorDeleteParkingSpot -> Toast.makeText(
-                activity,
-                "Error during deletion, try again later!",
-                Toast.LENGTH_SHORT
-            ).show()
-            is Effect.ToEditParkingSpotFragment -> toEditParkingSpotFragment(effect.parkingSpot)
-            is Effect.ToCreateParkingSpotFragment -> toCreateParkingSpotFragment()
-            is Effect.ShowDeleteDialog -> showDeleteDialog(effect.parkingSpot, effect.positionInAdapter)
-        }
+    override fun handleEffect(effect: Effect) = when (effect) {
+        is Effect.ShowErrorLoadParkingSpots -> Toast.makeText(
+            activity,
+            "Unexpected problems on the server! Try restarting the application!",
+            Toast.LENGTH_SHORT
+        ).show()
+        is Effect.ShowErrorNetwork -> Toast.makeText(
+            activity,
+            "Problems with your connection! Check your internet connection!",
+            Toast.LENGTH_SHORT
+        ).show()
+        is Effect.ShowErrorDeleteParkingSpot -> Toast.makeText(
+            activity,
+            "Error during deletion, try again later!",
+            Toast.LENGTH_SHORT
+        ).show()
+        is Effect.ToEditParkingSpotFragment -> toEditParkingSpotFragment(effect.parkingSpot)
+        is Effect.ToCreateParkingSpotFragment -> toCreateParkingSpotFragment()
+        is Effect.ShowDeleteDialog -> showDeleteDialog(effect.parkingSpot, effect.positionInAdapter)
     }
 
     @SuppressLint("SetTextI18n")
@@ -139,7 +136,6 @@ class SpotsFragment : ElmFragment<Event, Effect, State>() {
     }
 
     private fun toCreateParkingSpotFragment() {
-        Log.i("LIST_SPOTS", "TO CREATE FRAGMENT")
         val data = "spots"
         val intent = Intent((activity as AdminMainActivity), CreateModelActivity::class.java)
         intent.putExtra("fragment", data)
@@ -148,7 +144,6 @@ class SpotsFragment : ElmFragment<Event, Effect, State>() {
     }
 
     private fun toEditParkingSpotFragment(parkingSpot: ParkingSpot) {
-        Log.i("LIST_SPOTS", "TO EDIT FRAGMENT")
         val data = "spots"
         val intent = Intent((activity as AdminMainActivity), EditModelActivity::class.java)
         intent.putExtra("fragment", data)
@@ -163,29 +158,5 @@ class SpotsFragment : ElmFragment<Event, Effect, State>() {
         if (resultCode == Activity.RESULT_OK) {
             store.accept(Event.Ui.LoadParkingSpots)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.i("PARKING_SPOT FRAGMENT", "OnStart work\n" +
-                "${parkingSpotsAdapter} - ${parkingSpotsInAdapter}")
-    }
-    override fun onResume() {
-        super.onResume()
-        Log.i("PARKING_SPOT FRAGMENT", "OnResume work\n${parkingSpotsAdapter} - ${parkingSpotsInAdapter}")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.i("PARKING_SPOT FRAGMENT", "OnPause work")
-    }
-    override fun onStop() {
-        super.onStop()
-        Log.i("PARKING_SPOT FRAGMENT", "OnStop work")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.i("PARKING_SPOT FRAGMENT", "OnDestroy work")
     }
 }
