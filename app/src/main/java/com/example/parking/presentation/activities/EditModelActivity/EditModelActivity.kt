@@ -4,9 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.parking.R
-import com.example.parking.presentation.fragments.edit.*
 import com.example.parking.presentation.fragments.car.edit.EditCarFragment
 import com.example.parking.presentation.fragments.parkingSpot.edit.EditSpotFragment
+import com.example.parking.presentation.fragments.reservation.edit.admin.EditAdminReservationFragment
+import com.example.parking.presentation.fragments.reservation.edit.user.EditUserReservationFragment
 
 class EditModelActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.example.parking.presentation.fragments.create
+package com.example.parking.presentation.fragments.reservation.edit.user
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -17,16 +17,14 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CreateUserReservationFragment : Fragment() {
-
-    private val email = activity?.intent?.extras?.getString("email")
+class EditUserReservationFragment : Fragment() {
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView: View = inflater.inflate(R.layout.fragment_create_user_reservation, null)
+        val rootView: View = inflater.inflate(R.layout.fragment_edit_user_reservation, null)
         val btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
         val dateChips = rootView.findViewById<ChipGroup>(R.id.DateChips)
         val startTimeChips = rootView.findViewById<ChipGroup>(R.id.StartTimeChips)
@@ -44,7 +42,7 @@ class CreateUserReservationFragment : Fragment() {
         }
 
         btContinue.setOnClickListener {
-            // сюда вставить вызов функции создания в бэке
+            // сюда вставить вызов функции редактирования на бэке
 
             // с полученной информацией выводим окно
             val view = layoutInflater.inflate(R.layout.alertdialog_model, null)
@@ -55,10 +53,10 @@ class CreateUserReservationFragment : Fragment() {
             val textOutput = view.findViewById<TextView>(R.id.textView)
             alertDialog.setPositiveButton("OK") { _, _ ->
                 // вот так вызывается загрузочная крутяшка (отключаем кнопку ещё на всякий)
-                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
-                btContinue.isClickable = false
+//                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
+//                btContinue.isClickable = false
                 // вот так она скрывается
-                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
+//                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
                 // выводим toast что всё ок и закрываем активность
                 val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
                 toast.show()
@@ -117,5 +115,4 @@ class CreateUserReservationFragment : Fragment() {
             false
         }
     }
-
 }

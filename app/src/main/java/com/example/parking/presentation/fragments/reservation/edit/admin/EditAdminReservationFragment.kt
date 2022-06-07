@@ -1,4 +1,4 @@
-package com.example.parking.presentation.fragments.create
+package com.example.parking.presentation.fragments.reservation.edit.admin
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -17,14 +17,14 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CreateAdminReservationFragment : Fragment() {
+class EditAdminReservationFragment : Fragment() {
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView: View = inflater.inflate(R.layout.fragment_create_admin_reservation, null)
+        val rootView: View = inflater.inflate(R.layout.fragment_edit_admin_reservation, null)
         val btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
         val dateChips = rootView.findViewById<ChipGroup>(R.id.DateChips)
         val startTimeChips = rootView.findViewById<ChipGroup>(R.id.StartTimeChips)
@@ -43,20 +43,7 @@ class CreateAdminReservationFragment : Fragment() {
         }
 
         btContinue.setOnClickListener {
-            // вот так можно посчитать, какая дата выбрана
-//            val chipsCount: Int = dateChips.childCount
-//            var msg = ""
-//            if (chipsCount != 0) {
-//                var i = 0
-//                while (i < chipsCount) {
-//                    val chip = dateChips.getChildAt(i) as Chip
-//                    if (chip.isChecked) {
-//                        msg += chip.getText().toString()
-//                    }
-//                    i++
-//                }
-//            }
-            // сюда вставить вызов функции создания в бэке
+            // сюда вставить вызов функции редактирования на бэке
 
             // с полученной информацией выводим окно
             val view = layoutInflater.inflate(R.layout.alertdialog_model, null)
@@ -129,5 +116,4 @@ class CreateAdminReservationFragment : Fragment() {
             false
         }
     }
-
 }

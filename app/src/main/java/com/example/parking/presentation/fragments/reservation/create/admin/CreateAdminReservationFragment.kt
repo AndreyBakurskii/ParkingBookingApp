@@ -1,4 +1,4 @@
-package com.example.parking.presentation.fragments.edit
+package com.example.parking.presentation.fragments.reservation.create.admin
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -17,20 +17,21 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EditUserReservationFragment : Fragment() {
+class CreateAdminReservationFragment : Fragment() {
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView: View = inflater.inflate(R.layout.fragment_edit_user_reservation, null)
+        val rootView: View = inflater.inflate(R.layout.fragment_create_admin_reservation, null)
         val btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
         val dateChips = rootView.findViewById<ChipGroup>(R.id.DateChips)
         val startTimeChips = rootView.findViewById<ChipGroup>(R.id.StartTimeChips)
         val endTimeChips = rootView.findViewById<ChipGroup>(R.id.EndTimeChips)
         val etModel = rootView.findViewById<EditText>(R.id.etCarModel)
         val etNum = rootView.findViewById<EditText>(R.id.etCarNum)
+        val etEmail = rootView.findViewById<EditText>(R.id.etEmployeeEmail)
 
         val c = Calendar.getInstance()
         val df: DateFormat = SimpleDateFormat("EEE dd/MM")
@@ -42,7 +43,20 @@ class EditUserReservationFragment : Fragment() {
         }
 
         btContinue.setOnClickListener {
-            // сюда вставить вызов функции редактирования на бэке
+            // вот так можно посчитать, какая дата выбрана
+//            val chipsCount: Int = dateChips.childCount
+//            var msg = ""
+//            if (chipsCount != 0) {
+//                var i = 0
+//                while (i < chipsCount) {
+//                    val chip = dateChips.getChildAt(i) as Chip
+//                    if (chip.isChecked) {
+//                        msg += chip.getText().toString()
+//                    }
+//                    i++
+//                }
+//            }
+            // сюда вставить вызов функции создания в бэке
 
             // с полученной информацией выводим окно
             val view = layoutInflater.inflate(R.layout.alertdialog_model, null)
@@ -53,10 +67,10 @@ class EditUserReservationFragment : Fragment() {
             val textOutput = view.findViewById<TextView>(R.id.textView)
             alertDialog.setPositiveButton("OK") { _, _ ->
                 // вот так вызывается загрузочная крутяшка (отключаем кнопку ещё на всякий)
-//                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
-//                btContinue.isClickable = false
+                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
+                btContinue.isClickable = false
                 // вот так она скрывается
-//                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
+                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
                 // выводим toast что всё ок и закрываем активность
                 val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
                 toast.show()
@@ -115,4 +129,5 @@ class EditUserReservationFragment : Fragment() {
             false
         }
     }
+
 }

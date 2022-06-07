@@ -1,4 +1,4 @@
-package com.example.parking.presentation.fragments.edit
+package com.example.parking.presentation.fragments.reservation.create.user
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -17,21 +17,22 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EditAdminReservationFragment : Fragment() {
+class CreateUserReservationFragment : Fragment() {
+
+    private val email = activity?.intent?.extras?.getString("email")
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView: View = inflater.inflate(R.layout.fragment_edit_admin_reservation, null)
+        val rootView: View = inflater.inflate(R.layout.fragment_create_user_reservation, null)
         val btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
         val dateChips = rootView.findViewById<ChipGroup>(R.id.DateChips)
         val startTimeChips = rootView.findViewById<ChipGroup>(R.id.StartTimeChips)
         val endTimeChips = rootView.findViewById<ChipGroup>(R.id.EndTimeChips)
         val etModel = rootView.findViewById<EditText>(R.id.etCarModel)
         val etNum = rootView.findViewById<EditText>(R.id.etCarNum)
-        val etEmail = rootView.findViewById<EditText>(R.id.etEmployeeEmail)
 
         val c = Calendar.getInstance()
         val df: DateFormat = SimpleDateFormat("EEE dd/MM")
@@ -43,7 +44,7 @@ class EditAdminReservationFragment : Fragment() {
         }
 
         btContinue.setOnClickListener {
-            // сюда вставить вызов функции редактирования на бэке
+            // сюда вставить вызов функции создания в бэке
 
             // с полученной информацией выводим окно
             val view = layoutInflater.inflate(R.layout.alertdialog_model, null)
@@ -116,4 +117,5 @@ class EditAdminReservationFragment : Fragment() {
             false
         }
     }
+
 }
