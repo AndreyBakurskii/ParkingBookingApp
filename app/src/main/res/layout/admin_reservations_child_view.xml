@@ -65,26 +65,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" >
+
             <TextView
+                android:id="@+id/captionSpotNum"
                 style="@style/Body3"
-                android:id="@+id/captionCarModel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/base_400"
-                android:layout_alignParentTop="true"
-                android:text="Car model"
-                />
+                android:text="Spot's number"
+                android:textColor="@color/base_400" />
 
             <TextView
                 style="@style/Body2"
-                android:id="@+id/textCar"
+                android:id="@+id/textSpotNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/captionCarModel"
+                android:layout_below="@id/captionSpotNum"
                 />
         </RelativeLayout>
 
