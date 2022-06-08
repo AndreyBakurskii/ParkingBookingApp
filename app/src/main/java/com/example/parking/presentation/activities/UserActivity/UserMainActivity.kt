@@ -20,40 +20,40 @@ class UserMainActivity : AppCompatActivity() {
         val listView = findViewById<ExpandableListView>(R.id.expListView)
 
         //Создаем набор данных для адаптера
-        val groups = ArrayList<Reservation>()
-        val res1 = Reservation(
-            "01/02/2022",
-            "11 am - 1 pm",
-            "Nissan",
-            "ABC",
-            email
-        )
-        groups.add(res1)
-        val res2 = Reservation(
-            "02/02/2022",
-            "11 am - 1 pm",
-            "Lada",
-            "CDE",
-            email
-        )
-        groups.add(res2)
-        val res3 = Reservation(
-            "03/02/2022",
-            "12 am - 1 pm",
-            "Honda",
-            "BCD",
-            email
-        )
-        groups.add(res3)
-        groups.add(res2)
-
-        //Создаем адаптер и передаем context и список с данными
-        val adapter =
-            ExpListAdapterUserReservations(
-                this,
-                groups
-            )
-        listView.setAdapter(adapter)
+//        val groups = ArrayList<Reservation>()
+//        val res1 = Reservation(
+//            "01/02/2022",
+//            "11 am - 1 pm",
+//            "Nissan",
+//            "ABC",
+//            email
+//        )
+//        groups.add(res1)
+//        val res2 = Reservation(
+//            "02/02/2022",
+//            "11 am - 1 pm",
+//            "Lada",
+//            "CDE",
+//            email
+//        )
+//        groups.add(res2)
+//        val res3 = Reservation(
+//            "03/02/2022",
+//            "12 am - 1 pm",
+//            "Honda",
+//            "BCD",
+//            email
+//        )
+//        groups.add(res3)
+//        groups.add(res2)
+//
+//        //Создаем адаптер и передаем context и список с данными
+//        val adapter =
+//            ExpListAdapterUserReservations(
+//                this,
+//                groups
+//            )
+//        listView.setAdapter(adapter)
 
         val btAdd = findViewById<FloatingActionButton>(R.id.fab)
 //        btAdd.setOnClickListener {

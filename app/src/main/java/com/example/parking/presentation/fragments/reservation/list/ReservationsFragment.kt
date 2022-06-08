@@ -2,6 +2,7 @@ package com.example.parking.presentation.fragments.reservation.list
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,13 @@ import com.example.parking.presentation.activities.CreateModelActivity.CreateMod
 import com.example.parking.R
 import com.example.parking.presentation.adapters.ExpListAdapterAdminReservations
 import com.example.parking.data.models.Reservation
+import com.example.parking.data.network.modelJSON.ReservationJson
+import com.example.parking.utils.toDate
+import com.example.parking.utils.toStr
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.*
 
 class ReservationsFragment : Fragment() {
 
@@ -30,31 +37,27 @@ class ReservationsFragment : Fragment() {
         progressBar = rootView.findViewById(R.id.progressBarContainer)
         btAdd = rootView.findViewById(R.id.fab)
 
-        // нужно отключить кнопку btAdd на время загрузки
-//        progressBar?.visibility = View.VISIBLE
-//        btAdd?.isClickable = false
-        // а потом не забыть включить !!!!!!!!
-//        progressBar?.visibility = View.INVISIBLE
-//        btAdd?.isClickable = true
 
-        val groups = ArrayList<Reservation>()
-        val res1 = Reservation("01/02/2022", "11 am - 1 pm", "Nissan",
-            "ABC", "test")
-        groups.add(res1)
-        val res2 = Reservation("02/02/2022", "11 am - 1 pm", "Lada",
-            "CDE", "test")
-        groups.add(res2)
-        val res3 = Reservation("03/02/2022", "12 am - 1 pm", "Hondai",
-            "BCD", "test")
-        groups.add(res3)
-        groups.add(res2)
+//        val groups = ArrayList<Reservation>()
+//        val res1 = Reservation("01/02/2022", "11 am - 1 pm", "Nissan",
+//            "ABC", "test")
+//        groups.add(res1)
+//        val res2 = Reservation("02/02/2022", "11 am - 1 pm", "Lada",
+//            "CDE", "test")
+//        groups.add(res2)
+//        val res3 = Reservation("03/02/2022", "12 am - 1 pm", "Hondai",
+//            "BCD", "test")
+//        groups.add(res3)
+//        groups.add(res2)
+//
+//        val adapter =
+//            ExpListAdapterAdminReservations(
+//                activity,
+//                groups
+//            )
+//        listView.setAdapter(adapter)
 
-        val adapter =
-            ExpListAdapterAdminReservations(
-                activity,
-                groups
-            )
-        listView.setAdapter(adapter)
+
 
         btAdd?.setOnClickListener {
             val data = "reservations"

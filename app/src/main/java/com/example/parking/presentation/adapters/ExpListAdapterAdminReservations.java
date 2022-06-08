@@ -79,7 +79,7 @@ public class ExpListAdapterAdminReservations extends BaseExpandableListAdapter {
         }
 
         TextView textGroup = (TextView) convertView.findViewById(R.id.textGroup);
-        textGroup.setText(mGroups.get(groupPosition).getDate() + ", " + mGroups.get(groupPosition).getTime());
+//        textGroup.setText(mGroups.get(groupPosition).getDate() + ", " + mGroups.get(groupPosition).getTime());
 
         return convertView;
 
@@ -94,16 +94,16 @@ public class ExpListAdapterAdminReservations extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.admin_reservations_child_view, null);
         }
 
-        TextView textChild = (TextView) convertView.findViewById(R.id.textDate);
-        textChild.setText(mGroups.get(groupPosition).getDate());
-        TextView textChild1 = (TextView) convertView.findViewById(R.id.textTime);
-        textChild1.setText(mGroups.get(groupPosition).getTime());
-        TextView textChild2 = (TextView) convertView.findViewById(R.id.textCar);
-        textChild2.setText(mGroups.get(groupPosition).getCar());
-        TextView textChild3 = (TextView) convertView.findViewById(R.id.textCarNum);
-        textChild3.setText(mGroups.get(groupPosition).getCarNum());
-        TextView textChild4 = (TextView) convertView.findViewById(R.id.textEmail);
-        textChild4.setText(mGroups.get(groupPosition).getEmail());
+//        TextView textChild = (TextView) convertView.findViewById(R.id.textDate);
+//        textChild.setText(mGroups.get(groupPosition).getDate());
+//        TextView textChild1 = (TextView) convertView.findViewById(R.id.textTime);
+//        textChild1.setText(mGroups.get(groupPosition).getTime());
+//        TextView textChild2 = (TextView) convertView.findViewById(R.id.textCar);
+//        textChild2.setText(mGroups.get(groupPosition).getCar());
+//        TextView textChild3 = (TextView) convertView.findViewById(R.id.textCarNum);
+//        textChild3.setText(mGroups.get(groupPosition).getCarNum());
+//        TextView textChild4 = (TextView) convertView.findViewById(R.id.textEmail);
+//        textChild4.setText(mGroups.get(groupPosition).getEmail());
 
         Button button = (Button)convertView.findViewById(R.id.buttonDelete);
         button.setOnClickListener(view -> {
