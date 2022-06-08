@@ -103,6 +103,8 @@ public class ExpListAdapterUserReservations extends BaseExpandableListAdapter {
         textChild2.setText(mGroups.get(groupPosition).getCar());
         TextView textChild3 = (TextView) convertView.findViewById(R.id.textCarNum);
         textChild3.setText(mGroups.get(groupPosition).getCarNum());
+        TextView textChild4 = (TextView) convertView.findViewById(R.id.textSpotNum);
+//        textChild4.setText(mGroups.get(groupPosition).getSpotNum());
 
         Button button = (Button)convertView.findViewById(R.id.buttonDelete);
         button.setOnClickListener(view -> {

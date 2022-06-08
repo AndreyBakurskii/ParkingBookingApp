@@ -98,8 +98,8 @@ public class ExpListAdapterAdminReservations extends BaseExpandableListAdapter {
         textChild.setText(mGroups.get(groupPosition).getDate());
         TextView textChild1 = (TextView) convertView.findViewById(R.id.textTime);
         textChild1.setText(mGroups.get(groupPosition).getTime());
-        TextView textChild2 = (TextView) convertView.findViewById(R.id.textCar);
-        textChild2.setText(mGroups.get(groupPosition).getCar());
+        TextView textChild2 = (TextView) convertView.findViewById(R.id.captionSpotNum);
+//        textChild2.setText(mGroups.get(groupPosition).getSpotNum());
         TextView textChild3 = (TextView) convertView.findViewById(R.id.textCarNum);
         textChild3.setText(mGroups.get(groupPosition).getCarNum());
         TextView textChild4 = (TextView) convertView.findViewById(R.id.textEmail);
