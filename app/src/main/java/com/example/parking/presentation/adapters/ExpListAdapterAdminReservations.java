@@ -115,7 +115,7 @@ public class ExpListAdapterAdminReservations extends BaseExpandableListAdapter {
         TextView textTime = (TextView) convertView.findViewById(R.id.textTime);
         textTime.setText(currentReservation.getPresentationTime());
 
-        TextView textCaptionSpotNum = (TextView) convertView.findViewById(R.id.captionSpotNum);
+        TextView textCaptionSpotNum = (TextView) convertView.findViewById(R.id.textSpotNum);
         textCaptionSpotNum.setText(String.valueOf(currentReservation.getParkingSpot().getParkingNumber()));
 
         TextView textCarNum = (TextView) convertView.findViewById(R.id.textCarNum);
