@@ -35,29 +35,18 @@ class CreateAdminReservationFragment : Fragment() {
 
         val c = Calendar.getInstance()
         val df: DateFormat = SimpleDateFormat("EEE dd/MM")
-        for (i in 0..6) {
-            val chip = inflater.inflate(R.layout.layout_chip_choice, dateChips, false) as Chip
-            chip.text=df.format(c.time)
-            dateChips.addView(chip)
+        var i = 0
+        while (i < 7) {
+            if (c.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && c.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+                i++
+                val chip = inflater.inflate(R.layout.layout_chip_choice, dateChips, false) as Chip
+                chip.text=df.format(c.time)
+                dateChips.addView(chip)
+            }
             c.add(Calendar.DATE, 1)
         }
 
         btContinue.setOnClickListener {
-            // вот так можно посчитать, какая дата выбрана
-//            val chipsCount: Int = dateChips.childCount
-//            var msg = ""
-//            if (chipsCount != 0) {
-//                var i = 0
-//                while (i < chipsCount) {
-//                    val chip = dateChips.getChildAt(i) as Chip
-//                    if (chip.isChecked) {
-//                        msg += chip.getText().toString()
-//                    }
-//                    i++
-//                }
-//            }
-            // сюда вставить вызов функции создания в бэке
-
             // с полученной информацией выводим окно
             val view = layoutInflater.inflate(R.layout.alertdialog_model, null)
             val alertDialog = AlertDialog.Builder(activity, R.style.AlertDialog)
