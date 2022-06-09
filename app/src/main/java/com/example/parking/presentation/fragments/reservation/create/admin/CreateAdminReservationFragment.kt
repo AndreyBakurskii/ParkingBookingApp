@@ -35,10 +35,14 @@ class CreateAdminReservationFragment : Fragment() {
 
         val c = Calendar.getInstance()
         val df: DateFormat = SimpleDateFormat("EEE dd/MM")
-        for (i in 0..6) {
-            val chip = inflater.inflate(R.layout.layout_chip_choice, dateChips, false) as Chip
-            chip.text=df.format(c.time)
-            dateChips.addView(chip)
+        var i = 0
+        while (i < 7) {
+            if (c.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && c.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+                i++
+                val chip = inflater.inflate(R.layout.layout_chip_choice, dateChips, false) as Chip
+                chip.text=df.format(c.time)
+                dateChips.addView(chip)
+            }
             c.add(Calendar.DATE, 1)
         }
 
