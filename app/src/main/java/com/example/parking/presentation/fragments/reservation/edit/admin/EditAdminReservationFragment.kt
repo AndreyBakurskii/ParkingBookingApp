@@ -112,6 +112,20 @@ class EditAdminReservationFragment : Fragment() {
         }
     }
 
+    private fun selectChip(chips : ChipGroup, msg : String) {
+        val chipsCount: Int = chips.childCount
+        if (chipsCount != 0) {
+            var i = 0
+            while (i < chipsCount) {
+                val chip = chips.getChildAt(i) as Chip
+                if (chip.text == msg) {
+                    chip.isChecked = true
+                }
+                i++
+            }
+        }
+    }
+
     private fun isFieldEmpty(etField : EditText) : Boolean {
         return if (TextUtils.isEmpty(etField.text.toString())) {
             etField.error = "This field cannot be empty"
