@@ -45,7 +45,9 @@ class Reservation (
     var endTime: Date
 ) {
 
-    private val dateTimePattern: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    private val dateTimePattern: String = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+    private val datePresentationPattern: String = "EEE dd/MM"
+    private val timePresentationPattern: String = "HH:mm"
 
     fun toHashMap(withID: Boolean = false) : HashMap<String, String> {
         return if (withID) hashMapOf(
@@ -62,5 +64,13 @@ class Reservation (
             "startTime" to startTime.toStr(dateTimePattern),
             "endTime" to endTime.toStr(dateTimePattern)
         )
+    }
+
+    fun getPresentationDate(): String {
+        return startTime.toStr(datePresentationPattern)
+    }
+
+    fun getPresentationTime(): String {
+        return "${startTime.toStr(timePresentationPattern)} - ${endTime.toStr(timePresentationPattern)}"
     }
 }

@@ -108,7 +108,7 @@ class MyActor : Actor<Command, Event> {
     private val employeeMapper: EmployeeMapper = EmployeeMapper()
     private val parkingSpotMapper: ParkingSpotMapper = ParkingSpotMapper()
 
-    private val dateTimePattern: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    private val dateTimePattern: String = "yyyy-MM-dd'T'HH:mm:ss.SSS"
 
     override fun execute(command: Command): Observable<Event> = when (command) {
         is Command.LoadAllReservations -> reservationRepository
@@ -173,6 +173,7 @@ class MyActor : Actor<Command, Event> {
                             startTime = reservationJson.startTime.toDate(dateTimePattern),
                             endTime = reservationJson.endTime.toDate(dateTimePattern)
                         ) }
+                        .sortedBy { reservation -> reservation.startTime }
                 )
             )
                 .mapEvents(

@@ -27,7 +27,7 @@ public class ExpListAdapterAdminCars extends BaseExpandableListAdapter {
     public ExpListAdapterAdminCars(
             Context context,
             ArrayList<Car> groups,
-            Store store
+            Store<Event, Effect, State> store
     ){
         this.mContext = context;
         this.mGroups = groups;

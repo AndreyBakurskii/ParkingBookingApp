@@ -26,7 +26,11 @@ public class ExpListAdapterAdminEmployees extends BaseExpandableListAdapter {
     private final Context mContext;
     public Store<Event, Effect, State> store;
 
-    public ExpListAdapterAdminEmployees(Context context, ArrayList<Employee> groups, Store store){
+    public ExpListAdapterAdminEmployees(
+            Context context,
+            ArrayList<Employee> groups,
+            Store<Event, Effect, State> store
+    ){
         this.mContext = context;
         this.mGroups = groups;
         this.store = store;
