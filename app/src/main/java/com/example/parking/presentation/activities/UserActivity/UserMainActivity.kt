@@ -33,9 +33,12 @@ class UserMainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_use
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_main)
-        val email = intent.extras?.getString("email")
-        val listView = findViewById<ExpandableListView>(R.id.expListView)
+//        val email = intent.extras?.getString("email")
 
+        progressBar = findViewById(R.id.progressBarContainer)
+        btAdd = findViewById(R.id.fab)
+
+        val listView = findViewById<ExpandableListView>(R.id.expListView)
         reservationAdapter =
             ExpListAdapterUserReservations(
                 this,
@@ -69,15 +72,7 @@ class UserMainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_use
                 id = UUID.fromString("5a1874b2-4d30-3af0-ad60-1daf278ba512"),
                 name = "bakurskii2001@gmail.com"
             )
-        )
-        )
-
-//        store.accept(Event.Ui.LoadReservations(
-//            employee = Employee(
-//                id = UUID.fromString("5a1874b2-4d30-3af0-ad60-1daf278ba512"),
-//                name = "bakurskii2001@gmail.com"
-//            )
-//        ))
+        ))
     }
 
     override fun onStart() {
@@ -91,11 +86,11 @@ class UserMainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_use
     override val initEvent: Event = Event.Ui.Init
 
     override fun render(state: State) {
-//        if (state.loading) {
-//            progressBar!!.visibility = View.VISIBLE
-//        } else {
-//            progressBar!!.visibility = View.INVISIBLE
-//        }
+        if (state.loading) {
+            progressBar!!.visibility = View.VISIBLE
+        } else {
+            progressBar!!.visibility = View.INVISIBLE
+        }
 
         if (state.doUpdate) {
             reservationsInAdapter!!.clear()
