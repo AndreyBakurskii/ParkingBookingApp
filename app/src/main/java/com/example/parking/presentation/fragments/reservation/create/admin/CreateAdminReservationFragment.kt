@@ -47,21 +47,6 @@ class CreateAdminReservationFragment : Fragment() {
         }
 
         btContinue.setOnClickListener {
-            // вот так можно посчитать, какая дата выбрана
-//            val chipsCount: Int = dateChips.childCount
-//            var msg = ""
-//            if (chipsCount != 0) {
-//                var i = 0
-//                while (i < chipsCount) {
-//                    val chip = dateChips.getChildAt(i) as Chip
-//                    if (chip.isChecked) {
-//                        msg += chip.getText().toString()
-//                    }
-//                    i++
-//                }
-//            }
-            // сюда вставить вызов функции создания в бэке
-
             // с полученной информацией выводим окно
             val view = layoutInflater.inflate(R.layout.alertdialog_model, null)
             val alertDialog = AlertDialog.Builder(activity, R.style.AlertDialog)
