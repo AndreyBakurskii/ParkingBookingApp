@@ -7,8 +7,8 @@ import com.example.parking.R
 import com.example.parking.presentation.fragments.car.create.CreateCarFragment
 import com.example.parking.presentation.fragments.employee.create.CreateEmployeeFragment
 import com.example.parking.presentation.fragments.parkingSpot.create.CreateSpotsFragment
-import com.example.parking.presentation.fragments.reservation.create.admin.CreateAdminReservationFragment
-import com.example.parking.presentation.fragments.reservation.create.user.CreateUserReservationFragment
+import com.example.parking.presentation.fragments.reservation.create.CreateAdminReservationFragment
+import com.example.parking.presentation.fragments.reservation.create.CreateUserReservationFragment
 
 class CreateModelActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -126,21 +126,21 @@ public class ExpListAdapterUserReservations extends BaseExpandableListAdapter {
         TextView textCarNum = (TextView) convertView.findViewById(R.id.textCarNum);
         textCarNum.setText(currentReservation.getCar().getRegistryNumber());
 
-        Button button = (Button)convertView.findViewById(R.id.buttonDelete);
-        button.setOnClickListener(
-//                view -> store.accept(new Event.Ui.ClickDeleteReservation(currentReservation, groupPosition))
-        view -> {
-            Log.i("BUTTON DELETE", "CLICKED");
-        }
-        );
-
-        // здесь переходим в активность с редактированием, вызывая фрагмент для брони
-        Button buttonEdit = (Button)convertView.findViewById(R.id.buttonEdit);
-        buttonEdit.setOnClickListener(
-                view -> {
-                    Log.i("BUTTON EDIT", "CLICKED");
-                }
-        );
+//        Button button = (Button)convertView.findViewById(R.id.buttonDelete);
+//        button.setOnClickListener(
+////                view -> store.accept(new Event.Ui.ClickDeleteReservation(currentReservation, groupPosition))
+//        view -> {
+//            Log.i("BUTTON DELETE", "CLICKED");
+//        }
+//        );
+//
+//        // здесь переходим в активность с редактированием, вызывая фрагмент для брони
+//        Button buttonEdit = (Button)convertView.findViewById(R.id.buttonEdit);
+//        buttonEdit.setOnClickListener(
+//                view -> {
+//                    Log.i("BUTTON EDIT", "CLICKED");
+//                }
+//        );
 
         return convertView;
     }

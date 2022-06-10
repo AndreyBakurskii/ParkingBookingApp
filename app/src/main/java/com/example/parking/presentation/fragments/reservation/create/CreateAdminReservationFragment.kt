@@ -1,4 +1,4 @@
-package com.example.parking.presentation.fragments.reservation.create.admin
+package com.example.parking.presentation.fragments.reservation.create
 
 import android.annotation.SuppressLint
 import android.app.Activity
