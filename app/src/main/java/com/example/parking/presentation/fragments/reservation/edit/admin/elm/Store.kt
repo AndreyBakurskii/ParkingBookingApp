@@ -1,4 +1,4 @@
-package com.example.parking.presentation.fragments.reservation.create.elm
+package com.example.parking.presentation.fragments.reservation.edit.admin.elm
 
 import com.example.parking.data.mapper.CarMapper
 import com.example.parking.data.mapper.ParkingSpotMapper
@@ -12,8 +12,8 @@ import com.example.parking.data.repository.EmployeeRepository
 import com.example.parking.data.repository.ParkingSpotRepository
 import com.example.parking.data.repository.ReservationRepository
 import vivid.money.elmslie.core.store.dsl_reducer.ScreenDslReducer
-import com.example.parking.presentation.fragments.reservation.create.elm.Event.Ui
-import com.example.parking.presentation.fragments.reservation.create.elm.Event.Internal
+import com.example.parking.presentation.fragments.reservation.edit.admin.elm.Event.Internal
+import com.example.parking.presentation.fragments.reservation.edit.admin.elm.Event.Ui
 import com.example.parking.presentation.utils.statusCodeHandler
 import com.example.parking.utils.toDate
 import com.example.parking.utils.toStr
@@ -24,41 +24,53 @@ import vivid.money.elmslie.core.ElmStoreCompat
 import java.util.*
 import kotlin.collections.ArrayList
 
-
 class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui::class, Internal::class) {
     override fun Result.ui(event: Ui) = when (event) {
         is Ui.Init -> {}
-        is Ui.CreateClick -> {
+        is Ui.UpdateClick -> {
             state { copy(loading = false) }
             effects { +Effect.ShowConfirmDialog(
-                event.carModel, event.carRegistryNumber,
-                event.employee,
-                event.startTime, event.endTime
+                event.reservation,
+                event.updatedCarModel,
+                event.updatedCarRegistryNumber,
+                event.updatedEmployee,
+                event.updatedStartTime,
+                event.updatedEndTime
             ) }
         }
         is Ui.OkClickConfirmDialog -> {
             state { copy(
                 loading = true,
-                employee = event.employee,
-                carModel = event.carModel, carRegistryNumber = event.carRegistryNumber,
-                startTime = event.startTime, endTime = event.endTime
+                reservation = event.reservation,
+                updatedCarModel = event.updatedCarModel,
+                updatedCarRegistryNumber = event.updatedCarRegistryNumber,
+                updatedEmployee = event.updatedEmployee,
+                updatedStartTime = event.updatedStartTime,
+                updatedEndTime = event.updatedEndTime
                 ) }
-            commands { +Command.CheckExistEmployee(event.employee) }
+            commands { +Command.CheckExistEmployee(
+                state.reservation!!.employee,
+                event.updatedEmployee
+            ) }
         }
     }
 
     override fun Result.internal(event: Internal) = when (event) {
-        is Internal.SuccessCreateReservation -> {
+        is Internal.SuccessUpdateReservation -> {
             state { copy(loading = false) }
             effects { +Effect.ToReservationsFragment }
         }
-        is Internal.ErrorCreateReservation -> {
+        is Internal.ErrorUpdateReservation -> {
             state { copy(loading = false) }
-            effects { +Effect.ShowErrorCreateReservation }
+            effects { +Effect.ShowErrorUpdateReservation }
         }
         is Internal.SuccessCheckEmployee -> {
             state { copy(loading = true) }
-            commands { +Command.CheckExistCar(state.carModel, state.carRegistryNumber) }
+            commands { +Command.CheckExistCar(
+                state.reservation!!.car,
+                state.updatedCarModel,
+                state.updatedCarRegistryNumber)
+            }
         }
         is Internal.ErrorNotFoundEmployee -> {
             state { copy(loading = false) }
@@ -66,11 +78,32 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
         }
         is Internal.SuccessCheckCar -> {
             state { copy(loading = true, reservedCar = event.car) }
-            commands { +Command.LoadAllReservations }
+            commands { +Command.CheckNeedNewParkingSpot(
+                currentParkingSpot = state.reservation!!.parkingSpot,
+                currentStartTime = state.reservation!!.startTime,
+                currentEndTime = state.reservation!!.endTime,
+                updatedStartTime = state.updatedStartTime!!,
+                updatedEndTime = state.updatedEndTime!!
+            ) }
         }
         is Internal.ErrorNotFoundCar -> {
             state { copy(loading = false) }
             effects { +Effect.ShowErrorNotFoundCar }
+        }
+        is Internal.NeedNewParkingSpot -> {
+            state { copy(loading = true) }
+            commands { +Command.LoadAllReservations }
+        }
+        is Internal.NoNeedNewParkingSpot -> {
+            state { copy(loading = true, reservedParkingSpot = state.reservation!!.parkingSpot) }
+            commands { Command.UpdateReservation(
+                reservationId = state.reservation!!.id.toString(),
+                updatedEmployee = state.updatedEmployee!!,
+                reservedCar = state.reservedCar!!,
+                reservedParkingSpot = state.reservedParkingSpot!!,
+                updatedStartTime = state.updatedStartTime!!,
+                updatedEndTime = state.updatedEndTime!!
+            ) }
         }
         is Internal.SuccessLoadAllReservations -> {
             state { copy(loading = true, reservations = event.reservations) }
@@ -78,24 +111,24 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
         }
         is Internal.SuccessLoadAllParkingSpots -> {
             state { copy(loading = true, parkingSpots = event.parkingSpots) }
-            commands {
-                +Command.GetFreeParkingSpots(
-                    reservations = state.reservations,
-                    parkingSpots = event.parkingSpots,
-                    startTime = state.startTime!!, endTime = state.endTime!!
-                )
-            }
+            commands { +Command.GetFreeParkingSpots(
+                reservation = state.reservation!!,
+                reservations = state.reservations,
+                parkingSpots = event.parkingSpots,
+                updatedStartTime = state.updatedStartTime!!,
+                updatedEndTime = state.updatedEndTime!!
+            ) }
         }
         is Internal.SuccessGetFreeParkingSpots -> {
             state { copy(loading = true, reservedParkingSpot = event.parkingSpot) }
-            commands {
-                +Command.CreateReservation(
-                    employee = state.employee!!,
-                    car = state.reservedCar!!,
-                    parkingSpot = event.parkingSpot,
-                    startTime = state.startTime!!, endTime = state.endTime!!
-                )
-            }
+            commands { +Command.UpdateReservation(
+                reservationId = state.reservation!!.id.toString(),
+                updatedEmployee = state.updatedEmployee!!,
+                reservedCar = state.reservedCar!!,
+                reservedParkingSpot = state.reservedParkingSpot!!,
+                updatedStartTime = state.updatedStartTime!!,
+                updatedEndTime = state.updatedEndTime!!,
+            ) }
         }
         is Internal.ErrorNotFreeParkingSpots -> {
             state { copy(loading = false) }
@@ -122,30 +155,49 @@ class MyActor : Actor<Command, Event> {
     private val dateTimePattern: String = "yyyy-MM-dd'T'HH:mm:ss"
 
     override fun execute(command: Command): Observable<Event> = when (command) {
-        is Command.CheckExistEmployee -> employeeRepository
-            .getEmployee(command.employee.id.toString())
-            .mapEvents(
-                eventMapper = { response -> response.statusCodeHandler(
-                    successHandler = { Internal.SuccessCheckEmployee },
-                    errorHandler = { Internal.ErrorNotFoundEmployee }
-                ) },
-                errorMapper = { Internal.ErrorNetwork }
-            )
-        is Command.CheckExistCar -> carRepository
-            .getAll()
-            .mapEvents(
-                eventMapper = { response -> response.statusCodeHandler(
-                    successHandler = {
-                        return@statusCodeHandler getCarByModelAndRegistryNumber(
-                            it,
-                            command.carModel,
-                            command.carRegistryNumber
-                        )?.let { car -> Internal.SuccessCheckCar(car) } ?: Internal.ErrorNotFoundCar
-                                     },
-                    errorHandler = { Internal.ErrorCreateReservation }
-                )},
-                errorMapper = { Internal.ErrorNetwork }
-            )
+        is Command.CheckExistEmployee ->
+            if (command.currentEmployee.name == command.updatedEmployee.name) {
+                Observable.just(Internal.SuccessCheckEmployee)
+            } else {
+                employeeRepository
+                    .getEmployee(command.updatedEmployee.id.toString())
+                    .mapEvents(
+                        eventMapper = { response -> response.statusCodeHandler(
+                            successHandler = { Internal.SuccessCheckEmployee },
+                            errorHandler = { Internal.ErrorNotFoundEmployee }
+                        ) },
+                        errorMapper = { Internal.ErrorNetwork }
+                    )
+                }
+        is Command.CheckExistCar ->
+            if (command.currentCar.model == command.updatedCarModel
+                && command.currentCar.registryNumber == command.updatedCarRegistryNumber) {
+                    Observable.just(Internal.SuccessCheckCar(command.currentCar))
+            } else {
+                carRepository
+                    .getAll()
+                    .mapEvents(
+                        eventMapper = { response -> response.statusCodeHandler(
+                            successHandler = {
+                                return@statusCodeHandler getCarByModelAndRegistryNumber(
+                                    it,
+                                    command.updatedCarModel,
+                                    command.updatedCarRegistryNumber
+                                )?.let { car -> Internal.SuccessCheckCar(car) } ?: Internal.ErrorNotFoundCar
+                            },
+                            errorHandler = { Internal.ErrorUpdateReservation }
+                        ) },
+                        errorMapper = { Internal.ErrorNetwork }
+                    )
+                }
+        is Command.CheckNeedNewParkingSpot ->
+            if ((command.currentStartTime <= command.updatedStartTime && command.updatedStartTime <= command.currentEndTime)
+                && (command.currentStartTime <= command.updatedEndTime && command.updatedEndTime <= command.currentEndTime)
+            ) {
+                Observable.just(Internal.NoNeedNewParkingSpot(command.currentParkingSpot))
+            } else {
+                Observable.just(Internal.NeedNewParkingSpot)
+            }
         is Command.LoadAllReservations -> reservationRepository
             .getAll()
             .mapEvents(
@@ -153,7 +205,7 @@ class MyActor : Actor<Command, Event> {
                     successHandler = { Internal.SuccessLoadAllReservations(
                         reservations = ArrayList(it)
                     ) },
-                    errorHandler = { Internal.ErrorCreateReservation }
+                    errorHandler = { Internal.ErrorUpdateReservation }
                 ) },
                 errorMapper = { Internal.ErrorNetwork }
             )
@@ -165,17 +217,17 @@ class MyActor : Actor<Command, Event> {
                         parkingSpots = ArrayList(
                             it.map { parkingSpotJson ->  parkingSpotMapper.fromJsonToModel(parkingSpotJson) })
                     ) },
-                    errorHandler = { Internal.ErrorCreateReservation }
+                    errorHandler = { Internal.ErrorUpdateReservation }
                 ) },
                 errorMapper = { Internal.ErrorNetwork }
             )
         is Command.GetFreeParkingSpots -> {
             Observable.fromArray(
                 getFreeParkingSpots(
-                    reservations = command.reservations,
+                    reservations = ArrayList(command.reservations.filter { it.id == command.reservation.id.toString() }),
                     parkingSpots = command.parkingSpots,
-                    startTime = command.startTime,
-                    endTime = command.endTime
+                    startTime = command.updatedStartTime,
+                    endTime = command.updatedEndTime
                 )
             ).mapEvents(
                 eventMapper = {
@@ -183,21 +235,22 @@ class MyActor : Actor<Command, Event> {
                     if (freeParkingSpots.isNotEmpty()) Internal.SuccessGetFreeParkingSpots(freeParkingSpots[0])
                     else  Internal.ErrorNotFreeParkingSpots
                 },
-                errorMapper = { Internal.ErrorCreateReservation }
+                errorMapper = { Internal.ErrorUpdateReservation }
             )
         }
-        is Command.CreateReservation -> reservationRepository
-            .createReservation(
-                carId = command.car.id.toString(),
-                employeeId = command.employee.id.toString(),
-                parkingSpotId = command.parkingSpot.id.toString(),
-                startTime = command.startTime.toStr(dateTimePattern, TimeZone.getTimeZone("GMT")),
-                endTime = command.endTime.toStr(dateTimePattern, TimeZone.getTimeZone("GMT"))
+        is Command.UpdateReservation -> reservationRepository
+            .updateReservation(
+                id = command.reservationId,
+                carId = command.reservedCar.id.toString(),
+                employeeId = command.updatedEmployee.id.toString(),
+                parkingSpotId = command.reservedParkingSpot.id.toString(),
+                startTime = command.updatedStartTime.toStr(dateTimePattern, TimeZone.getTimeZone("GMT")),
+                endTime = command.updatedEndTime.toStr(dateTimePattern, TimeZone.getTimeZone("GMT"))
             )
             .mapEvents(
                 eventMapper = { response -> response.statusCodeHandler(
-                    successHandler = { Internal.SuccessCreateReservation },
-                    errorHandler = { Internal.ErrorCreateReservation }
+                    successHandler = { Internal.SuccessUpdateReservation },
+                    errorHandler = { Internal.ErrorUpdateReservation }
                 ) },
                 errorMapper = { Internal.ErrorNetwork }
             )

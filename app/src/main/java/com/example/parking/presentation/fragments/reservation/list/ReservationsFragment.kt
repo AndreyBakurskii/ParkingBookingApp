@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.example.parking.R
+import com.example.parking.data.mapper.CarMapper
 import com.example.parking.data.models.Reservation
 import com.example.parking.presentation.activities.AdminActivity.AdminMainActivity
 import com.example.parking.presentation.activities.CreateModelActivity.CreateModelActivity
@@ -19,6 +20,7 @@ import com.example.parking.presentation.fragments.reservation.list.elm.Effect
 import com.example.parking.presentation.fragments.reservation.list.elm.Event
 import com.example.parking.presentation.fragments.reservation.list.elm.State
 import com.example.parking.presentation.fragments.reservation.list.elm.storeFactory
+import com.example.parking.utils.toStr
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import vivid.money.elmslie.android.base.ElmFragment
 import vivid.money.elmslie.core.store.Store
@@ -31,6 +33,8 @@ class ReservationsFragment : ElmFragment<Event, Effect, State>() {
 
     private var btAdd : FloatingActionButton? = null
     private var progressBar : FrameLayout? = null
+
+    private var dateTimeFormatForServer: String = "yyyy-MM-dd'T'HH:mm:ss"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -151,6 +155,19 @@ class ReservationsFragment : ElmFragment<Event, Effect, State>() {
         val data = "reservations"
         val intent = Intent((activity as AdminMainActivity), EditModelActivity::class.java)
         intent.putExtra("fragment", data)
-        activity?.startActivity(intent)
+
+        intent.putExtra("reservationId", reservation.id.toString())
+        intent.putExtra("car", reservation.car.toHashMap(withID = true))
+        intent.putExtra("employee", reservation.employee.toHashMap(withID = true))
+        intent.putExtra("parkingSpot", reservation.parkingSpot.toHashMap(withID = true))
+        intent.putExtra("startTime", reservation.startTime.toStr(
+            pattern = dateTimeFormatForServer,
+            timeZone = TimeZone.getTimeZone("GMT"),
+        ))
+        intent.putExtra("endTime", reservation.endTime.toStr(
+            pattern = dateTimeFormatForServer,
+            timeZone = TimeZone.getTimeZone("GMT"),
+        ))
+        startActivityForResult(intent, 200);
     }
 }

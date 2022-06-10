@@ -9,9 +9,12 @@ import kotlin.collections.ArrayList
 
 data class State(
     val loading: Boolean = false,
+
     val employee: Employee? = null,
-    val carModel: String = "", val carRegistryNumber: String = "",
-    val startTime: Date? = null, val endTime: Date? = null,
+    val carModel: String = "",
+    val carRegistryNumber: String = "",
+    val startTime: Date? = null,
+    val endTime: Date? = null,
 
     val reservedCar: Car? = null,
     val reservedParkingSpot: ParkingSpot? = null,
