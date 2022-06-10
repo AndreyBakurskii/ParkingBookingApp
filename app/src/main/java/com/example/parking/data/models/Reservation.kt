@@ -46,7 +46,7 @@ class Reservation (
     var endTime: Date
 ) {
 
-    private val dateTimePattern: String = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+    private val dateTimePattern: String = "yyyy-MM-dd'T'HH:mm:ss"
     private val datePresentationPattern: String = "EEE dd/MM"
     private val timePresentationPattern: String = "HH:mm"
     private val serverTimeZone: TimeZone = TimeZone.getTimeZone("GMT")

@@ -1,6 +1,7 @@
 package com.example.parking.presentation.fragments.reservation.list
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -136,7 +137,14 @@ class ReservationsFragment : ElmFragment<Event, Effect, State>() {
         val data = "reservations"
         val intent = Intent((activity as AdminMainActivity), CreateModelActivity::class.java)
         intent.putExtra("fragment", data)
-        (activity as AdminMainActivity).startActivity(intent)
+        startActivityForResult(intent, 200);
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            store.accept(Event.Ui.LoadReservations)
+        }
     }
 
     private fun toEditReservationFragment(reservation: Reservation) {

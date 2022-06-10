@@ -5,15 +5,23 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
 
-fun Date.toStr(pattern: String, timeZone: TimeZone): String {
-    val simpleDateFormat: SimpleDateFormat = SimpleDateFormat(pattern, Locale.US)
+fun Date.toStr(
+    pattern: String,
+    timeZone: TimeZone,
+    locale: Locale = Locale.US
+): String {
+    val simpleDateFormat: SimpleDateFormat = SimpleDateFormat(pattern, locale)
     simpleDateFormat.timeZone = timeZone
 
     return simpleDateFormat.format(this)
 }
 
-fun String.toDate(pattern: String, timeZone: TimeZone = TimeZone.getTimeZone("GMT")): Date {
-    val simpleDateFormat: SimpleDateFormat = SimpleDateFormat(pattern, Locale.US)
+fun String.toDate(
+    pattern: String,
+    timeZone: TimeZone = TimeZone.getTimeZone("GMT"),
+    locale: Locale = Locale.US
+): Date {
+    val simpleDateFormat: SimpleDateFormat = SimpleDateFormat(pattern, locale)
     simpleDateFormat.timeZone = timeZone
 
     return simpleDateFormat.parse(this)!!

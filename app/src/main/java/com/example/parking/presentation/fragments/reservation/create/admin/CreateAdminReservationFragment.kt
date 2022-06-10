@@ -1,9 +1,11 @@
 package com.example.parking.presentation.fragments.reservation.create.admin
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +13,26 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.parking.R
+import com.example.parking.data.models.Employee
+import com.example.parking.data.models.createEmployee
+import com.example.parking.presentation.fragments.reservation.create.admin.elm.Effect
+import com.example.parking.presentation.fragments.reservation.create.admin.elm.Event
+import com.example.parking.presentation.fragments.reservation.create.admin.elm.State
+import com.example.parking.presentation.fragments.reservation.create.admin.elm.storeFactory
+import com.example.parking.utils.toDate
+import com.example.parking.utils.toStr
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import vivid.money.elmslie.android.base.ElmFragment
+import vivid.money.elmslie.core.store.Store
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CreateAdminReservationFragment : Fragment() {
+class CreateAdminReservationFragment : ElmFragment<Event, Effect, State>() {
+
+    private var progressBar : FrameLayout? = null
+    private var btnContinue : Button? = null
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
@@ -25,7 +40,10 @@ class CreateAdminReservationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val rootView: View = inflater.inflate(R.layout.fragment_create_admin_reservation, null)
-        val btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
+        btnContinue = rootView.findViewById<Button>(R.id.buttonContinue)
+        progressBar = rootView.findViewById<FrameLayout>(R.id.progressBarContainer)
+
+
         val dateChips = rootView.findViewById<ChipGroup>(R.id.DateChips)
         val startTimeChips = rootView.findViewById<ChipGroup>(R.id.StartTimeChips)
         val endTimeChips = rootView.findViewById<ChipGroup>(R.id.EndTimeChips)
@@ -46,30 +64,32 @@ class CreateAdminReservationFragment : Fragment() {
             c.add(Calendar.DATE, 1)
         }
 
-        btContinue.setOnClickListener {
-            // с полученной информацией выводим окно
-            val view = layoutInflater.inflate(R.layout.alertdialog_model, null)
-            val alertDialog = AlertDialog.Builder(activity, R.style.AlertDialog)
-            alertDialog.setTitle("Confirm")
-            alertDialog.setCancelable(false)
-            // сюда информацию
-            val textOutput = view.findViewById<TextView>(R.id.textView)
-            alertDialog.setPositiveButton("OK") { _, _ ->
-                // вот так вызывается загрузочная крутяшка (отключаем кнопку ещё на всякий)
-                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
-                btContinue.isClickable = false
-                // вот так она скрывается
-                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
-                // выводим toast что всё ок и закрываем активность
-                val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
-                toast.show()
-                activity?.finish()
+        btnContinue?.setOnClickListener {
+            if (!isFieldEmpty(etEmail) && !isFieldEmpty(etModel) && !isFieldEmpty(etNum)
+                && isChipSelected(dateChips) && isChipSelected(startTimeChips) && isChipSelected(endTimeChips)) {
+
+                val employee: Employee = createEmployee(etEmail.text.toString())
+
+                val carModel: String = etModel.text.toString()
+                val carRegistryNumber: String = etNum.text.toString()
+
+                val startTime: Date =
+                    ("${Calendar.getInstance().get(Calendar.YEAR)}" +
+                            " ${getSelectedChip(dateChips)} " +
+                            "${getSelectedChip(startTimeChips)}")
+                        .toDate("yyyy EEE dd/MM HH:mm", locale = Locale.getDefault())
+                val endTime: Date =
+                    ("${Calendar.getInstance().get(Calendar.YEAR)}" +
+                            " ${getSelectedChip(dateChips)} " +
+                            "${getSelectedChip(endTimeChips)}")
+                        .toDate("yyyy EEE dd/MM HH:mm", locale = Locale.getDefault())
+
+                store.accept(Event.Ui.CreateClick(
+                    employee = employee,
+                    carModel = carModel, carRegistryNumber = carRegistryNumber,
+                    startTime = startTime, endTime = endTime
+                ))
             }
-            alertDialog.setNegativeButton("Cancel") { dialog, _ ->
-                dialog.cancel()
-            }
-            alertDialog.setView(view)
-            alertDialog.show()
         }
         return rootView
     }
@@ -82,6 +102,105 @@ class CreateAdminReservationFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+    }
+
+    override val initEvent: Event = Event.Ui.Init
+
+    override fun createStore(): Store<Event, Effect, State> = storeFactory()
+
+    override fun render(state: State) {
+        if (state.loading) {
+            progressBar!!.visibility = View.VISIBLE
+            btnContinue!!.isClickable = false
+        } else {
+            progressBar!!.visibility = View.INVISIBLE
+            btnContinue!!.isClickable = true
+        }
+    }
+
+    override fun handleEffect(effect: Effect) = when (effect) {
+        is Effect.ShowConfirmDialog -> showConfirmDialog(
+            employee = effect.employee,
+            carModel = effect.carModel, carRegistryNumber = effect.carRegistryNumber,
+            startTime = effect.startTime, endTime = effect.endTime
+        )
+        is Effect.ToReservationsFragment -> toReservationsFragment()
+        is Effect.ShowErrorCreateReservation -> Toast.makeText(
+            activity,
+            "Unable to create a reservation, error on the server! Please check the entered data!",
+            Toast.LENGTH_SHORT
+        ).show()
+        is Effect.ShowErrorNotFreeParkingSpots -> Toast.makeText(
+            activity,
+            "There are no free parking spots!",
+            Toast.LENGTH_SHORT
+        ).show()
+        is Effect.ShowErrorNotFoundCar -> Toast.makeText(
+            activity,
+            "This car doesn't exist in the database!",
+            Toast.LENGTH_SHORT
+        ).show()
+        is Effect.ShowErrorNotFoundEmployee -> Toast.makeText(
+            activity,
+            "This employee doesn't exist in the database!",
+            Toast.LENGTH_SHORT
+        ).show()
+        is Effect.ShowErrorNetwork -> Toast.makeText(
+            activity,
+            "Problems with your connection! Check your internet connection!",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
+    private fun showConfirmDialog(
+        employee: Employee,
+        carModel: String, carRegistryNumber: String,
+        startTime: Date, endTime: Date,
+    ) {
+        val view = layoutInflater.inflate(R.layout.alertdialog_model, null)
+        val alertDialog = AlertDialog.Builder(activity, R.style.AlertDialog)
+        alertDialog.setTitle("Confirm")
+        alertDialog.setCancelable(false)
+
+        val textOutput = view.findViewById<TextView>(R.id.textView)
+        textOutput.setText(
+            "Employee: ${employee.name}\n" +
+            "Car model: $carModel\n" +
+            "Car registry number: $carRegistryNumber\n" +
+            "Date: ${startTime.toStr(
+                pattern = "EEE dd/MM",
+                timeZone = TimeZone.getDefault(),
+                locale = Locale.getDefault()
+            )}\n" +
+            "Time: ${startTime.toStr(
+                pattern = "HH:mm",
+                timeZone = TimeZone.getTimeZone("GMT"),
+                locale = Locale.getDefault()
+            )} - ${endTime.toStr(
+                pattern = "HH:mm",
+                timeZone = TimeZone.getTimeZone("GMT"),
+                locale = Locale.getDefault())}"
+        )
+        alertDialog.setPositiveButton("OK") { _, _ ->
+            store.accept(Event.Ui.OkClickConfirmDialog(
+                employee = employee,
+                carModel = carModel, carRegistryNumber = carRegistryNumber,
+                startTime = startTime, endTime = endTime
+            ))
+        }
+        alertDialog.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.cancel()
+        }
+        alertDialog.setView(view)
+        alertDialog.show()
+    }
+
+    private fun toReservationsFragment() {
+        val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
+        toast.show()
+        activity?.setResult(Activity.RESULT_OK)
+        activity?.finish()
     }
 
     private fun getSelectedChip(chips : ChipGroup) : String {

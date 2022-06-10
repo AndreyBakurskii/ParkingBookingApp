@@ -108,7 +108,7 @@ class MyActor : Actor<Command, Event> {
     private val employeeMapper: EmployeeMapper = EmployeeMapper()
     private val parkingSpotMapper: ParkingSpotMapper = ParkingSpotMapper()
 
-    private val dateTimePattern: String = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+    private val dateTimePattern: String = "yyyy-MM-dd'T'HH:mm:ss"
 
     override fun execute(command: Command): Observable<Event> = when (command) {
         is Command.LoadAllReservations -> reservationRepository

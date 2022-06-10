@@ -22,6 +22,7 @@ import com.example.parking.utils.toStr
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import vivid.money.elmslie.core.Actor
+import vivid.money.elmslie.core.ElmStoreCompat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -120,7 +121,7 @@ class MyActor : Actor<Command, Event> {
     private val carMapper: CarMapper = CarMapper()
     private val parkingSpotMapper: ParkingSpotMapper = ParkingSpotMapper()
 
-    private val dateTimePattern: String = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+    private val dateTimePattern: String = "yyyy-MM-dd'T'HH:mm:ss"
 
     override fun execute(command: Command): Observable<Event> = when (command) {
         is Command.CheckExistEmployee -> employeeRepository
@@ -235,4 +236,10 @@ class MyActor : Actor<Command, Event> {
         )
     }
 }
+
+fun storeFactory() = ElmStoreCompat(
+    initialState = State(),
+    reducer = Reducer(),
+    actor = MyActor()
+)
 
