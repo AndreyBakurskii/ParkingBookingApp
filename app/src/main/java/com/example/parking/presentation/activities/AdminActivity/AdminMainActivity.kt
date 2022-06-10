@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.parking.R
 import com.example.parking.presentation.fragments.car.list.CarsFragment
-import com.example.parking.presentation.fragments.ReservationsFragment
+import com.example.parking.presentation.fragments.reservation.list.ReservationsFragment
 import com.example.parking.presentation.fragments.parkingSpot.list.SpotsFragment
 import com.example.parking.presentation.fragments.employee.list.EmployeesFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView

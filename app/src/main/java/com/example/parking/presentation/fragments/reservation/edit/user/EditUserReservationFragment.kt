@@ -1,4 +1,4 @@
-package com.example.parking.presentation.fragments.create
+package com.example.parking.presentation.fragments.reservation.edit.user
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -17,46 +17,36 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CreateAdminReservationFragment : Fragment() {
+class EditUserReservationFragment : Fragment() {
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView: View = inflater.inflate(R.layout.fragment_create_admin_reservation, null)
+        val rootView: View = inflater.inflate(R.layout.fragment_edit_user_reservation, null)
         val btContinue = rootView.findViewById<Button>(R.id.buttonContinue)
         val dateChips = rootView.findViewById<ChipGroup>(R.id.DateChips)
         val startTimeChips = rootView.findViewById<ChipGroup>(R.id.StartTimeChips)
         val endTimeChips = rootView.findViewById<ChipGroup>(R.id.EndTimeChips)
         val etModel = rootView.findViewById<EditText>(R.id.etCarModel)
         val etNum = rootView.findViewById<EditText>(R.id.etCarNum)
-        val etEmail = rootView.findViewById<EditText>(R.id.etEmployeeEmail)
 
         val c = Calendar.getInstance()
         val df: DateFormat = SimpleDateFormat("EEE dd/MM")
-        for (i in 0..6) {
-            val chip = inflater.inflate(R.layout.layout_chip_choice, dateChips, false) as Chip
-            chip.text=df.format(c.time)
-            dateChips.addView(chip)
+        var i = 0
+        while (i < 7) {
+            if (c.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && c.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+                i++
+                val chip = inflater.inflate(R.layout.layout_chip_choice, dateChips, false) as Chip
+                chip.text=df.format(c.time)
+                dateChips.addView(chip)
+            }
             c.add(Calendar.DATE, 1)
         }
 
         btContinue.setOnClickListener {
-            // вот так можно посчитать, какая дата выбрана
-//            val chipsCount: Int = dateChips.childCount
-//            var msg = ""
-//            if (chipsCount != 0) {
-//                var i = 0
-//                while (i < chipsCount) {
-//                    val chip = dateChips.getChildAt(i) as Chip
-//                    if (chip.isChecked) {
-//                        msg += chip.getText().toString()
-//                    }
-//                    i++
-//                }
-//            }
-            // сюда вставить вызов функции создания в бэке
+            // сюда вставить вызов функции редактирования на бэке
 
             // с полученной информацией выводим окно
             val view = layoutInflater.inflate(R.layout.alertdialog_model, null)
@@ -67,10 +57,10 @@ class CreateAdminReservationFragment : Fragment() {
             val textOutput = view.findViewById<TextView>(R.id.textView)
             alertDialog.setPositiveButton("OK") { _, _ ->
                 // вот так вызывается загрузочная крутяшка (отключаем кнопку ещё на всякий)
-                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
-                btContinue.isClickable = false
+//                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.VISIBLE
+//                btContinue.isClickable = false
                 // вот так она скрывается
-                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
+//                rootView.findViewById<FrameLayout>(R.id.progressBarContainer).visibility = View.INVISIBLE
                 // выводим toast что всё ок и закрываем активность
                 val toast = Toast.makeText(activity, "Done", Toast.LENGTH_SHORT)
                 toast.show()
@@ -129,5 +119,4 @@ class CreateAdminReservationFragment : Fragment() {
             false
         }
     }
-
 }

@@ -13,16 +13,27 @@ import android.widget.TextView;
 import com.example.parking.presentation.activities.EditModelActivity.EditModelActivity;
 import com.example.parking.R;
 import com.example.parking.data.models.Reservation;
+import com.example.parking.presentation.fragments.reservation.list.elm.Effect;
+import com.example.parking.presentation.fragments.reservation.list.elm.Event;
+import com.example.parking.presentation.fragments.reservation.list.elm.State;
 
 import java.util.ArrayList;
+
+import vivid.money.elmslie.core.store.Store;
 
 public class ExpListAdapterAdminReservations extends BaseExpandableListAdapter {
     private final ArrayList<Reservation> mGroups;
     private final Context mContext;
+    public Store<Event, Effect, State> store;
 
-    public ExpListAdapterAdminReservations(Context context, ArrayList<Reservation> groups){
+    public ExpListAdapterAdminReservations(
+            Context context,
+            ArrayList<Reservation> groups,
+            Store<Event, Effect, State> store
+    ){
         this.mContext = context;
         this.mGroups = groups;
+        this.store = store;
     }
 
     @Override
@@ -78,8 +89,10 @@ public class ExpListAdapterAdminReservations extends BaseExpandableListAdapter {
             textCaption.setText("Click for details");
         }
 
+        Reservation currentReservation = mGroups.get(groupPosition);
+
         TextView textGroup = (TextView) convertView.findViewById(R.id.textGroup);
-        textGroup.setText(mGroups.get(groupPosition).getDate() + ", " + mGroups.get(groupPosition).getTime());
+        textGroup.setText(currentReservation.getPresentationDate() + ", " + currentReservation.getPresentationTime());
 
         return convertView;
 
@@ -94,34 +107,33 @@ public class ExpListAdapterAdminReservations extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.admin_reservations_child_view, null);
         }
 
-        TextView textChild = (TextView) convertView.findViewById(R.id.textDate);
-        textChild.setText(mGroups.get(groupPosition).getDate());
-        TextView textChild1 = (TextView) convertView.findViewById(R.id.textTime);
-        textChild1.setText(mGroups.get(groupPosition).getTime());
-        TextView textChild2 = (TextView) convertView.findViewById(R.id.textCar);
-        textChild2.setText(mGroups.get(groupPosition).getCar());
-        TextView textChild3 = (TextView) convertView.findViewById(R.id.textCarNum);
-        textChild3.setText(mGroups.get(groupPosition).getCarNum());
-        TextView textChild4 = (TextView) convertView.findViewById(R.id.textEmail);
-        textChild4.setText(mGroups.get(groupPosition).getEmail());
+        Reservation currentReservation = mGroups.get(groupPosition);
 
-        Button button = (Button)convertView.findViewById(R.id.buttonDelete);
-        button.setOnClickListener(view -> {
-            mGroups.remove(groupPosition);
-            notifyDataSetChanged();
-        });
+        TextView textDate = (TextView) convertView.findViewById(R.id.textDate);
+        textDate.setText(currentReservation.getPresentationDate());
+
+        TextView textTime = (TextView) convertView.findViewById(R.id.textTime);
+        textTime.setText(currentReservation.getPresentationTime());
+
+        TextView textSpotNum = (TextView) convertView.findViewById(R.id.textSpotNum);
+        textSpotNum.setText(String.valueOf(currentReservation.getParkingSpot().getParkingNumber()));
+
+        TextView textCarNum = (TextView) convertView.findViewById(R.id.textCarNum);
+        textCarNum.setText(currentReservation.getCar().getRegistryNumber());
+
+        TextView textEmail = (TextView) convertView.findViewById(R.id.textEmail);
+        textEmail.setText(currentReservation.getEmployee().getName());
+
+        Button buttonDelete = (Button)convertView.findViewById(R.id.buttonDelete);
+        buttonDelete.setOnClickListener(
+                view -> store.accept(new Event.Ui.ClickDeleteReservation(currentReservation, groupPosition))
+        );
 
         // здесь переходим в активность с редактированием, вызывая фрагмент для брони
         Button buttonEdit = (Button)convertView.findViewById(R.id.buttonEdit);
-        buttonEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String data = "reservations";
-                Intent intent = new Intent(mContext.getApplicationContext(), EditModelActivity.class);
-                intent.putExtra("fragment", data);
-                mContext.startActivity(intent);
-            }
-        });
+        buttonEdit.setOnClickListener(
+                view -> store.accept(new Event.Ui.ClickEditReservation(currentReservation, groupPosition))
+        );
 
         return convertView;
     }

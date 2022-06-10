@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.fragments.ReservationsFragment"
+    tools:context=".presentation.fragments.reservation.list.ReservationsFragment"
     android:background="@color/base_900">
 
     <TextView

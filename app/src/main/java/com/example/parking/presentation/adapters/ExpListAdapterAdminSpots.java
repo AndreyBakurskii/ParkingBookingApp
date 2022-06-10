@@ -27,7 +27,11 @@ public class ExpListAdapterAdminSpots extends BaseExpandableListAdapter {
     private final Context mContext;
     public Store<Event, Effect, State> store;
 
-    public ExpListAdapterAdminSpots(Context context, ArrayList<ParkingSpot> groups, Store store){
+    public ExpListAdapterAdminSpots(
+            Context context,
+            ArrayList<ParkingSpot> groups,
+            Store<Event, Effect, State> store
+    ){
         this.mContext = context;
         this.mGroups = groups;
         this.store = store;
