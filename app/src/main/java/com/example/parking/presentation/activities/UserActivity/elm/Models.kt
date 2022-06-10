@@ -19,22 +19,15 @@ data class State(
 
 sealed class Effect {
     object ShowErrorLoadReservations : Effect()
-//    object ShowErrorDeleteReservation : Effect()
     object ShowErrorNetwork : Effect()
 
-//    data class ShowDeleteDialog(var reservation: Reservation, var positionInAdapter: Int) : Effect()
-
     object ToCreateReservationFragment : Effect()
-//    data class ToEditReservationFragment(val reservation: Reservation) : Effect()
 }
 
 sealed class Event {
     sealed class Ui : Event() {
         object Init : Ui()
         data class LoadReservations(var employee: Employee) : Ui()
-//        data class ClickEditReservation(var reservation: Reservation, var positionInAdapter: Int) : Ui()
-//        data class ClickDeleteReservation(var reservation: Reservation, var positionInAdapter: Int) : Ui()
-//        data class OkClickDeleteDialog(var reservation: Reservation, var positionInAdapter: Int) : Ui()
         object ClickCreateReservation : Ui()
     }
 
@@ -46,10 +39,6 @@ sealed class Event {
         data class SuccessLoadParkingSpots(var parkingSpots: ArrayList<ParkingSpot>) : Internal()
 
         data class SuccessInitReservations(var reservations: ArrayList<Reservation>) : Internal()
-
-//        data class SuccessDeleteFromServer(var reservation: Reservation, var positionInAdapter: Int) : Internal()
-//        data class SuccessDeleteFromAdapter(var reservations: ArrayList<Reservation>) : Internal()
-//        object ErrorDeleteReservation : Internal()
 
         object ErrorNetwork : Internal()
     }
@@ -66,7 +55,4 @@ sealed class Command {
         var employee: Employee,
         var parkingSpots: ArrayList<ParkingSpot>
     ) : Command()
-
-//    data class DeleteFromServer(var reservation: Reservation, var positionInAdapter: Int) : Command()
-//    data class DeleteFromAdapter(var reservations: ArrayList<Reservation>, var positionInAdapter: Int) : Command()
 }

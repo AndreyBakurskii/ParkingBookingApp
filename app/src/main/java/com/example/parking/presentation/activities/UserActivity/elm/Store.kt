@@ -46,17 +46,6 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
             state { copy(loading = false, doUpdate = false) }
             effects { +Effect.ShowErrorLoadReservations }
         }
-//        is Internal.SuccessDeleteFromServer -> {
-//            state { copy(loading = true, doUpdate = false) }
-//            commands { +Command.DeleteFromAdapter(state.reservations, event.positionInAdapter) }
-//        }
-//        is Internal.SuccessDeleteFromAdapter -> {
-//            state { copy(loading = false, reservations = event.reservations, doUpdate = true) }
-//        }
-//        is Internal.ErrorDeleteReservation -> {
-//            state { copy(loading = false, doUpdate = false) }
-//            effects { +Effect.ShowErrorDeleteReservation }
-//        }
         is Internal.ErrorNetwork -> {
             state { copy(loading = false, doUpdate = false) }
             effects { +Effect.ShowErrorNetwork }
@@ -69,22 +58,10 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
             state { copy(loading = true, doUpdate = false, employee = event.employee)}
             commands { +Command.LoadAllReservations }
         }
-//        is Ui.ClickDeleteReservation -> {
-//            state { copy( loading = true, doUpdate = false) }
-//            effects { +Effect.ShowDeleteDialog(event.reservation, event.positionInAdapter) }
-//        }
-//        is Ui.OkClickDeleteDialog -> {
-//            state { copy( loading = true, doUpdate = false) }
-//            commands { +Command.DeleteFromServer(event.reservation, event.positionInAdapter) }
-//        }
         is Ui.ClickCreateReservation -> {
             state {copy(loading = false, doUpdate = false)}
             effects { +Effect.ToCreateReservationFragment }
         }
-//        is Ui.ClickEditReservation -> {
-//            state {copy(loading = false, doUpdate = false)}
-//            effects { +Effect.ToEditReservationFragment(event.reservation) }
-//        }
     }
 }
 
@@ -98,7 +75,7 @@ class MyActor : Actor<Command, Event> {
     private val carMapper: CarMapper = CarMapper()
     private val parkingSpotMapper: ParkingSpotMapper = ParkingSpotMapper()
 
-    private val dateTimePattern: String = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+    private val dateTimePattern: String = "yyyy-MM-dd'T'HH:mm:ss"
 
     override fun execute(command: Command): Observable<Event> = when (command) {
         is Command.LoadAllReservations -> reservationRepository
@@ -159,21 +136,6 @@ class MyActor : Actor<Command, Event> {
                     errorMapper = { Internal.ErrorLoadReservations }
                 )
         }
-//        is Command.DeleteFromServer -> reservationRepository
-//            .deleteReservation(id = command.reservation.id.toString())
-//            .mapEvents(
-//                eventMapper = { response -> response.statusCodeHandler(
-//                    successHandler = { Internal.SuccessDeleteFromServer(command.reservation, command.positionInAdapter) },
-//                    errorHandler = { Internal.ErrorDeleteReservation }
-//                )},
-//                errorMapper = { Internal.ErrorNetwork }
-//            )
-//        is Command.DeleteFromAdapter -> Observable
-//            .fromArray(command.reservations.removeElementByIndex(command.positionInAdapter))
-//            .mapEvents(
-//                eventMapper = { Internal.SuccessDeleteFromAdapter(reservations = it) },
-//                errorMapper = { Internal.ErrorDeleteReservation}
-//            )
     }
 }
 

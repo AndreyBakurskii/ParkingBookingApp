@@ -1,11 +1,9 @@
-package com.example.parking.presentation.fragments.reservation.create.admin.elm
+package com.example.parking.presentation.fragments.reservation.create.elm
 
 import com.example.parking.data.mapper.CarMapper
-import com.example.parking.data.mapper.EmployeeMapper
 import com.example.parking.data.mapper.ParkingSpotMapper
 import com.example.parking.data.models.Car
 import com.example.parking.data.models.ParkingSpot
-import com.example.parking.data.models.Reservation
 import com.example.parking.data.network.NetworkService
 import com.example.parking.data.network.modelJSON.CarJson
 import com.example.parking.data.network.modelJSON.ReservationJson
@@ -14,8 +12,8 @@ import com.example.parking.data.repository.EmployeeRepository
 import com.example.parking.data.repository.ParkingSpotRepository
 import com.example.parking.data.repository.ReservationRepository
 import vivid.money.elmslie.core.store.dsl_reducer.ScreenDslReducer
-import com.example.parking.presentation.fragments.reservation.create.admin.elm.Event.Ui
-import com.example.parking.presentation.fragments.reservation.create.admin.elm.Event.Internal
+import com.example.parking.presentation.fragments.reservation.create.elm.Event.Ui
+import com.example.parking.presentation.fragments.reservation.create.elm.Event.Internal
 import com.example.parking.presentation.utils.statusCodeHandler
 import com.example.parking.utils.toDate
 import com.example.parking.utils.toStr

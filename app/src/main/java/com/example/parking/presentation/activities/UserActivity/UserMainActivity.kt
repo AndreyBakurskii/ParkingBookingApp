@@ -1,5 +1,6 @@
 package com.example.parking.presentation.activities.UserActivity
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -30,10 +31,14 @@ class UserMainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_use
     private var btAdd : FloatingActionButton? = null
     private var progressBar : FrameLayout? = null
 
+    var employee: Employee = Employee(
+        id = UUID.fromString("5a1874b2-4d30-3af0-ad60-1daf278ba512"),
+        name = "bakurskii2001@gmail.com"
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_main)
-//        val email = intent.extras?.getString("email")
 
         progressBar = findViewById(R.id.progressBarContainer)
         btAdd = findViewById(R.id.fab)
@@ -68,10 +73,7 @@ class UserMainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_use
             }
         })
         store.accept(Event.Ui.LoadReservations(
-            employee = Employee(
-                id = UUID.fromString("5a1874b2-4d30-3af0-ad60-1daf278ba512"),
-                name = "bakurskii2001@gmail.com"
-            )
+            employee = employee
         ))
     }
 
@@ -110,21 +112,22 @@ class UserMainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_use
             "Problems with your connection! Check your internet connection!",
             Toast.LENGTH_SHORT
         ).show()
-//        is Effect.ShowErrorDeleteReservation -> Toast.makeText(
-//            this,
-//            "Error during deletion, try again later!",
-//            Toast.LENGTH_SHORT
-//        ).show()
-//        is Effect.ToEditReservationFragment -> toEditReservationFragment(effect.reservation)
         is Effect.ToCreateReservationFragment -> toCreateReservationFragment()
-//        is Effect.ShowDeleteDialog -> showDeleteDialog(effect.reservation, effect.positionInAdapter)
     }
 
     private fun toCreateReservationFragment() {
         val data = "user"
         val intent = Intent(this, CreateModelActivity::class.java)
-//        intent.putExtra("email", email)
         intent.putExtra("fragment", data)
-        startActivity(intent)
+        startActivityForResult(intent, 200);
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            store.accept(Event.Ui.LoadReservations(
+                employee = employee
+            ))
+        }
     }
 }

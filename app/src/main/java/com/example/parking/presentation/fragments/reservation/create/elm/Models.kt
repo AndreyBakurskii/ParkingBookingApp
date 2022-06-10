@@ -1,9 +1,8 @@
-package com.example.parking.presentation.fragments.reservation.create.admin.elm
+package com.example.parking.presentation.fragments.reservation.create.elm
 
 import com.example.parking.data.models.Car
 import com.example.parking.data.models.Employee
 import com.example.parking.data.models.ParkingSpot
-import com.example.parking.data.models.Reservation
 import com.example.parking.data.network.modelJSON.ReservationJson
 import java.util.*
 import kotlin.collections.ArrayList
