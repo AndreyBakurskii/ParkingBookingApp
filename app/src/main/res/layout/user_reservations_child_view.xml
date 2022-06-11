@@ -140,30 +140,30 @@
             android:layout_marginTop="10dp"
             android:layout_below="@id/captionSpotNum"
             />
-        <Button
-            android:id="@+id/buttonDelete"
-            style="@style/ButtonText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="10dp"
-            android:focusable="false"
-            android:text="DELETE"
-            android:textColor="@color/negative_500"
-            android:textSize="14sp"
-            android:layout_alignParentEnd="true" />
+<!--        <Button-->
+<!--            android:id="@+id/buttonDelete"-->
+<!--            style="@style/ButtonText"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="6dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:focusable="false"-->
+<!--            android:text="DELETE"-->
+<!--            android:textColor="@color/negative_500"-->
+<!--            android:textSize="14sp"-->
+<!--            android:layout_alignParentEnd="true" />-->
 
-        <Button
-            android:id="@+id/buttonEdit"
-            style="@style/ButtonText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="10dp"
-            android:layout_toStartOf="@+id/buttonDelete"
-            android:focusable="false"
-            android:text="EDIT"
-            android:textSize="14sp"
-            android:textColor="@color/info_600" />
+<!--        <Button-->
+<!--            android:id="@+id/buttonEdit"-->
+<!--            style="@style/ButtonText"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="6dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:layout_toStartOf="@+id/buttonDelete"-->
+<!--            android:focusable="false"-->
+<!--            android:text="EDIT"-->
+<!--            android:textSize="14sp"-->
+<!--            android:textColor="@color/info_600" />-->
     </RelativeLayout>
 </LinearLayout>

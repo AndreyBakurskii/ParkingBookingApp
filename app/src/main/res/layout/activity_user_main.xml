@@ -51,7 +51,8 @@
             android:indicatorRight="400dp"
             android:childDivider="@color/base_900"
             android:divider="@color/base_900"
-            android:dividerHeight="8dp">
+            android:dividerHeight="8dp"
+            android:layout_marginBottom="?attr/actionBarSize">
         </ExpandableListView>
     </LinearLayout>
 
