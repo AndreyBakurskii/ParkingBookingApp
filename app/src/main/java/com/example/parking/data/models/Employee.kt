@@ -3,7 +3,7 @@ package com.example.parking.data.models;
 import java.util.*
 import kotlin.collections.HashMap
 
-public class Employee(
+class Employee(
     val id: UUID = UUID.fromString("0f29717c-37e4-4a93-9165-6baacae64e98"),
     val name: String
 ) {
