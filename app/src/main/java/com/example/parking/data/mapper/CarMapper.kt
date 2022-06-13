@@ -15,16 +15,6 @@ class CarMapper {
         )
     }
 
-    fun fromModelToJson(car: Car): CarJson {
-        return CarJson(
-            id = car.id.toString(),
-            model = car.model,
-            registryNumber = car.registryNumber,
-            wight = car.wight,
-            length = car.length
-        )
-    }
-
     fun fromHashMapToModel(hashMapModel: HashMap<String, Any>): Car {
         return Car(
             id = UUID.fromString(hashMapModel["id"].toString()),
