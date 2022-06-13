@@ -9,6 +9,7 @@ import com.example.parking.presentation.fragments.reservation.list.ReservationsF
 import com.example.parking.presentation.fragments.parkingSpot.list.SpotsFragment
 import com.example.parking.presentation.fragments.employee.list.EmployeesFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 
 class AdminMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,8 +18,8 @@ class AdminMainActivity : AppCompatActivity() {
         replaceFragment(EmployeesFragment())
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigation.setOnNavigationItemSelectedListener {
-            when(it.itemId) {
+        bottomNavigation.setOnItemSelectedListener {
+            when (it.itemId) {
                 R.id.menu_cars -> replaceFragment(CarsFragment())
                 R.id.menu_bookings -> replaceFragment(ReservationsFragment())
                 R.id.menu_employees -> replaceFragment(EmployeesFragment())
