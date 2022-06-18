@@ -9,7 +9,6 @@ import com.example.parking.presentation.fragments.reservation.list.ReservationsF
 import com.example.parking.presentation.fragments.parkingSpot.list.SpotsFragment
 import com.example.parking.presentation.fragments.employee.list.EmployeesFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 
 class AdminMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
