@@ -1,5 +1,6 @@
 package com.example.parking.presentation.activities.MainActivity.elm
 
+import com.example.parking.data.models.Employee
 import com.example.parking.data.network.modelJSON.CarJson
 
 data class State(
@@ -11,7 +12,7 @@ sealed class Effect {
     object ShowErrorInvalidEmail : Effect()
     object ShowAlertDialogPassword : Effect()
     object ShowErrorInvalidPassword : Effect()
-    object ToUserMainActivity : Effect()
+    data class ToUserMainActivity(val email: String) : Effect()
     object ToAdminMainActivity : Effect()
 }
 
@@ -26,11 +27,12 @@ sealed class Event {
     sealed class Internal : Event() {
         object SuccessCheckAdminPassword  : Internal()
         object ErrorInvalidPassword : Internal()
-        object SuccessCheckUserEmail  : Internal()
+        data class SuccessCheckUserEmail(val email: String)  : Internal()
         object ErrorInvalidUserEmail : Internal()
     }
 }
 
 sealed class Command {
+    data class CheckExistEmployee(val email: String) : Command()
 }
 

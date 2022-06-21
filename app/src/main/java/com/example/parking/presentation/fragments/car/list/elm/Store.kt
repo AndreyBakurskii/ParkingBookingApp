@@ -54,7 +54,7 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
             commands { +Command.LoadAllCar }
         }
         is Ui.ClickDeleteCar -> {
-            state { copy(loading = true, doUpdate = false) }
+            state { copy(loading = false, doUpdate = false) }
             effects { +Effect.ShowDeleteDialog(event.car, event.positionInAdapter) }
         }
         is Ui.ClickEditCar -> {

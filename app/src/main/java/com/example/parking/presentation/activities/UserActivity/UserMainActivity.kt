@@ -10,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.parking.R
+import com.example.parking.data.mapper.EmployeeMapper
 import com.example.parking.data.models.Employee
 import com.example.parking.presentation.activities.CreateModelActivity.CreateModelActivity
 import com.example.parking.presentation.adapters.ExpListAdapterUserReservations
@@ -31,10 +32,7 @@ class UserMainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_use
     private var btAdd : FloatingActionButton? = null
     private var progressBar : FrameLayout? = null
 
-    var employee: Employee = Employee(
-        id = UUID.fromString("5a1874b2-4d30-3af0-ad60-1daf278ba512"),
-        name = "bakurskii2001@gmail.com"
-    )
+    lateinit var employee: Employee
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +40,8 @@ class UserMainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_use
 
         progressBar = findViewById(R.id.progressBarContainer)
         btAdd = findViewById(R.id.fab)
+
+        employee = EmployeeMapper().fromHashMapToModel(this.intent?.extras?.get("employee")!! as HashMap<String, String>)
 
         val listView = findViewById<ExpandableListView>(R.id.expListView)
         reservationAdapter =

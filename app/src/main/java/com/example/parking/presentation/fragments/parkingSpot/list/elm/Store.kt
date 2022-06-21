@@ -56,7 +56,7 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
             commands { +Command.LoadAllParkingSpot }
         }
         is Ui.ClickDeleteParkingSpot -> {
-            state { copy(loading = true, doUpdate = false) }
+            state { copy(loading = false, doUpdate = false) }
             effects { +Effect.ShowDeleteDialog(event.parkingSpot, event.positionInAdapter) }
         }
         is Ui.ClickEditParkingSpot -> {

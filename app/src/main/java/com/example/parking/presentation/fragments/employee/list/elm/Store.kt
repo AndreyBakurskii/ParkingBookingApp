@@ -52,7 +52,7 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
             commands { +Command.LoadAllEmployee }
         }
         is Ui.ClickDeleteEmployee -> {
-            state { copy(loading = true, doUpdate = false) }
+            state { copy(loading = false, doUpdate = false) }
             effects { +Effect.ShowDeleteDialog(event.employee, event.positionInAdapter) }
         }
         is Ui.ClickCreateEmployee -> {
