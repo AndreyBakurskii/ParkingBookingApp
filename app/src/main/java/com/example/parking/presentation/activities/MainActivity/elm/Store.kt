@@ -1,11 +1,19 @@
 package com.example.parking.presentation.activities.MainActivity.elm
 
+import com.example.parking.data.models.createEmployee
+import com.example.parking.data.network.NetworkService
+import com.example.parking.data.repository.EmployeeRepository
 import vivid.money.elmslie.core.store.dsl_reducer.ScreenDslReducer
 import com.example.parking.presentation.activities.MainActivity.elm.Event.Internal
 import com.example.parking.presentation.activities.MainActivity.elm.Event.Ui
+import com.example.parking.presentation.utils.statusCodeHandler
+import io.reactivex.Observable
+import vivid.money.elmslie.core.Actor
+import vivid.money.elmslie.core.ElmStoreCompat
 import vivid.money.elmslie.core.store.ElmStore
 import vivid.money.elmslie.core.store.NoOpActor
 import vivid.money.elmslie.core.store.dsl_reducer.DslReducer
+import java.util.*
 
 
 class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui::class, Internal::class) {
@@ -21,7 +29,7 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
         }
         is Internal.SuccessCheckUserEmail -> {
             state { copy(pass = true) }
-            effects { +Effect.ToUserMainActivity }
+            effects { +Effect.ToUserMainActivity(event.email) }
         }
         is Internal.ErrorInvalidUserEmail -> {
             state { copy(pass = false) }
@@ -42,7 +50,7 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
         is Ui.OkClickAlertDialogEmail -> {
             state { copy(pass = false) }
             if (android.util.Patterns.EMAIL_ADDRESS.matcher(event.email).matches()) {
-                effects { +Effect.ToUserMainActivity }
+                commands { +Command.CheckExistEmployee(event.email) }
             } else {
                 effects { +Effect.ShowErrorInvalidEmail }
             }
@@ -58,8 +66,26 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
     }
 }
 
-fun storeFactory() = ElmStore(
+class MyActor : Actor<Command, Event> {
+    private val employeeRepository: EmployeeRepository = EmployeeRepository(
+        NetworkService("user", "password").retrofit
+    )
+
+    override fun execute(command: Command): Observable<Event> = when (command) {
+        is Command.CheckExistEmployee -> employeeRepository
+            .getEmployee(createEmployee(command.email).id.toString())
+            .mapEvents(
+                eventMapper = { response -> response.statusCodeHandler(
+                    successHandler = { Internal.SuccessCheckUserEmail(command.email) },
+                    errorHandler = { Internal.ErrorInvalidUserEmail }
+                )},
+                errorMapper = { Internal.ErrorInvalidUserEmail }
+            )
+    }
+}
+
+fun storeFactory() = ElmStoreCompat(
     initialState = State(),
     reducer = Reducer(),
-    actor = NoOpActor(),
+    actor = MyActor(),
 )

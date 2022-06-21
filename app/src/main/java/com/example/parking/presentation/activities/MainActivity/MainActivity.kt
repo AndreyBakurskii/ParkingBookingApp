@@ -11,6 +11,8 @@ import com.example.parking.presentation.activities.MainActivity.elm.Event
 import com.example.parking.presentation.activities.MainActivity.elm.State
 import com.example.parking.presentation.activities.MainActivity.elm.storeFactory
 import com.example.parking.R
+import com.example.parking.data.models.Employee
+import com.example.parking.data.models.createEmployee
 import com.example.parking.presentation.activities.UserActivity.UserMainActivity
 import com.example.parking.presentation.activities.AdminActivity.AdminMainActivity
 import vivid.money.elmslie.android.base.ElmActivity
@@ -88,13 +90,22 @@ class MainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_main) {
         alertDialog.setView(view)
         alertDialog.show()
     }
-    // intent.putExtra("email", editText.text.toString())
+
     override fun handleEffect(effect: Effect) = when (effect) {
         is Effect.ShowAlertDialogEmail -> showAlertDialogEmail()
         is Effect.ShowAlertDialogPassword -> showAlertDialogPassword()
         is Effect.ShowErrorInvalidPassword -> Toast.makeText(applicationContext, "Wrong password!", Toast.LENGTH_SHORT).show()
         is Effect.ShowErrorInvalidEmail -> Toast.makeText(applicationContext, "Invalid e-mail address", Toast.LENGTH_SHORT).show()
-        is Effect.ToUserMainActivity -> startActivity(Intent(this, UserMainActivity::class.java))
+        is Effect.ToUserMainActivity -> toUserMainActivity(effect.email)
         is Effect.ToAdminMainActivity -> startActivity(Intent(this, AdminMainActivity::class.java))
+    }
+
+    private fun toUserMainActivity(email: String) {
+        var employee: Employee = createEmployee(email)
+
+        var intent: Intent = Intent(this, UserMainActivity::class.java)
+        intent.putExtra("employee", employee.toHashMap(withID = true))
+
+        startActivity(intent)
     }
 }
