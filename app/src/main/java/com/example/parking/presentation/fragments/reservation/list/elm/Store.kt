@@ -78,7 +78,7 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
             commands { +Command.LoadAllReservations }
         }
         is Ui.ClickDeleteReservation -> {
-            state { copy( loading = true, doUpdate = false) }
+            state { copy( loading = false, doUpdate = false) }
             effects { +Effect.ShowDeleteDialog(event.reservation, event.positionInAdapter) }
         }
         is Ui.OkClickDeleteDialog -> {
