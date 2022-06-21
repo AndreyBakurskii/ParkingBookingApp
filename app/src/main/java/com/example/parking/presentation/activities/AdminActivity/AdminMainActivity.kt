@@ -17,8 +17,8 @@ class AdminMainActivity : AppCompatActivity() {
         replaceFragment(EmployeesFragment())
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigation.setOnNavigationItemSelectedListener {
-            when(it.itemId) {
+        bottomNavigation.setOnItemSelectedListener {
+            when (it.itemId) {
                 R.id.menu_cars -> replaceFragment(CarsFragment())
                 R.id.menu_bookings -> replaceFragment(ReservationsFragment())
                 R.id.menu_employees -> replaceFragment(EmployeesFragment())

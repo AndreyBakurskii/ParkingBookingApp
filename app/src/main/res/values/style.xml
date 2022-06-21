@@ -68,4 +68,10 @@
     <style name="Caption" parent="Body3">
         <item name="android:textColor">@color/base_400</item>
     </style>
+    <style name="ProgressBarSpinner" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:indeterminateTint">@color/primary_600</item>
+    </style>
 </resources>

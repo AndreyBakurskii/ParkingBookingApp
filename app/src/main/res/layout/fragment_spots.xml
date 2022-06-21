@@ -50,10 +50,7 @@
         android:visibility="gone">
         <ProgressBar
             android:id="@+id/pBar"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            style="@style/ProgressBarSpinner" />
     </FrameLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
