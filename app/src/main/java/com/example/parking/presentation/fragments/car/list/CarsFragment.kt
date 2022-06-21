@@ -39,7 +39,6 @@ class CarsFragment : ElmFragment<Event, Effect, State>() {
         progressBar = rootView.findViewById(R.id.progressBarContainer)
         btAdd = rootView.findViewById(R.id.fab)
 
-        progressBar = rootView.findViewById(R.id.progressBarContainer)
 
         carsAdapter = ExpListAdapterAdminCars(activity, carsInAdapter, store)
         listView.setAdapter(carsAdapter)

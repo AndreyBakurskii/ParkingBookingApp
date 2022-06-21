@@ -30,7 +30,7 @@ class Reducer : ScreenDslReducer<Event, Ui, Internal, State, Effect, Command>(Ui
             effects { +Effect.ShowErrorLoadCars }
         }
         is Internal.SuccessDeleteFromServer -> {
-            state { copy(loading = true, doUpdate = false) }  // todo решить что будет с cars
+            state { copy(loading = true, doUpdate = false) }
             commands { +Command.DeleteFromAdapter(state.cars, event.positionInAdapter) }
         }
         is Internal.SuccessDeleteFromAdapter -> {

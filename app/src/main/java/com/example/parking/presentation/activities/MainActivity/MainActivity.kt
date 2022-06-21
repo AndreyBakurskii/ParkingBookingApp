@@ -16,11 +16,6 @@ import com.example.parking.presentation.activities.AdminActivity.AdminMainActivi
 import vivid.money.elmslie.android.base.ElmActivity
 
 class MainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_main) {
-
-    override val initEvent: Event = Event.Ui.Init
-
-    override fun createStore() = storeFactory()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,6 +33,10 @@ class MainActivity : ElmActivity<Event, Effect, State>(R.layout.activity_main) {
             store.accept(Event.Ui.StartClick(spinner.selectedItemPosition))
         }
     }
+
+    override val initEvent: Event = Event.Ui.Init
+
+    override fun createStore() = storeFactory()
 
     override fun render(state: State) {
         Log.i("STATE", "render state")
